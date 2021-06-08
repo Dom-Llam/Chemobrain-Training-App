@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+
+//MARK: - Original Navigation View
+
 struct ContentView: View {
     var body: some View {
         NavigationView {
@@ -15,6 +18,9 @@ struct ContentView: View {
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }
+
+//MARK: - Login View
+
 struct LoginView: View {
     
     // For the Username and password TextField
@@ -66,12 +72,6 @@ struct LoginView: View {
                 .foregroundColor(.blue)
                 .navigationBarTitle("Already a user? Sign in")
                 .navigationBarHidden(true)
-
-            
-            
-                        
-            
-            
         }
 //        .aspectRatio(contentMode: .fit)
         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -84,6 +84,8 @@ struct LoginView: View {
         }
     }
 }
+
+//MARK: - Registration View
 
 struct RegistrationView: View {
     
@@ -163,10 +165,6 @@ struct RegistrationView: View {
             Button(action: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/{}/*@END_MENU_TOKEN@*/) {
                 Text("Register")
             }
-            
-            
-            
-            
         }
 //        .aspectRatio(contentMode: .fit)
         .textFieldStyle(RoundedBorderTextFieldStyle())
