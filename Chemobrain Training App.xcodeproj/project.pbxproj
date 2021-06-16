@@ -11,6 +11,9 @@
 		F222302926690EDB00435E92 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222302826690EDB00435E92 /* ContentView.swift */; };
 		F222302B26690EDD00435E92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F222302A26690EDD00435E92 /* Assets.xcassets */; };
 		F222302E26690EDD00435E92 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F222302D26690EDD00435E92 /* Preview Assets.xcassets */; };
+		F251FF7C267A4EA6004887FF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F251FF7B267A4EA6004887FF /* HomeView.swift */; };
+		F251FF80267A4EEC004887FF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F251FF7F267A4EEC004887FF /* RegisterView.swift */; };
+		F251FF82267A4F6C004887FF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F251FF81267A4F6C004887FF /* LoginView.swift */; };
 		F2A93F19266FBE830067662D /* MyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A93F18266FBE830067662D /* MyButtonStyle.swift */; };
 		F2A93F1D266FC7EB0067662D /* AppNavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A93F1C266FC7EB0067662D /* AppNavigationManager.swift */; };
 /* End PBXBuildFile section */
@@ -22,6 +25,9 @@
 		F222302A26690EDD00435E92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F222302D26690EDD00435E92 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F222302F26690EDD00435E92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F251FF7B267A4EA6004887FF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F251FF7F267A4EEC004887FF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		F251FF81267A4F6C004887FF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F2A93F18266FBE830067662D /* MyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButtonStyle.swift; sourceTree = "<group>"; };
 		F2A93F1C266FC7EB0067662D /* AppNavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,9 +63,9 @@
 			isa = PBXGroup;
 			children = (
 				F222302626690EDB00435E92 /* Chemobrain_Training_AppApp.swift */,
-				F222302826690EDB00435E92 /* ContentView.swift */,
-				F2A93F1C266FC7EB0067662D /* AppNavigationManager.swift */,
-				F2A93F18266FBE830067662D /* MyButtonStyle.swift */,
+				F251FF7E267A4EBF004887FF /* Model */,
+				F251FF7D267A4EB1004887FF /* View */,
+				F251FF83267A4FA1004887FF /* Controller */,
 				F222302A26690EDD00435E92 /* Assets.xcassets */,
 				F222302F26690EDD00435E92 /* Info.plist */,
 				F222302C26690EDD00435E92 /* Preview Content */,
@@ -73,6 +79,33 @@
 				F222302D26690EDD00435E92 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F251FF7D267A4EB1004887FF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F222302826690EDB00435E92 /* ContentView.swift */,
+				F251FF7B267A4EA6004887FF /* HomeView.swift */,
+				F251FF7F267A4EEC004887FF /* RegisterView.swift */,
+				F251FF81267A4F6C004887FF /* LoginView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F251FF7E267A4EBF004887FF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F2A93F18266FBE830067662D /* MyButtonStyle.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F251FF83267A4FA1004887FF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F2A93F1C266FC7EB0067662D /* AppNavigationManager.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,8 +178,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F222302926690EDB00435E92 /* ContentView.swift in Sources */,
+				F251FF82267A4F6C004887FF /* LoginView.swift in Sources */,
 				F2A93F1D266FC7EB0067662D /* AppNavigationManager.swift in Sources */,
 				F2A93F19266FBE830067662D /* MyButtonStyle.swift in Sources */,
+				F251FF80267A4EEC004887FF /* RegisterView.swift in Sources */,
+				F251FF7C267A4EA6004887FF /* HomeView.swift in Sources */,
 				F222302726690EDB00435E92 /* Chemobrain_Training_AppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
