@@ -26,72 +26,73 @@ struct RegisterView: View {
     // To initially hide the demographic textfields
     
     
+
+    
     var body: some View {
         
-        List {
-            Spacer()
-            
-            GeometryReader { geo in
-                Image("SNAPLabBanner")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: geo.size.width)
-            }
-            .frame(height: 200)
-            
-            
-            TextField("Enter user name", text: $username) { isEditing in
-                self.isEditingUser = isEditing
-            } onCommit: {
-                // Add internal validation method here for realm
-                // validate(name: username)
-            }
+        NavigationView {
+            VStack {
+                GeometryReader { geo in
+                    Image("SNAPLabBanner")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: geo.size.width)
+                }
+                .frame(height: 200)
+                
+                VStack {
+                    TextField("Enter user name", text: $username)
+                        .padding()
+                        .frame(width: 700, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(8)
+                    
+                    SecureField("Enter password", text: $password)
+                        .padding()
+                        .frame(width: 700, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(8)
+                    
+                    TextField("First name", text: $firstName)
+                        .padding()
+                        .frame(width: 700, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .disableAutocorrection(true)
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(8)
+                    
+                    TextField("Last name", text: $lastName)
+                        .padding()
+                        .frame(width: 700, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .disableAutocorrection(true)
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(8)
+                    
+                    TextField("Phone number", text: $phoneNumber)
+                        .padding()
+                        .frame(width: 700, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(8)
+                    
+                    // Test to push through to home page screen from register through navlink
+                    NavigationLink(destination: HomeView(), label: {Text("Sign Up") })
+                        .buttonStyle(MyButtonStyle(color: .blue))
+                        .foregroundColor(.blue)
+                        .navigationBarHidden(false)
+                }
                 .padding()
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-           
-            
-            TextField("Enter password", text: $password) { isEditing in
-                self.isEditingPassword = isEditing
-            } onCommit: {
-                // Add internal validation method here for realm
+                Spacer()
             }
-                .padding()
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-            
-            TextField("First name", text: $firstName) { isEditing in
-                self.isEditingUser = isEditing
-            } onCommit: {
-                // Add internal validation method here for realm
-            }
-                .padding()
-            
-            TextField("Last name", text: $lastName) { isEditing in
-                self.isEditingUser = isEditing
-            } onCommit: {
-                // Add internal validation method here for realm
-            }
-                .padding()
-            
-            TextField("Phone number", text: $phoneNumber) { isEditing in
-                self.isEditingUser = isEditing
-            } onCommit: {
-                // Add internal validation method here for realm
-            }
-                .padding()
-            
-            // Test to push through to home page screen from register through navlink
-            NavigationLink(destination: HomeView(), label: {Text("Take me home") })
-                .buttonStyle(MyButtonStyle(color: .blue))
-                .foregroundColor(.blue)
-                .navigationBarHidden(false)
         }
-//        .aspectRatio(contentMode: .fit)
-        .textFieldStyle(RoundedBorderTextFieldStyle())
+        .navigationViewStyle(StackNavigationViewStyle())
+        
     }
     
-
     func validate() {
         if self.username == "" || self.password == "" {
             self.invalid = true

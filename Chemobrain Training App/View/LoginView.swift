@@ -25,62 +25,52 @@ struct LoginView: View {
     
     var body: some View {
         // To create a constant for the navigationLink
-//        let navLink = NavigationLink("New user?", destination: RegistrationView())
+        //        let navLink = NavigationLink("New user?", destination: RegistrationView())
         
-        return List {
-            Spacer()
-            
-            GeometryReader { geo in
-                Image("SNAPLabBanner")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: geo.size.width)
-            }
-            .frame(height: 200)
-            
-            
-            TextField("Enter user name", text: $username) { isEditing in
-                self.isEditingUser = isEditing
-            } onCommit: {
-                // Add internal validation method here for realm
-                // validate(name: username)
-            }
-                .padding()
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-           
-            
-            TextField("Enter password", text: $password) { isEditing in
-                self.isEditingPassword = isEditing
-            } onCommit: {
-                // Add internal validation method here for realm
-                // validate(name: username)
-            }
-                .padding()
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-            
-            // Testing new navLink
-//            navLink.frame(width: 10, height: 10)
+        NavigationView {
+            VStack {
+                GeometryReader { geo in
+                    Image("SNAPLabBanner")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: geo.size.width)
+                }
+                .frame(height: 200)
+                
+                VStack {
+                    TextField("Enter user name", text: $username)
+                        .padding()
+                        .frame(width: 700, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(8)
+                    
+                    SecureField("Enter password", text: $password)
+                        .padding()
+                        .frame(width: 700, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(8)
+                    // Nav link to home page
+                    NavigationLink(destination: HomeView(), label: {Text("Sign In") })
+                        .buttonStyle(MyButtonStyle(color: .blue))
+                        .foregroundColor(.blue)
+                        .navigationBarTitle("Sign in")
 
-            // Nav link to home page
-            NavigationLink(destination: HomeView(), label: {Text("Take me home") })
-                .buttonStyle(MyButtonStyle(color: .blue))
-                .foregroundColor(.blue)
-                .navigationBarHidden(false)
-            
-            // Nav link to register screen
-            NavigationLink(destination: RegisterView(), label: {Text("New user punk?") })
-                .buttonStyle(MyButtonStyle(color: .blue))
-                .foregroundColor(.blue)
-                .navigationBarTitle("Sign in")
-                .navigationBarHidden(false)
+                    // Nav link to register screen
+                    NavigationLink(destination: RegisterView(), label: {Text("New user?") })
+                        .foregroundColor(.blue)
+                }
+                
+                .padding()
+                Spacer()
+            }
         }
-//        .aspectRatio(contentMode: .fit)
-        .textFieldStyle(RoundedBorderTextFieldStyle())
-        .navigationBarTitle("Login")
+        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationBarHidden(true)
     }
-    
     func validate() {
         if self.username == "" || self.password == "" {
             self.invalid = true
