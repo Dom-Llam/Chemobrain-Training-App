@@ -13,10 +13,10 @@ struct LoginView: View {
     
     
     // The environmentObject that should update the current presented screen
-    @EnvironmentObject var env : MyAppEnvironmentData
-    
+    @EnvironmentObject var viewModel: AppViewModel
+
     // For the Username and password TextField
-    @State private var username: String = ""
+    @State private var email: String = ""
     @State private var password: String = ""
     @State private var isEditingUser = false
     @State private var isEditingPassword = false
@@ -24,10 +24,8 @@ struct LoginView: View {
     
     
     var body: some View {
-        // To create a constant for the navigationLink
-        //        let navLink = NavigationLink("New user?", destination: RegistrationView())
-        
-        NavigationView {
+       
+
             VStack {
                 GeometryReader { geo in
                     Image("SNAPLabBanner")
@@ -38,7 +36,7 @@ struct LoginView: View {
                 .frame(height: 200)
                 
                 VStack {
-                    TextField("Enter user name", text: $username)
+                    TextField("Enter email", text: $email)
                         .padding()
                         .frame(width: 700, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .autocapitalization(.none)
@@ -53,26 +51,44 @@ struct LoginView: View {
                         .disableAutocorrection(true)
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(8)
-                    // Nav link to home page
-                    NavigationLink(destination: HomeView(), label: {Text("Sign In") })
-                        .buttonStyle(MyButtonStyle(color: .blue))
-                        .foregroundColor(.blue)
-                        .navigationBarTitle("Sign in")
-
+                    
+                    //Switch to button to utilize AppViewModel functionality
+                    
+                    Button(action: {
+                        
+                        guard !email.isEmpty, !password.isEmpty else {
+                            return
+                        }
+                        
+                        viewModel.signIn(email: self.email, password: self.password)
+                        
+                    }, label: {
+                        Text("Sign In")
+                            .foregroundColor(Color.white)
+                            .frame(width: 200, height: 50)
+                            .cornerRadius(8)
+                            .background(Color.blue)
+                    })
+                    .padding()
+                    
+//                    // Nav link to home page
+//                    NavigationLink(destination: HomeView(), label: {Text("Sign In") })
+//                        .buttonStyle(MyButtonStyle(color: .blue))
+//                        .foregroundColor(.blue)
+//                        .navigationBarTitle("Sign in")
+//
                     // Nav link to register screen
                     NavigationLink(destination: RegisterView(), label: {Text("New user?") })
                         .foregroundColor(.blue)
                 }
-                
                 .padding()
                 Spacer()
             }
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .navigationBarHidden(true)
+            .navigationViewStyle(StackNavigationViewStyle())
+            .navigationBarTitle("Sign In")
     }
     func validate() {
-        if self.username == "" || self.password == "" {
+        if self.email == "" || self.password == "" {
             self.invalid = true
         }
     }

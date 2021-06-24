@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>946869256134-n7tegvumh8pcbjqpg2sh4b9ebf0m71ml.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.946869256134-n7tegvumh8pcbjqpg2sh4b9ebf0m71ml</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA8EwoRdaCd1ER0tERE9QRf5RsgdtEKoI8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>946869256134</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>Dom.Chemobrain-Training-App</string>
+	<key>PROJECT_ID</key>
+	<string>chemobrainapp</string>
+	<key>STORAGE_BUCKET</key>
+	<string>chemobrainapp.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:946869256134:ios:fb94415758ab3dc6a63cc7</string>
+</dict>
+</plist>

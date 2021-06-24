@@ -10,10 +10,10 @@ import SwiftUI
 struct RegisterView: View {
     
     // To track page observable object
-    @EnvironmentObject var env : MyAppEnvironmentData
-    
+    @EnvironmentObject var viewModel: AppViewModel
+
     // For the Username and password TextField
-    @State private var username: String = ""
+    @State private var email: String = ""
     @State private var password: String = ""
     @State private var isEditingUser = false
     @State private var isEditingPassword = false
@@ -30,7 +30,7 @@ struct RegisterView: View {
     
     var body: some View {
         
-        NavigationView {
+
             VStack {
                 GeometryReader { geo in
                     Image("SNAPLabBanner")
@@ -41,7 +41,7 @@ struct RegisterView: View {
                 .frame(height: 200)
                 
                 VStack {
-                    TextField("Enter user name", text: $username)
+                    TextField("Enter email", text: $email)
                         .padding()
                         .frame(width: 700, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .autocapitalization(.none)
@@ -79,22 +79,38 @@ struct RegisterView: View {
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(8)
                     
-                    // Test to push through to home page screen from register through navlink
-                    NavigationLink(destination: HomeView(), label: {Text("Sign Up") })
-                        .buttonStyle(MyButtonStyle(color: .blue))
-                        .foregroundColor(.blue)
-                        .navigationBarHidden(false)
+                    // Switch to button to utilize AppViewModel Functionality
+                    Button(action: {
+                        
+                        guard !email.isEmpty, !password.isEmpty else {
+                            return
+                        }
+                        
+                        viewModel.signUp(email: self.email, password: self.password)
+                        
+                    }, label: {
+                        Text("Sign Up")
+                            .foregroundColor(Color.white)
+                            .frame(width: 200, height: 50)
+                            .cornerRadius(8)
+                            .background(Color.blue)
+                    })
+                    
+//                    // Test to push through to home page screen from register through navlink
+//                    NavigationLink(destination: HomeView(), label: {Text("Sign Up") })
+//                        .buttonStyle(MyButtonStyle(color: .blue))
+//                        .foregroundColor(.blue)
+//                        .navigationBarHidden(false)
                 }
                 .padding()
                 Spacer()
-            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        
-    }
+        .navigationBarTitle("Create Account")
+}
     
     func validate() {
-        if self.username == "" || self.password == "" {
+        if self.email == "" || self.password == "" {
             self.invalid = true
         }
     }

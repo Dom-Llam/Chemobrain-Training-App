@@ -8,8 +8,21 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    // To track page observable object
+    @EnvironmentObject var viewModel: AppViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("We did it!")
+            
+            Button(action: {
+                viewModel.signOut()
+            }, label: {
+                Text("SignOut")
+                    .foregroundColor(Color.blue)
+            })
+        }
     }
 }
 

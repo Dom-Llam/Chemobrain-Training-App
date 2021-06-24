@@ -6,43 +6,37 @@
 //
 
 import SwiftUI
-import Combine
-
-//Class and enum to hold state values for active screen
-enum MyAppPage {
-    case LoginView
-    case RegisterView
-    case HomeView
-}
-
-final class MyAppEnvironmentData: ObservableObject {
-    @Published var currentPage : MyAppPage? = .LoginView
-}
+import FirebaseAuth
 
 
 //MARK: - Original Navigation View
 
 struct ContentView: View {
     
-    //EnvironmentObject for navigation view
-    @EnvironmentObject var env : MyAppEnvironmentData
+    @EnvironmentObject var viewModel: AppViewModel
     
     var body: some View {
         
         NavigationView {
-            LoginView()
+            if viewModel.isSignedIn {
+                HomeView()
+                
+            } else {
+                LoginView()
+            }
+        }
+        .onAppear {
+            viewModel.signedIn = viewModel.isSignedIn
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
 
-
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
 
-            ContentView().environmentObject(MyAppEnvironmentData())
+            ContentView()
          
     }
 }

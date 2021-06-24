@@ -6,16 +6,31 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct Chemobrain_Training_AppApp: App {
-    @StateObject var page = MyAppEnvironmentData()
-    @EnvironmentObject var env : MyAppEnvironmentData
+    
+    // Create instance of app delegate for Firebase Authentication
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     var body: some Scene {
         WindowGroup {
+            
+            let viewModel = AppViewModel()
+            
             ContentView()
-                .environmentObject(page)
+                .environmentObject(viewModel)
         }
+    }
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+       
+        // Configure firebase instance
+        FirebaseApp.configure()
+        
+        return true
     }
 }

@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19AD4E54D1FDC217E8CA7FE7 /* Pods_Chemobrain_Training_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A50AB92B212F90079C080C /* Pods_Chemobrain_Training_App.framework */; };
 		F222302726690EDB00435E92 /* Chemobrain_Training_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222302626690EDB00435E92 /* Chemobrain_Training_AppApp.swift */; };
 		F222302926690EDB00435E92 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222302826690EDB00435E92 /* ContentView.swift */; };
 		F222302B26690EDD00435E92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F222302A26690EDD00435E92 /* Assets.xcassets */; };
@@ -16,9 +17,14 @@
 		F251FF82267A4F6C004887FF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F251FF81267A4F6C004887FF /* LoginView.swift */; };
 		F2A93F19266FBE830067662D /* MyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A93F18266FBE830067662D /* MyButtonStyle.swift */; };
 		F2A93F1D266FC7EB0067662D /* AppNavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A93F1C266FC7EB0067662D /* AppNavigationManager.swift */; };
+		F2E2A927268399C500143E69 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2E2A926268399C500143E69 /* GoogleService-Info.plist */; };
+		F2E2A9292684CD6900143E69 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2A9282684CD6900143E69 /* AppViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E2A794953DAEE1FF8B3E20C /* Pods-Chemobrain Training App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chemobrain Training App.release.xcconfig"; path = "Target Support Files/Pods-Chemobrain Training App/Pods-Chemobrain Training App.release.xcconfig"; sourceTree = "<group>"; };
+		ABCD577C4DF6AD3744148D79 /* Pods-Chemobrain Training App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chemobrain Training App.debug.xcconfig"; path = "Target Support Files/Pods-Chemobrain Training App/Pods-Chemobrain Training App.debug.xcconfig"; sourceTree = "<group>"; };
+		B1A50AB92B212F90079C080C /* Pods_Chemobrain_Training_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chemobrain_Training_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F222302326690EDB00435E92 /* Chemobrain Training App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chemobrain Training App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F222302626690EDB00435E92 /* Chemobrain_Training_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chemobrain_Training_AppApp.swift; sourceTree = "<group>"; };
 		F222302826690EDB00435E92 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -30,6 +36,8 @@
 		F251FF81267A4F6C004887FF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F2A93F18266FBE830067662D /* MyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButtonStyle.swift; sourceTree = "<group>"; };
 		F2A93F1C266FC7EB0067662D /* AppNavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationManager.swift; sourceTree = "<group>"; };
+		F2E2A926268399C500143E69 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F2E2A9282684CD6900143E69 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,17 +45,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19AD4E54D1FDC217E8CA7FE7 /* Pods_Chemobrain_Training_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E8AF96CD4BB02E9DEA0A801 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B1A50AB92B212F90079C080C /* Pods_Chemobrain_Training_App.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9B08A5A9383B3F5D692F2AB3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ABCD577C4DF6AD3744148D79 /* Pods-Chemobrain Training App.debug.xcconfig */,
+				1E2A794953DAEE1FF8B3E20C /* Pods-Chemobrain Training App.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		F222301A26690EDB00435E92 = {
 			isa = PBXGroup;
 			children = (
 				F222302526690EDB00435E92 /* Chemobrain Training App */,
 				F222302426690EDB00435E92 /* Products */,
+				9B08A5A9383B3F5D692F2AB3 /* Pods */,
+				4E8AF96CD4BB02E9DEA0A801 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +95,7 @@
 				F251FF7D267A4EB1004887FF /* View */,
 				F251FF83267A4FA1004887FF /* Controller */,
 				F222302A26690EDD00435E92 /* Assets.xcassets */,
+				F2E2A926268399C500143E69 /* GoogleService-Info.plist */,
 				F222302F26690EDD00435E92 /* Info.plist */,
 				F222302C26690EDD00435E92 /* Preview Content */,
 			);
@@ -96,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				F2A93F18266FBE830067662D /* MyButtonStyle.swift */,
+				F2E2A9282684CD6900143E69 /* AppViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -115,9 +145,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F222303226690EDD00435E92 /* Build configuration list for PBXNativeTarget "Chemobrain Training App" */;
 			buildPhases = (
+				B64A1A1A0C4DF6AAE0ECCF8B /* [CP] Check Pods Manifest.lock */,
 				F222301F26690EDB00435E92 /* Sources */,
 				F222302026690EDB00435E92 /* Frameworks */,
 				F222302126690EDB00435E92 /* Resources */,
+				C19B10EB416D4FBC54750D18 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -166,11 +198,54 @@
 			buildActionMask = 2147483647;
 			files = (
 				F222302E26690EDD00435E92 /* Preview Assets.xcassets in Resources */,
+				F2E2A927268399C500143E69 /* GoogleService-Info.plist in Resources */,
 				F222302B26690EDD00435E92 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B64A1A1A0C4DF6AAE0ECCF8B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Chemobrain Training App-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C19B10EB416D4FBC54750D18 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Chemobrain Training App/Pods-Chemobrain Training App-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Chemobrain Training App/Pods-Chemobrain Training App-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Chemobrain Training App/Pods-Chemobrain Training App-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F222301F26690EDB00435E92 /* Sources */ = {
@@ -179,6 +254,7 @@
 			files = (
 				F222302926690EDB00435E92 /* ContentView.swift in Sources */,
 				F251FF82267A4F6C004887FF /* LoginView.swift in Sources */,
+				F2E2A9292684CD6900143E69 /* AppViewModel.swift in Sources */,
 				F2A93F1D266FC7EB0067662D /* AppNavigationManager.swift in Sources */,
 				F2A93F19266FBE830067662D /* MyButtonStyle.swift in Sources */,
 				F251FF80267A4EEC004887FF /* RegisterView.swift in Sources */,
@@ -308,6 +384,7 @@
 		};
 		F222303326690EDD00435E92 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ABCD577C4DF6AD3744148D79 /* Pods-Chemobrain Training App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -330,6 +407,7 @@
 		};
 		F222303426690EDD00435E92 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E2A794953DAEE1FF8B3E20C /* Pods-Chemobrain Training App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
