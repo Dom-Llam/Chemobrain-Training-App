@@ -15,9 +15,14 @@ class AppViewModel: ObservableObject {
     let auth = Auth.auth()
     
     @Published var signedIn = false
+    @Published var showingGame = false
     
     var isSignedIn: Bool {
         return auth.currentUser != nil
+    }
+    
+    func playGame() {
+        self.showingGame.toggle()
     }
     
     func signIn(email: String, password: String) {

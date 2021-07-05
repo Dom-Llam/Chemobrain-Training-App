@@ -18,12 +18,15 @@ struct ContentView: View {
     var body: some View {
         
         NavigationView {
-            if viewModel.isSignedIn {
+            if viewModel.showingGame {
+                GameScene()
+            }else if viewModel.isSignedIn {
                 HomeView()
-                
+
             } else {
                 LoginView()
             }
+
         }
         .onAppear {
             viewModel.signedIn = viewModel.isSignedIn
