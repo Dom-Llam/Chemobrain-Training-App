@@ -37,6 +37,10 @@ struct BlueButton: ButtonStyle {
 
 struct GameScene: View {
     
+    // To track time for each game session
+    let timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
+    @State var seconds: Float = 0.0
+    
     // To track page observable object
     @EnvironmentObject var viewModel: AppViewModel
     
@@ -54,8 +58,13 @@ struct GameScene: View {
             SpriteView(scene: scene)
                 .frame(width: 700, height: 800)
             
+            Text("Time in session: \(seconds)").onReceive(timer) { input in
+                self.seconds += 0.01
+            }
+            
             Button(action: {
                 viewModel.playGame()
+                
             }, label: {
                 Text("Let's Play!")
                     .foregroundColor(Color.blue)

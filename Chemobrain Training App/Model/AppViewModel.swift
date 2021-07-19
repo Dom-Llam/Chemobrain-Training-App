@@ -7,12 +7,14 @@
 
 import SwiftUI
 import FirebaseAuth
+import Firebase
 
 // Class for current view
 
 class AppViewModel: ObservableObject {
     
     let auth = Auth.auth()
+    let db = Firestore.firestore()
     
     @Published var signedIn = false
     @Published var showingGame = false
@@ -41,8 +43,12 @@ class AppViewModel: ObservableObject {
     func signUp(email: String, password: String) {
         auth.createUser(withEmail: email, password: password) { [weak self] result, error in
             guard result != nil, error == nil else {
+                print("an error took place creating user\(error!)")
                 return
             }
+            
+            // Create user instance of firebase.auth in firebase.firestore?
+            self?.db.collection("users").document().setData(["UserName": email, "Password": password])
             
             // Successful login
             DispatchQueue.main.async {
@@ -55,6 +61,12 @@ class AppViewModel: ObservableObject {
         try? auth.signOut()
         
         self.signedIn = false
+    }
+    
+    func addInfo() {
+        
+        // More to come
+        db.collection("U")
     }
     
 }
