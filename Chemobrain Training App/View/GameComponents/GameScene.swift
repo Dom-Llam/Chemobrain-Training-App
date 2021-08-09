@@ -73,7 +73,7 @@ var body: some View {
                 
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
-        
+            .ignoresSafeArea()
         
     }
     .ignoresSafeArea()

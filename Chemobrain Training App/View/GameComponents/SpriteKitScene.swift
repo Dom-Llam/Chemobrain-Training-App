@@ -19,11 +19,19 @@ enum CollisionType: UInt32 {
 
 class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     
+    
+    
     @EnvironmentObject var viewModel: AppViewModel
 
     // Setting up the timer and score
     var timer: Timer?
+    let timerLabel = SKLabelNode(fontNamed: "Baskerville-Bold")
     let scoreLabel = SKLabelNode(fontNamed: "Baskerville-Bold")
+    var countDown = 60.0 {
+        didSet {
+            timerLabel.text = "Time remaining: \(countDown)"
+        }
+    }
     var score = 0 {
         didSet {
             scoreLabel.text = "Score: \(score)"
@@ -50,10 +58,21 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     let positions = Array(stride(from: -50, through: 50, by: 50))
     
     override func didMove(to view: SKView) {
+        
+        
         //Set up scene here
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         physicsWorld.contactDelegate = self
         addChild(music)
+        
+        // For countDown
+        timerLabel.fontColor = UIColor.white.withAlphaComponent(0.5)
+        timerLabel.position = CGPoint(x: 310, y: 400)
+        timerLabel.zPosition = 2
+        addChild(timerLabel)
+        countDown = 60
+        
+        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(sessionCountDown), userInfo: nil, repeats: true)
         
         // For score
         scoreLabel.fontColor = UIColor.white.withAlphaComponent(0.5)
@@ -244,6 +263,15 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         //This is called before each frame is rendered
     //    moveCoins()
+    }
+    
+    @objc func sessionCountDown() {
+        if countDown > 0 {
+        countDown -= 0.1
+        } else  if countDown < 45 {
+            viewModel.playGame()
+        }
+        
     }
     
     func checkPhysics() {
