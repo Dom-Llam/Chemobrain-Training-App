@@ -23,13 +23,20 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     
     @EnvironmentObject var viewModel: AppViewModel
 
+    
     // Setting up the timer and score
     var timer: Timer?
     let timerLabel = SKLabelNode(fontNamed: "Baskerville-Bold")
     let scoreLabel = SKLabelNode(fontNamed: "Baskerville-Bold")
+ 
+    
     var countDown = 60.0 {
         didSet {
-            timerLabel.text = "Time remaining: \(countDown)"
+            let str = String(format: "%.2f", countDown)
+            timerLabel.text = "Countdown: \(str)"
+            if countDown <= 0 {
+                //viewModel.playGame()
+            }
         }
     }
     var score = 0 {
@@ -52,6 +59,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     let center: CGFloat = 0
     var moveCount = 0
     
+    
     var levelNumber = 0
     var waveNumber = 0
     
@@ -67,7 +75,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         
         // For countDown
         timerLabel.fontColor = UIColor.white.withAlphaComponent(0.5)
-        timerLabel.position = CGPoint(x: 310, y: 400)
+        timerLabel.position = CGPoint(x: 250, y: 400)
         timerLabel.zPosition = 2
         addChild(timerLabel)
         countDown = 60
@@ -109,17 +117,38 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         let gas2 = SKTexture(imageNamed: "gas2")
         let gas3 = SKTexture(imageNamed: "gas3")
         let gas4 = SKTexture(imageNamed: "gas4")
+        let gas5 = SKTexture(imageNamed: "gas5")
+        let gas6 = SKTexture(imageNamed: "gas6")
+        let gas7 = SKTexture(imageNamed: "gas7")
+        let gas8 = SKTexture(imageNamed: "gas8")
+        let gas9 = SKTexture(imageNamed: "gas9")
+        let gas10 = SKTexture(imageNamed: "gas10")
+        let gas11 = SKTexture(imageNamed: "gas11")
+        let gas12 = SKTexture(imageNamed: "gas12")
+        let gas13 = SKTexture(imageNamed: "gas13")
+        let gas14 = SKTexture(imageNamed: "gas14")
+        let gas15 = SKTexture(imageNamed: "gas15")
+        let gas16 = SKTexture(imageNamed: "gas16")
+        let gas17 = SKTexture(imageNamed: "gas17")
+        let gas18 = SKTexture(imageNamed: "gas18")
+        let gas19 = SKTexture(imageNamed: "gas19")
+        let gas20 = SKTexture(imageNamed: "gas20")
+        let gas21 = SKTexture(imageNamed: "gas21")
+        let gas22 = SKTexture(imageNamed: "gas22")
+        let gas23 = SKTexture(imageNamed: "gas23")
+        let gas24 = SKTexture(imageNamed: "gas24")
+        
 
         // Setting up the animation components for the portal
-        let portalArray = [gas0, gas1, gas2, gas3, gas4]
+        let portalArray = [gas0, gas1, gas2, gas3, gas4, gas5, gas6, gas7, gas8, gas9, gas10, gas11, gas12, gas13, gas14, gas15, gas16, gas17, gas18, gas19, gas20, gas21, gas22, gas23, gas24]
         let portalAnim = SKAction.animate(with: portalArray, timePerFrame: 0.2)
         let portalForever = SKAction.repeatForever(portalAnim)
         
         // Initiating the portal
         portal.name = "portal"
         portal.position = CGPoint(x: 0, y: 300)
-        portal.size.height = 250
-        portal.size.width = 250
+        portal.size.height = 450
+        portal.size.width = 450
         portal.run(portalForever)
         portal.zPosition = 2
         addChild(portal)
@@ -248,12 +277,12 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         if location.x < center {
             guard moveCount != -1 else { return }
             moveCount -= 1
-            let moveLeft = SKAction.moveBy(x: -200, y: 0, duration: 0.5)
+            let moveLeft = SKAction.moveBy(x: -163, y: 0, duration: 0.5)
             player.run(moveLeft)
         } else {
             
             guard moveCount != 1 else { return }
-            let moveRight = SKAction.moveBy(x: +200, y: 0, duration: 0.5)
+            let moveRight = SKAction.moveBy(x: +163, y: 0, duration: 0.5)
             player.run(moveRight)
             moveCount += 1
             
@@ -268,8 +297,8 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     @objc func sessionCountDown() {
         if countDown > 0 {
         countDown -= 0.1
-        } else  if countDown < 45 {
-            viewModel.playGame()
+        } else {
+            return
         }
         
     }
