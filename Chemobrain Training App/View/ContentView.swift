@@ -12,7 +12,7 @@ import FirebaseAuth
 //MARK: - Original Navigation View
 
 struct ContentView: View {
-    
+
     @EnvironmentObject var viewModel: AppViewModel
     
     var body: some View {

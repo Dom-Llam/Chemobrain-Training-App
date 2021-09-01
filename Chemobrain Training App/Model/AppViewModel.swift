@@ -16,13 +16,20 @@ class AppViewModel: ObservableObject {
     // For backside server and user auth
     let auth = Auth.auth()
     let db = Firestore.firestore()
+
     
     // For the timer and score
     let timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
     @Published var score: Int = 0
     
     @Published var signedIn = false
+    
     @Published var showingGame = false
+    
+    
+    // Public var to use in the game scene to exit
+    public static var shared = AppViewModel()
+    @Published public var exitView = false
     
     var isSignedIn: Bool {
         return auth.currentUser != nil

@@ -28,7 +28,7 @@ struct HomeView: View {
 
                 HStack {
                     VStack {
-                        Text("Welcome back, user!")
+                        Text("Welcome back!")
                     }
                     
                 }
@@ -37,27 +37,27 @@ struct HomeView: View {
                 .background(Color.yellow)
                 .cornerRadius(20)
                 
-                HStack {
-                    VStack {
-                        Image("robot")
-                        Text("You're from the future!")
-                    }
-                    
-                    VStack {
-                        Image("person")
-                        Text("You're an adventurer!")
-                    }
-                    
-                    VStack {
-                        Image("zombie")
-                        Text("Battle the magical undead!")
-                    }
-                }
-                .padding()
-                .frame(width: 700, height: 300, alignment: .center)
-                .background(Color.secondary)
-                .cornerRadius(20)
-                
+//                HStack {
+//                    VStack {
+//                        Image("robot")
+//                        Text("You're from the future!")
+//                    }
+//
+//                    VStack {
+//                        Image("person")
+//                        Text("You're an adventurer!")
+//                    }
+//
+//                    VStack {
+//                        Image("zombie")
+//                        Text("Battle the magical undead!")
+//                    }
+//                }
+//                .padding()
+//                .frame(width: 700, height: 300, alignment: .center)
+//                .background(Color.secondary)
+//                .cornerRadius(20)
+//
                 HStack {
                     VStack {
                         Image("robot")
@@ -66,6 +66,11 @@ struct HomeView: View {
                     
                     Button(action: {
                         viewModel.playGame()
+                        
+                        // After duration of trial toggle again to get out?
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 245) {
+                            viewModel.playGame()
+                        }
                     }, label: {
                         Text("Let's Play!")
                             .foregroundColor(Color.blue)

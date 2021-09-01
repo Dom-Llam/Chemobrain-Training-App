@@ -11,6 +11,9 @@ import SpriteKit
 
 
 struct GameScene: View {
+    // For environment object to exit game
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @StateObject private var viewManager = AppViewModel.shared
     
     // To track page observable object
     @EnvironmentObject var viewModel: AppViewModel
@@ -18,7 +21,7 @@ struct GameScene: View {
     
     //For SKscene being added to swiftui view
     var scene: SKScene {
-        let scene = SpriteKitScene()
+        let scene = SpriteKitScene(/*viewModel: viewModel*/)
         scene.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         scene.scaleMode = .fill
         return scene
@@ -32,7 +35,19 @@ var body: some View {
     
     ZStack {
         SpriteView(scene: scene)
-        
+        // Another attempt to exit game
+//        if viewManager.exitView {
+//            Button {
+//                presentationMode.wrappedValue.dismiss()
+//
+//                viewModel.playGame()
+//
+//                viewManager.exitView = false
+//
+//            } label: {
+//                Image(systemName: "arrow.uturn.left")
+//            }
+//        }
 
             VStack(alignment: .leading) {
 //                Text("Score: \(viewModel.score)")
@@ -73,9 +88,11 @@ var body: some View {
                     Spacer()
                     }
                 
+                
             }
-            .frame(maxWidth: .infinity, alignment: .trailing)
             .ignoresSafeArea()
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            
         
     }
     .ignoresSafeArea()
@@ -97,6 +114,9 @@ struct BlueButton: ButtonStyle {
 
 struct GameScene_Previews: PreviewProvider {
     static var previews: some View {
-        GameScene()
+        Group {
+            GameScene()
+            GameScene()
+        }
     }
 }

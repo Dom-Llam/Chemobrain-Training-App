@@ -15,17 +15,33 @@ import SwiftUI
 enum CollisionType: UInt32 {
     case player = 1
     case coin = 2
-    case obstruction = 4
+    case target = 4
     case distractorLaser = 8
 }
 
 class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     
-    
-    
-    @EnvironmentObject var viewModel: AppViewModel
+//    GameScene().environmentObject(AppViewModel)
 
+    // To decode the hardcoded JSON file into an array of TrialType
+    let trialTypes = Bundle.main.decode([TrialType].self, from: "test-trial.json")
     
+    // Create an instance of the difficulty manager
+    var dl = DifficultyLevel(scoreAndTrial: [0:0])
+    @StateObject public var appViewModel = AppViewModel.shared
+    
+    // Create an initializer to take in the instance of appViewModel from Swiftui GameScene
+//    init(viewModel: AppViewModel) {
+//        self.appViewModel = viewModel
+//
+//        // Call on super init to avoid error
+//        super.init(size: CGSize(width: 1620, height: 2160))
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//    
     // Setting up the timer and score
     var timer: Timer?
     let timerLabel = SKLabelNode(fontNamed: "Baskerville-Bold")
@@ -34,8 +50,8 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     var reactionTime: Timer?
     var rt: Double = 0.0
     var targetResponse: Bool = false
-    var responseTimeArray = [0.0]
-    var responseArray = [""]
+    var responseTimeArray:Array<Double> = []
+    var responseArray:Array<String> = []
     
     // To validate right/left responses to target (ie. not record random button taps
     var cueFlashed: Bool = false
@@ -55,13 +71,30 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    var currentColor: String = ""
+    var currentDirection: String = ""
+    // Second attempt to match responses, key is an array that is appended at each iteration of [i] in dispatch for loop
+    // Response count should be incremented each time that a response is tapped.
+    var responseKey = [""]
+    var responseCount = 1
+    
     // Setting up images for the scene itself
     let fixedSky = SKSpriteNode(imageNamed: "fixedSky")
     let tile = SKSpriteNode(imageNamed: "tile")
     let player = SKSpriteNode(imageNamed: "player")
     let portal = SKSpriteNode(imageNamed: "gas0")
-    let leftArrow = SKSpriteNode(imageNamed: "tile_directionWest")
-    let rightArrow = SKSpriteNode(imageNamed: "tile_directionEast")
+    let yellowLeft = SKSpriteNode(imageNamed: "yellowLeft")
+    let yellowRight = SKSpriteNode(imageNamed: "yellowRight")
+    let blueLeft = SKSpriteNode(imageNamed: "blueLeft")
+    let blueRight = SKSpriteNode(imageNamed: "blueRight")
+    let moveRight = SKSpriteNode(imageNamed: "move")
+    let moveLeft = SKSpriteNode(imageNamed: "move")
+    
+    // Add targets here to make them globally available
+    let rightYellowTarget = SKSpriteNode(imageNamed: "yellowSmall")
+    let rightBlueTarget = SKSpriteNode(imageNamed: "blueSmall")
+    let leftYellowTarget = SKSpriteNode(imageNamed: "yellowSmall")
+    let leftBlueTarget = SKSpriteNode(imageNamed: "blueSmall")
 
     let music = SKAudioNode(fileNamed: "the-hero.mp3")
     
@@ -78,6 +111,17 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         
         
+        
+        // Create instance of trial Manager so that it can be used in response functionality
+        var trialManager = TrialManager(type: trialTypes[0], trialNumber: trialTypes[0].trialNumber, coinCongruent: trialTypes[0].coinCongruent, targetBlue: trialTypes[0].targetBlue, targetRight: trialTypes[0].targetRight, flashScreen: trialTypes[0].flashScreen, flashRight: trialTypes[0].flashRight)
+        
+        // Simply leave after two models
+       
+            DispatchQueue.main.asyncAfter(deadline: .now() + 120) {
+                self.dl.appendScoreAndTrial(score: self.score)
+            }
+        
+        
         //Set up scene here
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         physicsWorld.contactDelegate = self
@@ -90,7 +134,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         addChild(timerLabel)
         countDown = 60
         
-        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(sessionCountDown), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(sessionCountDown), userInfo: nil, repeats: true)
         
         // For score
         scoreLabel.fontColor = UIColor.white.withAlphaComponent(0.5)
@@ -164,30 +208,55 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         addChild(portal)
         
         // For the arrow response buttons
-        rightArrow.name = "right"
-        rightArrow.position = CGPoint(x: 325, y: -400)
-        rightArrow.size = CGSize(width: 100, height: 100)
-        rightArrow.zPosition = 2
-        addChild(rightArrow)
+        yellowRight.name = "yellowRight"
+        yellowRight.position = CGPoint(x: 280, y: -350)
+        yellowRight.size = CGSize(width: 75, height: 75)
+        yellowRight.zPosition = 2
+        addChild(yellowRight)
         
-        leftArrow.name = "left"
-        leftArrow.position = CGPoint(x: -325, y: -400)
-        leftArrow.size = CGSize(width: 100, height: 100)
-        leftArrow.zPosition = 2
-        addChild(leftArrow)
+        yellowLeft.name = "yellowLeft"
+        yellowLeft.position = CGPoint(x: -280, y: -350)
+        yellowLeft.size = CGSize(width: 75, height: 75)
+        yellowLeft.zPosition = 2
+        addChild(yellowLeft)
+        
+        blueRight.name = "blueRight"
+        blueRight.position = CGPoint(x: 355, y: -350)
+        blueRight.size = CGSize(width: 75, height: 75)
+        blueRight.zPosition = 2
+        addChild(blueRight)
+        
+        blueLeft.name = "blueLeft"
+        blueLeft.position = CGPoint(x: -355, y: -350)
+        blueLeft.size = CGSize(width: 75, height: 75)
+        blueLeft.zPosition = 2
+        addChild(blueLeft)
+        
+        // For the movement buttons
+        moveRight.name = "moveRight"
+        moveRight.position = CGPoint(x: 325, y: -475)
+        moveRight.size = CGSize(width: moveRight.frame.width, height: moveRight.frame.height)
+        moveRight.zPosition = 2
+        addChild(moveRight)
+        
+        moveLeft.name = "moveLeft"
+        moveLeft.position = CGPoint(x: -325, y: -475)
+        moveLeft.size = CGSize(width: moveLeft.frame.width, height: moveLeft.frame.height)
+        moveLeft.zPosition = 2
+        addChild(moveLeft)
         
         // Initiating the player
         player.name = "player"
         player.position.y = frame.minY + 150
         player.position.x = 0
-        player.zPosition = 1
+        player.zPosition = 2
         player.size = CGSize(width: 100, height: 100)
         player.zRotation = .pi / 1
         //Adding physics body to allow collisions with coins and obstacles and distractor laser
         player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.texture!.size())
         player.physicsBody?.categoryBitMask = CollisionType.player.rawValue
-        player.physicsBody?.collisionBitMask = CollisionType.coin.rawValue | CollisionType.obstruction.rawValue | CollisionType.distractorLaser.rawValue
-        player.physicsBody?.contactTestBitMask = CollisionType.coin.rawValue | CollisionType.obstruction.rawValue | CollisionType.distractorLaser.rawValue
+        player.physicsBody?.collisionBitMask = CollisionType.coin.rawValue | CollisionType.target.rawValue | CollisionType.distractorLaser.rawValue
+        player.physicsBody?.contactTestBitMask = CollisionType.coin.rawValue | CollisionType.target.rawValue | CollisionType.distractorLaser.rawValue
         player.physicsBody?.isDynamic = false
         addChild(player)
         
@@ -199,455 +268,572 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         addChild(fixedSky)
         
         
-        // It might be the case that all of the coins are being rendered in the same exact space and so appear as if only one if being genereated at a time, which may be why you generate waves offscreen - in their offset positions - before you move them onto the screen. But that won't work for me so maybe it will have to be something ran in the background thread liek the stack overflow answer. OR alternatively , make the coins visibility property be off until they hit y: 300 where the portal is and then make them visible again.
-
         
-        for i in 1...12 {
+        for i in 0...23 {
             
-            let delay: Double = Double(i) * 5.0
-            let coinDelay: Double = Double(i) * 5 + 5
+            let delay: Double = Double(i) * 10 + 3.5
+            let coinDelay: Double = Double(i) * 10
             
-
-            switch i {
-            case 1:
-                DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
-                    self.spawnYellowCoinWave()
-                    print("spawning right target")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.flashRight()
-                    self.spawnRightYellowTarget()
-                    print("spawning right target")
-                }
-            case 2:
-                DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
-                    self.spawnBlueCoinWave()
-                    print("spawning right target")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay ) {
-                    self.flashLeft()
-                    self.spawnLeftYellowTarget()
-                    print("spawning second wave")
+            
+            // Create trial manager, which takes in decoded JSON file as an array of trialTypes with all the necessary parameters
+            
+            trialManager = TrialManager(type: trialTypes[i], trialNumber: trialTypes[i].trialNumber, coinCongruent: trialTypes[i].coinCongruent, targetBlue: trialTypes[i].targetBlue, targetRight: trialTypes[i].targetRight, flashScreen: trialTypes[i].flashScreen, flashRight: trialTypes[i].flashRight)
+            
+            
+            if trialManager.type.targetRight == true && trialManager.type.targetBlue == true {
+                responseKey.append("rightBlue")
+            } else if trialManager.type.targetRight == true && trialManager.type.targetBlue == false {
+                responseKey.append("rightYellow")
+            } else if trialManager.type.targetRight == false && trialManager.type.targetBlue == true {
+                responseKey.append("leftBlue")
+            } else if trialManager.type.targetRight == false && trialManager.type.targetBlue == false {
+                responseKey.append("leftYellow")
+            }
+            
+            // Attempt to append current trial parameters for responseKey for verifying correct response later
+//            responseKey.[i] = (trialManager.type.trialNumber, currentColor, currentDirection)
+            
+            func printStats() {
+                print("Trial: \(trialManager.type.trialNumber)")
+                print("FlashRight: \(trialManager.type.flashRight)")
+                print("TargetRight: \(trialManager.type.targetRight)")
+                print("TargetBlue: \(trialManager.type.targetBlue)")
+                print("CoinCongruent: \(trialManager.type.coinCongruent)")
+                print("FlashScreen: \(trialManager.type.flashScreen)")
+                print("CurrentDirect: \(currentDirection)")
+                print("CurrentColor: \(currentColor)")
+                print(responseKey[i + 1])
+            }
+                printStats()
+                // All of the condition possibilities for flash whole
+                
+                if trialManager.type.flashScreen && trialManager.type.targetRight && trialManager.type.targetBlue && trialManager.type.coinCongruent {
                     
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnBlueCoinWave()
+                        print("spawning blue coin wave. Trial: 1")
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        // Invalidate so that timer is always fresh when screen is flashed
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        print("ReactionTime invalidated trial 1"
+                        )
+                        // Generate wave and target
+                        self.wholeScreenFlash()
+                        self.spawnRightBlueTarget()
+                        
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        // Ommit first and last increment in order for order to stay correct
+//                        self.responseCount += 1
+//                        print("Count after increment = \(self.responseCount)")
+                        
+                        
+                        print("Trial: 1, blue coins, right blue target.")
+                        print("Hard coded: \(self.responseKey[1])")
+                    }
+                } else if trialManager.type.flashScreen && trialManager.type.targetRight && trialManager.type.targetBlue && !trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnYellowCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        print("Reaction time invalidated trial 2")
+                        self.wholeScreenFlash()
+                        self.spawnRightBlueTarget()
+                        
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self.responseCount = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                        
+                        print("Trial: 2, yellow coins, right blue target.")
+                        print(self.responseKey[2])
+                    }
+                } else if trialManager.type.flashScreen && trialManager.type.targetRight && !trialManager.type.targetBlue && trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnYellowCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        print("reaction time invalidated trial 3")
+                        self.wholeScreenFlash()
+                        self.spawnRightYellowTarget()
+                        
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+           
+                        print("Trial: 3, yellow coins, right yellow target.")
+                        print(self.responseKey[3])
+                    }
+                } else if trialManager.type.flashScreen && trialManager.type.targetRight && !trialManager.type.targetBlue && !trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnBlueCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        print("reaction time invalidated trial 4")
+                        self.wholeScreenFlash()
+                        self.spawnRightYellowTarget()
+                        
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                  
+                        print("Trial: 4, blue coins, right yellow target.")
+                        print(self.responseKey[4])
+                    }
+                } else if trialManager.type.flashScreen && !trialManager.type.targetRight && trialManager.type.targetBlue && trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnBlueCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        print("reaction time invalidated trial 5")
+                        self.wholeScreenFlash()
+                        self.spawnLeftBlueTarget()
+                        
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                      
+                        print("Trial: 5, blue coins, left blue target.")
+                        print(self.responseKey[5])
+                    }
+                } else if trialManager.type.flashScreen && !trialManager.type.targetRight && trialManager.type.targetBlue && !trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnYellowCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        print("reactiontime invalidated trial 6")
+                        self.wholeScreenFlash()
+                        self.spawnLeftBlueTarget()
+                        
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                       
+                        print("Trial: 6, yellow coins, left blue target.")
+                        print(self.responseKey[6])
+                    }
+                } else if trialManager.type.flashScreen && !trialManager.type.targetRight && !trialManager.type.targetBlue && trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnYellowCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        print("reaction time invalidated trial 7")
+                        self.wholeScreenFlash()
+                        self.spawnLeftYellowTarget()
+                        
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                        
+                        print("Trial: 7, yellow coins, left yellow target.")
+                        print(self.responseKey[7])
+                    }
+                } else if trialManager.type.flashScreen && !trialManager.type.targetRight && !trialManager.type.targetBlue && !trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnBlueCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        self.wholeScreenFlash()
+                        self.spawnLeftYellowTarget()
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                         
+                        print("Trial: 8, blue coins, left yellow target.")
+                        print(self.responseKey[8])
+                    }
                 }
-            case 3:
-                DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
-                    self.spawnBlueCoinWave()
-                    print("spawning right target")
+                
+                // All of the condition possibilities for flash right
+                
+                else if trialManager.type.flashRight && trialManager.type.targetRight && trialManager.type.targetBlue && trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnBlueCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        self.flashRight()
+                        self.spawnRightBlueTarget()
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                         
+                        print("Trial: 9, blue coins, right blue target. ")
+                        print(self.responseKey[9])
+                    }
+                } else if trialManager.type.flashRight && trialManager.type.targetRight && trialManager.type.targetBlue && !trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnYellowCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        self.flashRight()
+                        self.spawnRightBlueTarget()
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                         
+                        print("Trial: 10, yellow coins, right blue target. ")
+                        print(self.responseKey[10])
+                    }
+                } else if trialManager.type.flashRight && trialManager.type.targetRight && !trialManager.type.targetBlue && trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnYellowCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        self.flashRight()
+                        self.spawnRightYellowTarget()
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                         
+                        print("Trial: 11, yellow coins, right yellow target. ")
+                        print(self.responseKey[11])
+                    }
+                } else if trialManager.type.flashRight && trialManager.type.targetRight && !trialManager.type.targetBlue && !trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnBlueCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        self.flashRight()
+                        self.spawnRightYellowTarget()
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                         
+                        print("Trial: 12, blue coins, right yellow target. ")
+                        print(self.responseKey[12])
+                    }
+                } else if trialManager.type.flashRight && !trialManager.type.targetRight && trialManager.type.targetBlue && trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnBlueCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        self.flashRight()
+                        self.spawnLeftBlueTarget()
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                         
+                        print("Trial: 13, blue coins, left blue target.")
+                        print(self.responseKey[13])
+                    }
+                } else if trialManager.type.flashRight && !trialManager.type.targetRight && trialManager.type.targetBlue && !trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnYellowCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        self.flashRight()
+                        self.spawnLeftBlueTarget()
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                         
+                        print("Trial: 14, yellow coins, left blue target. ")
+                        print(self.responseKey[14])
+                    }
+                } else if trialManager.type.flashRight && !trialManager.type.targetRight && !trialManager.type.targetBlue && trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnYellowCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        self.flashRight()
+                        self.spawnLeftYellowTarget()
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                         
+                        print("Trial: 15, yellow coins, left yellow target. ")
+                        print(self.responseKey[15])
+                    }
+                } else if trialManager.type.flashRight && !trialManager.type.targetRight && !trialManager.type.targetBlue && !trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnBlueCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        self.flashRight()
+                        self.spawnLeftYellowTarget()
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                         
+                        print("Trial: 16, blue coins, left yellow target. ")
+                        print(self.responseKey[16])
+                    }
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.wholeScreenFlash()
-                    self.spawnRightYellowTarget()
-                    print("spawning left target")
+                
+                // All of the condition possibilities for flash left
+                
+                else if !trialManager.type.flashRight && trialManager.type.targetRight && trialManager.type.targetBlue && trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnBlueCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        self.flashLeft()
+                        self.spawnRightBlueTarget()
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                         
+                        print("Trial: 17, blue coins, right blue target. ")
+                        print(self.responseKey[17])
+                    }
+                } else if !trialManager.type.flashRight && trialManager.type.targetRight && trialManager.type.targetBlue && !trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnYellowCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        self.flashLeft()
+                        self.spawnRightBlueTarget()
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                         
+                        print("Trial: 18, yellow coins, right blue target. ")
+                        print(self.responseKey[18])
+                    }
+                } else if !trialManager.type.flashRight && trialManager.type.targetRight && !trialManager.type.targetBlue && trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnYellowCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        self.flashLeft()
+                        self.spawnRightYellowTarget()
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                         
+                        print("Trial: 19, yellow coins, right yellow target. ")
+                        print(self.responseKey[19])
+                    }
+                } else if !trialManager.type.flashRight && trialManager.type.targetRight && !trialManager.type.targetBlue && !trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnBlueCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        self.flashLeft()
+                        self.spawnRightYellowTarget()
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                         
+                        print("Trial: 20, blue coins, right yellow target. ")
+                        print(self.responseKey[20])
+                    }
+                } else if !trialManager.type.flashRight && !trialManager.type.targetRight && trialManager.type.targetBlue && trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnBlueCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        self.flashLeft()
+                        self.spawnLeftBlueTarget()
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                         
+                        print("Trial: 21, blue coins, left blue target. ")
+                        print(self.responseKey[21])
+                    }
+                } else if !trialManager.type.flashRight && !trialManager.type.targetRight && trialManager.type.targetBlue && !trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnYellowCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        self.flashLeft()
+                        self.spawnLeftBlueTarget()
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                         
+                        print("Trial: 22, yellow coins, left blue target. ")
+                        print(self.responseKey[22])
+                    }
+                } else if !trialManager.type.flashRight && !trialManager.type.targetRight && !trialManager.type.targetBlue && trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnYellowCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        self.flashLeft()
+                        self.spawnLeftYellowTarget()
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        self.responseCount += 1
+                        print("Count after increment = \(self.responseCount)")
+                         
+                        print("Trial: 23, yellow coins, left yellow target. ")
+                        print(self.responseKey[23])
+                    }
+                } else if !trialManager.type.flashRight && !trialManager.type.targetRight && !trialManager.type.targetBlue && !trialManager.type.coinCongruent {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
+                        self.spawnBlueCoinWave()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                        self.reactionTime?.invalidate()
+                        self.rt = 0
+                        
+                        self.flashLeft()
+                        self.spawnLeftYellowTarget()
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                            self.dl.trainingDay = true
+                            print("Training day toggled intrial block after spawn left yellow target - Training day: \(self.dl.trainingDay)")
+                        }
+                        
+                        // increment response Count here? So that the answer is independent of user input
+                        print("Response Key with self. = \(self.responseKey[self.responseCount])")
+                        
+                        //Don't increment the last time
+//                        self.responseCount += 1
+//                        print("Count after increment = \(self.responseCount)")
+                         
+                        print("Trial: 24, blue coins, left yellow target. ")
+                        print(self.responseKey[24])
+                    }
                 }
-            case 4:
-                DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
-                    self.spawnYellowCoinWave()
-                    print("spawning right target")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.wholeScreenFlash()
-                    self.spawnLeftYellowTarget()
-                    print("spawning left target")
-                }
-            case 5:
-                DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
-                    self.spawnBlueCoinWave()
-                    print("spawning right target")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.flashRight()
-                    self.spawnLeftYellowTarget()
-                    print("spawning left target")
-                }
-            case 6:
-                DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
-                    self.spawnYellowCoinWave()
-                    print("spawning right target")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.flashLeft()
-                    self.spawnRightYellowTarget()
-                    print("spawning left target")
-                }
-            case 7:
-                DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
-                    self.spawnBlueCoinWave()
-                    print("spawning right target")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.flashRight()
-                    self.spawnRightBlueTarget()
-                    print("spawning left target")
-                }
-            case 8:
-                DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
-                    self.spawnYellowCoinWave()
-                    print("spawning right target")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.flashLeft()
-                    self.spawnLeftBlueTarget()
-                    print("spawning left target")
-                }
-            case 9:
-                DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
-                    self.spawnBlueCoinWave()
-                    print("spawning right target")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.wholeScreenFlash()
-                    self.spawnRightBlueTarget()
-                    print("spawning left target")
-                }
-            case 10:
-                DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
-                    self.spawnYellowCoinWave()
-                    print("spawning right target")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.wholeScreenFlash()
-                    self.spawnLeftBlueTarget()
-                    print("spawning left target")
-                }
-            case 11:
-                DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
-                    self.spawnBlueCoinWave()
-                    print("spawning right target")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.flashRight()
-                    self.spawnLeftBlueTarget()
-                    print("spawning left target")
-                }
-            case 12:
-                DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
-                    self.spawnYellowCoinWave()
-                    print("spawning right target")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.flashLeft()
-                    self.spawnRightBlueTarget()
-                    print("spawning left target")
-                }
-            default:
-                DispatchQueue.main.asyncAfter(deadline: .now() + coinDelay) {
-                    self.spawnYellowCoinWave()
-                    print("This is default block")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.wholeScreenFlash()
-                    self.spawnLeftYellowTarget()
-                    print("This is default block")
-                }
-            }
-        
-        
-        
-        // To check physics
-//        checkPhysics()
+            
+//            }
         }
         
+
+//        // To check physics
+////        checkPhysics()
+//        }
+//
     }
     
-    func flashRight() {
-        
-        let flashRight = SKSpriteNode(imageNamed: "redLine")
-        flashRight.position = CGPoint(x: 410, y: 0)
-        flashRight.zPosition = 2
-        flashRight.size = CGSize(width: frame.height, height: flashRight.size.height)
-        flashRight.zRotation = .pi / 2
-        flashRight.alpha = 0
-        self.addChild(flashRight)
-        
-        let wait10 = SKAction.wait(forDuration: 10)
-        let wait1 = SKAction.wait(forDuration: 0.25)
-        
-        flashRight.run(wait10)
-        flashRight.alpha = 0.5
-        
-        cueFlashed = true
-        // Here is where flash appears on screen - cue timer
-        reactionTime = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(reactToTarget), userInfo: nil, repeats: true)
-        
-        let sequence = SKAction.sequence([wait1, .removeFromParent()])
-        flashRight.run(sequence)
-    }
     
-    func flashLeft() {
-        
-        let flashLeft = SKSpriteNode(imageNamed: "redLine")
-        flashLeft.position = CGPoint(x: -410, y: 0)
-        flashLeft.zPosition = 2
-        flashLeft.size = CGSize(width: frame.height, height: flashLeft.size.height)
-        flashLeft.zRotation = .pi / 2
-        flashLeft.alpha = 0
-        self.addChild(flashLeft)
-        
-        let wait10 = SKAction.wait(forDuration: 10)
-        let wait1 = SKAction.wait(forDuration: 0.25)
-        
-        flashLeft.run(wait10)
-        flashLeft.alpha = 0.5
-        
-        cueFlashed = true
-        // Here is where flash appears on screen - cue timer
-        reactionTime = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(reactToTarget), userInfo: nil, repeats: true)
-        
-        let sequence = SKAction.sequence([wait1, .removeFromParent()])
-        flashLeft.run(sequence)
-    }
-    
-    func wholeScreenFlash() {
-        
-        let wholeScreenFlash = SKSpriteNode(imageNamed: "wholeScreenFlash")
-        wholeScreenFlash.position = CGPoint(x: 0, y: 0)
-        wholeScreenFlash.size = CGSize(width: frame.width, height: frame.height)
-        wholeScreenFlash.zPosition = 2
-        wholeScreenFlash.alpha = 0
-        self.addChild(wholeScreenFlash)
-        
-        
-        let wait10 = SKAction.wait(forDuration: 30)
-        let wait1 = SKAction.wait(forDuration: 0.25)
-        
-        wholeScreenFlash.run(wait10)
-        wholeScreenFlash.alpha = 0.5
-        
-        cueFlashed = true
-        // Here is where flash appears on screen - cue timer
-        reactionTime = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(reactToTarget), userInfo: nil, repeats: true)
-        
-        let sequence = SKAction.sequence([wait1, .removeFromParent()])
-        wholeScreenFlash.run(sequence)
-    }
-    
-    func spawnRightBlueTarget() {
-        
-        //boiler plate for target object
-        let rightTarget = SKSpriteNode(imageNamed: "blueSmall")
-        rightTarget.position = CGPoint(x: 500, y: 700)
-        rightTarget.size = CGSize(width: 250, height: 75)
-        rightTarget.zPosition = 2
-        rightTarget.name = "rightTarget"
-        self.addChild(rightTarget)
-        
-        let movement = SKAction.move(to: CGPoint(x: 200, y: 0), duration: 1.5)
-        let movement2 = SKAction.move(to: CGPoint(x: 500, y: -700), duration: 0.5)
-        let wait5 = SKAction.wait(forDuration: 1)
-        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 0.5)
-        let repeatRotation = SKAction.repeatForever(rotateAction)
-        rightTarget.run(repeatRotation)
-        let sequence = SKAction.sequence([wait5, movement, movement2, .removeFromParent()])
-        rightTarget.run(sequence)
-    }
-    
-    func spawnRightYellowTarget() {
-        
-        //boiler plate for target object
-        let rightTarget = SKSpriteNode(imageNamed: "yellowSmall")
-        rightTarget.position = CGPoint(x: 500, y: 700)
-        rightTarget.size = CGSize(width: 250, height: 75)
-        rightTarget.zPosition = 2
-        rightTarget.name = "rightTarget"
-        self.addChild(rightTarget)
-        
-        let movement = SKAction.move(to: CGPoint(x: 200, y: 0), duration: 1.5)
-        let movement2 = SKAction.move(to: CGPoint(x: 500, y: -700), duration: 0.5)
-        let wait5 = SKAction.wait(forDuration: 1)
-        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 0.5)
-        let repeatRotation = SKAction.repeatForever(rotateAction)
-        rightTarget.run(repeatRotation)
-        let sequence = SKAction.sequence([wait5, movement, movement2, .removeFromParent()])
-        rightTarget.run(sequence)
-    }
-    
-    func spawnLeftYellowTarget() {
-        
-        //boiler plate for target object
-        let leftTarget = SKSpriteNode(imageNamed: "yellowSmall")
-        leftTarget.position = CGPoint(x: -500, y: 700)
-        leftTarget.size = CGSize(width: 250, height: 75)
-        leftTarget.zPosition = 2
-        leftTarget.name = "leftTarget"
-        self.addChild(leftTarget)
-        
-        let movement = SKAction.move(to: CGPoint(x: -200, y: 0), duration: 1.5)
-        let movement2 = SKAction.move(to: CGPoint(x: -500, y: -700), duration: 0.5)
-        let wait5 = SKAction.wait(forDuration: 1)
-        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 0.5)
-        let repeatRotation = SKAction.repeatForever(rotateAction)
-        leftTarget.run(repeatRotation)
-        let sequence = SKAction.sequence([wait5, movement, movement2, .removeFromParent()])
-        leftTarget.run(sequence)
-    }
-    
-    func spawnLeftBlueTarget() {
-        
-        //boiler plate for target object
-        let leftTarget = SKSpriteNode(imageNamed: "blueSmall")
-        leftTarget.position = CGPoint(x: -500, y: 700)
-        leftTarget.size = CGSize(width: 250, height: 75)
-        leftTarget.zPosition = 2
-        leftTarget.name = "leftTarget"
-        self.addChild(leftTarget)
-        
-        let movement = SKAction.move(to: CGPoint(x: -200, y: 0), duration: 1.5)
-        let movement2 = SKAction.move(to: CGPoint(x: -500, y: -700), duration: 0.5)
-        let wait5 = SKAction.wait(forDuration: 1)
-        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 0.5)
-        let repeatRotation = SKAction.repeatForever(rotateAction)
-        leftTarget.run(repeatRotation)
-        let sequence = SKAction.sequence([wait5, movement, movement2, .removeFromParent()])
-        leftTarget.run(sequence)
-    }
-    
-    func spawnRedCoinWave() {
-
-        func spawnCoin()   {
-            let randomLane = Int.random(in: 1...3)
-            var lanePosition = 0
-            
-            switch randomLane {
-            case 1:
-                lanePosition = 0
-            case 2:
-                lanePosition = -150
-            case 3:
-                lanePosition = 150
-            default:
-                lanePosition = 0
-            }
-            
-            //        print("\(randomLane)")
-            
-            let coin = SKSpriteNode(imageNamed: "redResources")
-            coin.position = CGPoint(x: lanePosition, y: 300)
-            coin.size = CGSize(width: 50, height: 50)
-            coin.name = "coin"
-            
-            coin.physicsBody = SKPhysicsBody(rectangleOf: coin.size)
-            //            coin.physicsBody?.isDynamic = false
-            coin.physicsBody?.categoryBitMask = CollisionType.coin.rawValue
-            coin.physicsBody?.collisionBitMask = CollisionType.player.rawValue
-            coin.physicsBody?.contactTestBitMask = CollisionType.player.rawValue
-            self.addChild(coin)
-            
-            let movement = SKAction.move(to: CGPoint(x: coin.position.x, y: -800), duration: 5)
-            let sequence = SKAction.sequence([movement, .removeFromParent()])
-            coin.run(sequence)
-            
-        }
-        
-      let wait1  = SKAction.wait(forDuration: 0.25)
-      let wait3   = SKAction.wait(forDuration:  2)
-      let spawn   = SKAction.run { spawnCoin() }
-
-      let action = SKAction.sequence([wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait3, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn])
-
-      // To run coin spawns forever
-//      let forever = SKAction.repeatForever(action)
-
-      self.run(action)
-    }
-    
-    func spawnYellowCoinWave() {
-
-        func spawnCoin()   {
-            let randomLane = Int.random(in: 1...3)
-            var lanePosition = 0
-            
-            switch randomLane {
-            case 1:
-                lanePosition = 0
-            case 2:
-                lanePosition = -150
-            case 3:
-                lanePosition = 150
-            default:
-                lanePosition = 0
-            }
-            
-            //        print("\(randomLane)")
-            
-            let coin = SKSpriteNode(imageNamed: "yellowResources")
-            coin.position = CGPoint(x: lanePosition, y: 300)
-            coin.size = CGSize(width: 50, height: 50)
-            coin.name = "coin"
-            
-            coin.physicsBody = SKPhysicsBody(rectangleOf: coin.size)
-            //            coin.physicsBody?.isDynamic = false
-            coin.physicsBody?.categoryBitMask = CollisionType.coin.rawValue
-            coin.physicsBody?.collisionBitMask = CollisionType.player.rawValue
-            coin.physicsBody?.contactTestBitMask = CollisionType.player.rawValue
-            self.addChild(coin)
-            
-            let movement = SKAction.move(to: CGPoint(x: coin.position.x, y: -800), duration: 5)
-            let sequence = SKAction.sequence([movement, .removeFromParent()])
-            coin.run(sequence)
-            
-        }
-        
-      let wait1  = SKAction.wait(forDuration: 0.25)
-      let wait3   = SKAction.wait(forDuration:  2)
-      let spawn   = SKAction.run { spawnCoin() }
-
-      let action = SKAction.sequence([wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait3, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn])
-
-      // To run coin spawns forever
-//      let forever = SKAction.repeatForever(action)
-
-      self.run(action)
-    }
-    
-    func spawnBlueCoinWave() {
-
-        func spawnCoin()   {
-            let randomLane = Int.random(in: 1...3)
-            var lanePosition = 0
-            
-            switch randomLane {
-            case 1:
-                lanePosition = 0
-            case 2:
-                lanePosition = -150
-            case 3:
-                lanePosition = 150
-            default:
-                lanePosition = 0
-            }
-            
-            //        print("\(randomLane)")
-            
-            let coin = SKSpriteNode(imageNamed: "blueResources")
-            coin.position = CGPoint(x: lanePosition, y: 300)
-            coin.size = CGSize(width: 50, height: 50)
-            coin.name = "coin"
-            
-            coin.physicsBody = SKPhysicsBody(rectangleOf: coin.size)
-            //            coin.physicsBody?.isDynamic = false
-            coin.physicsBody?.categoryBitMask = CollisionType.coin.rawValue
-            coin.physicsBody?.collisionBitMask = CollisionType.player.rawValue
-            coin.physicsBody?.contactTestBitMask = CollisionType.player.rawValue
-            self.addChild(coin)
-            
-            let movement = SKAction.move(to: CGPoint(x: coin.position.x, y: -800), duration: 5)
-            let sequence = SKAction.sequence([movement, .removeFromParent()])
-            coin.run(sequence)
-            
-        }
-        
-      let wait1  = SKAction.wait(forDuration: 0.25)
-      let wait3   = SKAction.wait(forDuration:  2)
-      let spawn   = SKAction.run { spawnCoin() }
-
-      let action = SKAction.sequence([wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait3, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn])
-
-      // To run coin spawns forever
-//      let forever = SKAction.repeatForever(action)
-
-      self.run(action)
-    }
     
     func didBegin(_ contact: SKPhysicsContact) {
         // Make sure both nodes in contact exist and are still a part of our game scene
@@ -661,10 +847,41 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         if secondNode.name == "player" {
             run(SKAction.playSoundFileNamed("score.wav", waitForCompletion: false))
             firstNode.removeFromParent()
-//            viewModel.score += 1
+
             score += 1
 //            print("coin collided with player. First node =  \(firstNode.name ?? "") SecondNode = \(secondNode.name ?? "")")
+        } else if secondNode.name == "rightTarget" {
+            
+            rightYellowTarget.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.1),
+                                                   SKAction.wait(forDuration: 0.1),
+                                                   SKAction.scale(to: 1, duration: 0.1)
+            ]))
+            rightBlueTarget.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.1),
+                                                   SKAction.wait(forDuration: 0.1),
+                                                   SKAction.scale(to: 1, duration: 0.1)
+            ]))
+            firstNode.removeFromParent()
+            
+            run(SKAction.playSoundFileNamed("confirmation_002.wav", waitForCompletion: false))
+            
+            score += 5
+        } else if secondNode.name == "leftTarget" {
+            
+            leftBlueTarget.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.1),
+                                                   SKAction.wait(forDuration: 0.1),
+                                                   SKAction.scale(to: 1, duration: 0.1)
+            ]))
+            leftBlueTarget.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.1),
+                                                   SKAction.wait(forDuration: 0.1),
+                                                   SKAction.scale(to: 1, duration: 0.1)
+            ]))
+            firstNode.removeFromParent()
+            
+            run(SKAction.playSoundFileNamed("confirmation_002.wav", waitForCompletion: false))
+            
+            score += 5
         }
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -674,45 +891,319 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         let node: SKNode = self.atPoint(location)
         
         // Touch either directional nodes and mark response to target
-        
         if cueFlashed == true {
-            if node.name == "right" {
-                self.responseArray.append(node.name!)
-                targetResponse = true
-                cueFlashed = false
-                print(node.name!)
-                
-            } else if node.name == "left" {
-                self.responseArray.append(node.name!)
-                targetResponse = true
-                cueFlashed = false
-                print(node.name!)
-            }
-        }
-        // Touch anywhere on the screen left/right of center line and player moves
-        if location.x < center {
-            guard moveCount != -1 else { return }
-            moveCount -= 1
-            let moveLeft = SKAction.moveBy(x: -163, y: 0, duration: 0.5)
-            player.run(moveLeft)
-        } else {
             
+            if node.name == "yellowRight" {
+                print(responseCount)
+                print(responseKey[responseCount])
+                if responseKey[responseCount] == "rightYellow" {
+                    score += 100
+                    
+                    // The action to stop it and move it to player
+                    rightYellowTarget.removeAllActions()
+                    let moveToPlayer = SKAction.move(to: player.position, duration: 1)
+                    let sequence = SKAction.sequence([moveToPlayer, .removeFromParent()])
+                    rightYellowTarget.run(sequence)
+                    player.run(SKAction.sequence([SKAction.wait(forDuration: 5),
+                                                  SKAction.scale(to: 1.3, duration: 0.1),
+                                                  SKAction.wait(forDuration: 0.1),
+                                                  SKAction.scale(to: 1, duration: 0.1)
+                    ]))
+                    run(SKAction.playSoundFileNamed("upgrade1.wav", waitForCompletion: false))
+                    
+                    
+                    print(rt)
+                    
+                    self.responseArray.append(node.name!)
+                    targetResponse = true
+                    cueFlashed = false
+                    print(node.name!)
+                    
+                    reactionTime?.invalidate()
+                } else if responseKey[responseCount] != "rightYellow" {
+                    // what happens if the response does not match
+                    // The ship explodes with sound
+                    if intersects(rightBlueTarget) {
+                        if let particles = SKEmitterNode(fileNamed: "Explosion") {
+                            particles.position = rightBlueTarget.position
+                            particles.zPosition = 2
+                            rightBlueTarget.alpha = 0
+                            addChild(particles)
+                            
+                        }
+                    } else if intersects(leftBlueTarget) {
+                        if let particles = SKEmitterNode(fileNamed: "Explosion") {
+                            particles.position = leftBlueTarget.position
+                            particles.zPosition = 2
+                            leftBlueTarget.alpha = 0
+                            addChild(particles)
+                        }
+                    } else if intersects(leftYellowTarget) {
+                        if let particles = SKEmitterNode(fileNamed: "Explosion") {
+                            particles.position = leftYellowTarget.position
+                            particles.zPosition = 2
+                            leftYellowTarget.alpha = 0
+                            addChild(particles)
+                        }
+                    }
+                    
+                    run(SKAction.playSoundFileNamed("explosion1.wav", waitForCompletion: false))
+                    // Vibrate the device
+                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+                    
+                    // Still need to append and change response parameters if they get the wrong answer
+                    self.responseArray.append(node.name!)
+                    targetResponse = true
+                    cueFlashed = false
+                    // Either way the timer needs to be invalidated
+                    reactionTime?.invalidate()
+                    
+                }
+                
+                
+                
+                
+            } else if node.name == "yellowLeft" {
+                print(responseCount)
+                print(responseKey[responseCount])
+                if responseKey[responseCount] == "leftYellow" {
+                    score += 100
+                    
+                    // The action to stop it and move it to player
+                    leftYellowTarget.removeAllActions()
+                    let moveToPlayer = SKAction.move(to: player.position, duration: 1)
+                    let sequence = SKAction.sequence([moveToPlayer, .removeFromParent()])
+                    leftYellowTarget.run(sequence)
+                    player.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.1),
+                                                  SKAction.wait(forDuration: 0.1),
+                                                  SKAction.scale(to: 1, duration: 0.1)
+           ]))
+                    run(SKAction.playSoundFileNamed("upgrade1.wav", waitForCompletion: false))
+                    print(rt)
+                    
+                    self.responseArray.append(node.name!)
+                    targetResponse = true
+                    cueFlashed = false
+                    print(node.name!)
+                    
+                    reactionTime?.invalidate()
+                } else if responseKey[responseCount] != "leftYellow" {
+                    // what happens if the response does not match
+                    // The ship explodes with sound
+                    if intersects(leftBlueTarget) {
+                        if let particles = SKEmitterNode(fileNamed: "Explosion") {
+                            particles.position = leftBlueTarget.position
+                            particles.zPosition = 2
+                            leftBlueTarget.alpha = 0
+                            addChild(particles)
+                        }
+                    } else if intersects(rightBlueTarget) {
+                        if let particles = SKEmitterNode(fileNamed: "Explosion") {
+                            particles.position = rightBlueTarget.position
+                            particles.zPosition = 2
+                            rightBlueTarget.alpha = 0
+                            addChild(particles)
+                        }
+                    } else if intersects(rightYellowTarget) {
+                        if let particles = SKEmitterNode(fileNamed: "Explosion") {
+                            particles.position = rightYellowTarget.position
+                            particles.zPosition = 2
+                            rightYellowTarget.alpha = 0
+                            addChild(particles)
+                        }
+                    }
+                    run(SKAction.playSoundFileNamed("explosion1.wav", waitForCompletion: false))
+                    // Vibrate the device
+                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+                    // Still need to append and change response parameters if they get the wrong answer
+                    self.responseArray.append(node.name!)
+                    targetResponse = true
+                    cueFlashed = false
+                    // Either way the timer needs to be invalidated
+                    reactionTime?.invalidate()
+                }
+                
+                
+            
+            } else if node.name == "blueRight" {
+                print(responseCount)
+                print(responseKey[responseCount])
+                
+                if responseKey[responseCount] == "rightBlue" {
+                    score += 100
+                    
+                    // The action to stop it and move it to player
+                    rightBlueTarget.removeAllActions()
+                    let moveToPlayer = SKAction.move(to: player.position, duration: 1)
+                    let sequence = SKAction.sequence([moveToPlayer, .removeFromParent()])
+                    rightBlueTarget.run(sequence)
+                    player.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.1),
+                                                  SKAction.wait(forDuration: 0.1),
+                                                  SKAction.scale(to: 1, duration: 0.1)
+           ]))
+                    run(SKAction.playSoundFileNamed("upgrade1.wav", waitForCompletion: false))
+                    print(rt)
+                    
+                    self.responseArray.append(node.name!)
+                    targetResponse = true
+                    cueFlashed = false
+                    print(node.name!)
+                    
+                    reactionTime?.invalidate()
+                } else if responseKey[responseCount] != "rightBlue" {
+                    // what happens if the response does not match
+                    // The ship explodes with sound
+                    if intersects(rightYellowTarget) {
+                        if let particles = SKEmitterNode(fileNamed: "Explosion") {
+                            particles.position = rightYellowTarget.position
+                            particles.zPosition = 2
+                            rightYellowTarget.alpha = 0
+                            addChild(particles)
+                        }
+                    } else if intersects(leftBlueTarget) {
+                        if let particles = SKEmitterNode(fileNamed: "Explosion") {
+                            particles.position = leftBlueTarget.position
+                            particles.zPosition = 2
+                            leftBlueTarget.alpha = 0
+                            addChild(particles)
+                        }
+                    } else if intersects(leftYellowTarget) {
+                        if let particles = SKEmitterNode(fileNamed: "Explosion") {
+                            particles.position = leftYellowTarget.position
+                            particles.zPosition = 2
+                            leftYellowTarget.alpha = 0
+                            addChild(particles)
+                        }
+                    }
+                    run(SKAction.playSoundFileNamed("explosion1.wav", waitForCompletion: false))
+                    // Vibrate the device
+                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+                    
+                    // Still need to append and change response parameters if they get the wrong answer
+                    self.responseArray.append(node.name!)
+                    targetResponse = true
+                    cueFlashed = false
+                    // Either way the timer needs to be invalidated
+                    reactionTime?.invalidate()
+                }
+                
+                
+            
+            } else if node.name == "blueLeft" {
+                print(responseCount)
+                print(responseKey[responseCount])
+                if responseKey[responseCount] == "leftBlue" {
+                    // Increment score
+                    score += 100
+                    // The action to stop it and move it to player
+                    leftBlueTarget.removeAllActions()
+                    let moveToPlayer = SKAction.move(to: player.position, duration: 1)
+                    let sequence = SKAction.sequence([moveToPlayer, .removeFromParent()])
+                    leftBlueTarget.run(sequence)
+                    player.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.1),
+                                                  SKAction.wait(forDuration: 0.1),
+                                                  SKAction.scale(to: 1, duration: 0.1)
+           ]))
+                    run(SKAction.playSoundFileNamed("upgrade1.wav", waitForCompletion: false))
+                    // Record Reaction time
+                    print(rt)
+                    
+                    self.responseArray.append(node.name!)
+                    targetResponse = true
+                    cueFlashed = false
+                    print(node.name!)
+                    
+                    reactionTime?.invalidate()
+                } else if responseKey[responseCount] != "leftBlue" {
+                    // what happens if the response does not match
+                    // The ship explodes with sound
+                    if intersects(leftYellowTarget) {
+                        if let particles = SKEmitterNode(fileNamed: "Explosion") {
+                            particles.position = leftYellowTarget.position
+                            particles.zPosition = 2
+                            leftYellowTarget.alpha = 0
+                            addChild(particles)
+                        }
+                    } else if intersects(rightBlueTarget) {
+                        if let particles = SKEmitterNode(fileNamed: "Explosion") {
+                            particles.position = rightBlueTarget.position
+                            particles.zPosition = 2
+                            rightBlueTarget.alpha = 0
+                            addChild(particles)
+                        }
+                    } else if intersects(rightYellowTarget) {
+                        if let particles = SKEmitterNode(fileNamed: "Explosion") {
+                            particles.position = rightYellowTarget.position
+                            particles.zPosition = 2
+                            rightYellowTarget.alpha = 0
+                            addChild(particles)
+                        }
+                    }
+                    run(SKAction.playSoundFileNamed("explosion1.wav", waitForCompletion: false))
+                    // Vibrate the device
+                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+                    
+                    // Still need to append and change response parameters if they get the wrong answer
+                    self.responseArray.append(node.name!)
+                    targetResponse = true
+                    cueFlashed = false
+                    // Either way the timer needs to be invalidated
+                    reactionTime?.invalidate()
+                }
+                
+                
+                
+            }
+            
+        }
+        
+        // Touch movement pads to move left or right
+        if node.name == "moveRight" {
             guard moveCount != 1 else { return }
             let moveRight = SKAction.moveBy(x: +163, y: 0, duration: 0.5)
             player.run(moveRight)
             moveCount += 1
-            
+        } else if node.name == "moveLeft" {
+            guard moveCount != -1 else { return }
+            moveCount -= 1
+            let moveLeft = SKAction.moveBy(x: -163, y: 0, duration: 0.5)
+            player.run(moveLeft)
         }
+        // Touch anywhere on the screen left/right of center line and player moves
+//        if location.x < center {
+//            guard moveCount != -1 else { return }
+//            moveCount -= 1
+//            let moveLeft = SKAction.moveBy(x: -163, y: 0, duration: 0.5)
+//            player.run(moveLeft)
+//        } else {
+//
+//            guard moveCount != 1 else { return }
+//            let moveRight = SKAction.moveBy(x: +163, y: 0, duration: 0.5)
+//            player.run(moveRight)
+//            moveCount += 1
+//
+//        }
     }
     
     override func update(_ currentTime: TimeInterval) {
         //This is called before each frame is rendered
-    //    moveCoins()
+        if dl.trainingDay == true {
+//            AppViewModel.shared.exitView = true
+//            print("ExitView activated in update.")
+            
+            // Try just gameScene
+//            appViewModel.playGame()
+//            print(".playGame toggled. AppViewModel.playGame: \(appViewModel.playGame())")
+        }
+        // First attempt at updating screen if target is flying towards player, how to update path accurately
+        if cueFlashed {
+            
+        }
     }
     
     @objc func sessionCountDown() {
-        if countDown > 0 {
-        countDown -= 0.1
+        if countDown < 0 {
+        countDown += 0.1
         } else {
             return
         }
@@ -724,7 +1215,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
             rt += 0.1
         } else if targetResponse == true {
             responseTimeArray.append(rt)
-            reactionTime?.invalidate()
+            
             print(rt)
             rt = 0.0
             targetResponse = false
@@ -775,42 +1266,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     }
     }
     
-    @objc func createWave3() {
-        
-        let coinRandom = Int.random(in: 5..<15)
-        let randomLane = Int.random(in: 1...3)
-        
-            for _ in 0...15 {
-                // Not sure where to put the queue async so that the coins generate after one second delays.
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                let coin = SKSpriteNode(imageNamed: "redResources")
-                coin.position = CGPoint(x: 0, y: 300)
-                coin.size = CGSize(width: 50, height: 50)
-                coin.name = "coin"
-                
-                coin.physicsBody = SKPhysicsBody(rectangleOf: coin.size)
-                coin.physicsBody?.isDynamic = false
-                coin.physicsBody?.categoryBitMask = CollisionType.coin.rawValue
-                coin.physicsBody?.collisionBitMask = CollisionType.player.rawValue
-                coin.physicsBody?.contactTestBitMask = CollisionType.player.rawValue
-                self.addChild(coin)
-                
-                let movement = SKAction.move(to: CGPoint(x: coin.position.x, y: -750), duration: 3)
-                let sequence = SKAction.sequence([movement, .removeFromParent()])
-                coin.run(sequence)
-                //                switch randomLane {
-                //                case 1:
-                //                    <#code#>
-                //                case 2:
-                //                    <#code#>
-                //                case 3:
-                //                    <#code#>
-                //                default:
-                //                    print("Something went wrong")
-                //                }
-            }
-        }
-    }
+
   
     func moveCoins() {
         //First attempt at making lanes move
@@ -832,3 +1288,4 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     
 
 }
+

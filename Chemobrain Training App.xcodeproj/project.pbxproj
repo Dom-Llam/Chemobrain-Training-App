@@ -25,6 +25,16 @@
 		F251FF7C267A4EA6004887FF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F251FF7B267A4EA6004887FF /* HomeView.swift */; };
 		F251FF80267A4EEC004887FF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F251FF7F267A4EEC004887FF /* RegisterView.swift */; };
 		F251FF82267A4F6C004887FF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F251FF81267A4F6C004887FF /* LoginView.swift */; };
+		F290130C26D3F47200B850CD /* ExtensionSpriteKitScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F290130B26D3F47200B850CD /* ExtensionSpriteKitScene.swift */; };
+		F290130E26D3FD1400B850CD /* TrialType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F290130D26D3FD1400B850CD /* TrialType.swift */; };
+		F290131126D4029E00B850CD /* TrialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F290131026D4029E00B850CD /* TrialManager.swift */; };
+		F290131326D40D3500B850CD /* test-trial.json in Resources */ = {isa = PBXBuildFile; fileRef = F290131226D40D3500B850CD /* test-trial.json */; };
+		F290131526D7C49800B850CD /* ResponseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F290131426D7C49800B850CD /* ResponseKey.swift */; };
+		F290131826D8437800B850CD /* confirmation_002.wav in Resources */ = {isa = PBXBuildFile; fileRef = F290131726D8437800B850CD /* confirmation_002.wav */; };
+		F290131A26D8443F00B850CD /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = F290131926D8443F00B850CD /* Explosion.sks */; };
+		F290131C26D844E300B850CD /* explosion1.wav in Resources */ = {isa = PBXBuildFile; fileRef = F290131B26D844E300B850CD /* explosion1.wav */; };
+		F290131E26D8577900B850CD /* upgrade1.wav in Resources */ = {isa = PBXBuildFile; fileRef = F290131D26D8577900B850CD /* upgrade1.wav */; };
+		F290132026DA767300B850CD /* DifficultyLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F290131F26DA767300B850CD /* DifficultyLevel.swift */; };
 		F2A93F19266FBE830067662D /* MyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A93F18266FBE830067662D /* MyButtonStyle.swift */; };
 		F2A93F1D266FC7EB0067662D /* AppNavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A93F1C266FC7EB0067662D /* AppNavigationManager.swift */; };
 		F2E2A927268399C500143E69 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2E2A926268399C500143E69 /* GoogleService-Info.plist */; };
@@ -55,6 +65,16 @@
 		F251FF7B267A4EA6004887FF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F251FF7F267A4EEC004887FF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		F251FF81267A4F6C004887FF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		F290130B26D3F47200B850CD /* ExtensionSpriteKitScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionSpriteKitScene.swift; sourceTree = "<group>"; };
+		F290130D26D3FD1400B850CD /* TrialType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialType.swift; sourceTree = "<group>"; };
+		F290131026D4029E00B850CD /* TrialManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialManager.swift; sourceTree = "<group>"; };
+		F290131226D40D3500B850CD /* test-trial.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "test-trial.json"; sourceTree = "<group>"; };
+		F290131426D7C49800B850CD /* ResponseKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseKey.swift; sourceTree = "<group>"; };
+		F290131726D8437800B850CD /* confirmation_002.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = confirmation_002.wav; sourceTree = "<group>"; };
+		F290131926D8443F00B850CD /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
+		F290131B26D844E300B850CD /* explosion1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion1.wav; sourceTree = "<group>"; };
+		F290131D26D8577900B850CD /* upgrade1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = upgrade1.wav; sourceTree = "<group>"; };
+		F290131F26DA767300B850CD /* DifficultyLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyLevel.swift; sourceTree = "<group>"; };
 		F2A93F18266FBE830067662D /* MyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButtonStyle.swift; sourceTree = "<group>"; };
 		F2A93F1C266FC7EB0067662D /* AppNavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationManager.swift; sourceTree = "<group>"; };
 		F2E2A926268399C500143E69 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -137,13 +157,22 @@
 			children = (
 				F2E2A92A2684E23E00143E69 /* GameScene.swift */,
 				F244EFFF26AF4D27006DE8EA /* SpriteKitScene.swift */,
+				F290130D26D3FD1400B850CD /* TrialType.swift */,
+				F290131026D4029E00B850CD /* TrialManager.swift */,
+				F290131426D7C49800B850CD /* ResponseKey.swift */,
+				F290131226D40D3500B850CD /* test-trial.json */,
 				F237AB7526B8AB3E00DC94A8 /* Bundle-Decoding.swift */,
+				F290130B26D3F47200B850CD /* ExtensionSpriteKitScene.swift */,
 				F237AB6F26B0329100DC94A8 /* GlowExtension.swift */,
 				F244F00126AF4F45006DE8EA /* Starfield.sks */,
 				F244F02726AF944C006DE8EA /* PortalSparks.sks */,
 				F237AB6D26B02F9C00DC94A8 /* PlayerEngine.sks */,
+				F290131926D8443F00B850CD /* Explosion.sks */,
+				F290131B26D844E300B850CD /* explosion1.wav */,
+				F290131D26D8577900B850CD /* upgrade1.wav */,
 				F237AB7B26C18E5900DC94A8 /* the-hero.mp3 */,
 				F237AB7926C18D7E00DC94A8 /* score.wav */,
+				F290131726D8437800B850CD /* confirmation_002.wav */,
 				F244F02226AF940C006DE8EA /* Assets.xcassets */,
 			);
 			path = GameComponents;
@@ -167,6 +196,7 @@
 			children = (
 				F2A93F18266FBE830067662D /* MyButtonStyle.swift */,
 				F2E2A9282684CD6900143E69 /* AppViewModel.swift */,
+				F290131F26DA767300B850CD /* DifficultyLevel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -238,13 +268,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F290131C26D844E300B850CD /* explosion1.wav in Resources */,
 				F222302E26690EDD00435E92 /* Preview Assets.xcassets in Resources */,
 				F237AB7C26C18E5900DC94A8 /* the-hero.mp3 in Resources */,
+				F290131826D8437800B850CD /* confirmation_002.wav in Resources */,
 				F244F02826AF944C006DE8EA /* PortalSparks.sks in Resources */,
 				F237AB7A26C18D7E00DC94A8 /* score.wav in Resources */,
+				F290131A26D8443F00B850CD /* Explosion.sks in Resources */,
 				F237AB6E26B02F9C00DC94A8 /* PlayerEngine.sks in Resources */,
+				F290131E26D8577900B850CD /* upgrade1.wav in Resources */,
 				F244F00326AF4F45006DE8EA /* Starfield.sks in Resources */,
 				F2E2A927268399C500143E69 /* GoogleService-Info.plist in Resources */,
+				F290131326D40D3500B850CD /* test-trial.json in Resources */,
 				F244F00426AF4F45006DE8EA /* Assets.xcassets in Resources */,
 				F244F02426AF940C006DE8EA /* Assets.xcassets in Resources */,
 				F222302B26690EDD00435E92 /* Assets.xcassets in Resources */,
@@ -304,10 +339,15 @@
 				F251FF82267A4F6C004887FF /* LoginView.swift in Sources */,
 				F244F00026AF4D27006DE8EA /* SpriteKitScene.swift in Sources */,
 				F2E2A9292684CD6900143E69 /* AppViewModel.swift in Sources */,
+				F290131526D7C49800B850CD /* ResponseKey.swift in Sources */,
+				F290131126D4029E00B850CD /* TrialManager.swift in Sources */,
+				F290130C26D3F47200B850CD /* ExtensionSpriteKitScene.swift in Sources */,
 				F2E2A92B2684E23E00143E69 /* GameScene.swift in Sources */,
+				F290130E26D3FD1400B850CD /* TrialType.swift in Sources */,
 				F2A93F1D266FC7EB0067662D /* AppNavigationManager.swift in Sources */,
 				F2A93F19266FBE830067662D /* MyButtonStyle.swift in Sources */,
 				F251FF80267A4EEC004887FF /* RegisterView.swift in Sources */,
+				F290132026DA767300B850CD /* DifficultyLevel.swift in Sources */,
 				F251FF7C267A4EA6004887FF /* HomeView.swift in Sources */,
 				F237AB7026B0329100DC94A8 /* GlowExtension.swift in Sources */,
 				F222302726690EDB00435E92 /* Chemobrain_Training_AppApp.swift in Sources */,
