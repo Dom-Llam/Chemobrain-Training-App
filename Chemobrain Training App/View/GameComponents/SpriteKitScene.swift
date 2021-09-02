@@ -38,10 +38,6 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
 //        super.init(size: CGSize(width: 1620, height: 2160))
 //    }
 //
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//    
     // Setting up the timer and score
     var timer: Timer?
     let timerLabel = SKLabelNode(fontNamed: "Baskerville-Bold")
@@ -320,7 +316,8 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                         print("ReactionTime invalidated trial 1"
                         )
                         // Generate wave and target
-                        self.wholeScreenFlash()
+                        //self.wholeScreenFlash()
+                        self.flashLeftCircle()
                         self.spawnRightBlueTarget()
                         
                         // increment response Count here? So that the answer is independent of user input
@@ -344,7 +341,8 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                         self.rt = 0
                         
                         print("Reaction time invalidated trial 2")
-                        self.wholeScreenFlash()
+                        //self.wholeScreenFlash()
+                        self.flashRightCircle()
                         self.spawnRightBlueTarget()
                         
                         // increment response Count here? So that the answer is independent of user input

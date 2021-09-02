@@ -36,6 +36,56 @@ extension SpriteKitScene {
         let sequence = SKAction.sequence([wait1, .removeFromParent()])
         flashRight.run(sequence)
     }
+    func flashRightCircle() {
+        let circle = SKShapeNode(circleOfRadius: 60)
+        circle.position = CGPoint(x: 403, y: 500)
+        circle.name = "rightRedCircle"
+        circle.strokeColor = SKColor.red
+        circle.glowWidth = 10.0
+        circle.fillColor = SKColor.red
+        circle.physicsBody?.isDynamic = false
+        circle.zPosition = 1
+        circle.alpha = 0
+        self.addChild(circle)
+        
+        let wait10 = SKAction.wait(forDuration: 4)
+        let wait1 = SKAction.wait(forDuration: 0.25)
+        
+        circle.run(wait10)
+        circle.alpha = 0.5
+        
+        cueFlashed = true
+        // Here is where flash appears on screen - cue timer
+        reactionTime = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(reactToTarget), userInfo: nil, repeats: true)
+        
+        let sequence = SKAction.sequence([wait1, .removeFromParent()])
+        circle.run(sequence)
+    }
+    func flashLeftCircle() {
+        let circle = SKShapeNode(circleOfRadius: 60)
+        circle.position = CGPoint(x: -403, y: 500)
+        circle.name = "leftRedCircle"
+        circle.strokeColor = SKColor.red
+        circle.glowWidth = 10.0
+        circle.fillColor = SKColor.red
+        circle.physicsBody?.isDynamic = false
+        circle.zPosition = 1
+        circle.alpha = 0
+        self.addChild(circle)
+        
+        let wait10 = SKAction.wait(forDuration: 4)
+        let wait1 = SKAction.wait(forDuration: 0.25)
+        
+        circle.run(wait10)
+        circle.alpha = 0.5
+        
+        cueFlashed = true
+        // Here is where flash appears on screen - cue timer
+        reactionTime = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(reactToTarget), userInfo: nil, repeats: true)
+        
+        let sequence = SKAction.sequence([wait1, .removeFromParent()])
+        circle.run(sequence)
+    }
     
     func flashLeft() {
         
@@ -108,13 +158,13 @@ extension SpriteKitScene {
         rightBlueTarget.physicsBody?.isDynamic = false
         self.addChild(rightBlueTarget)
         
-        let movement = SKAction.move(to: CGPoint(x: 200, y: 0), duration: 1.5)
+        let movement = SKAction.move(to: CGPoint(x: 275, y: 0), duration: 1.5)
         let movement2 = SKAction.move(to: CGPoint(x: 500, y: -700), duration: 0.5)
         let wait5 = SKAction.wait(forDuration: 1)
         let rotateAction = SKAction.rotate(byAngle: .pi, duration: 0.5)
         let repeatRotation = SKAction.repeatForever(rotateAction)
         rightBlueTarget.run(repeatRotation)
-        let sequence = SKAction.sequence([wait5, movement, movement2, .removeFromParent()])
+        let sequence = SKAction.sequence([wait5, movement/*, movement2, .removeFromParent()*/])
         rightBlueTarget.run(sequence)
     }
     
@@ -135,13 +185,13 @@ extension SpriteKitScene {
         rightYellowTarget.physicsBody?.isDynamic = false
         self.addChild(rightYellowTarget)
         
-        let movement = SKAction.move(to: CGPoint(x: 200, y: 0), duration: 1.5)
+        let movement = SKAction.move(to: CGPoint(x: 260, y: 0), duration: 1.5)
         let movement2 = SKAction.move(to: CGPoint(x: 500, y: -700), duration: 0.5)
         let wait5 = SKAction.wait(forDuration: 1)
         let rotateAction = SKAction.rotate(byAngle: .pi, duration: 0.5)
         let repeatRotation = SKAction.repeatForever(rotateAction)
         rightYellowTarget.run(repeatRotation)
-        let sequence = SKAction.sequence([wait5, movement, movement2, .removeFromParent()])
+        let sequence = SKAction.sequence([wait5, movement/*, movement2, .removeFromParent()*/])
         rightYellowTarget.run(sequence)
     }
     
