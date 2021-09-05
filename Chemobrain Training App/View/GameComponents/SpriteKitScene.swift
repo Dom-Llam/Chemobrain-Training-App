@@ -40,6 +40,8 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
 //
     // Setting up the timer and score
     var timer: Timer?
+    var intervalTimer: Timer?
+    var interval: Double = 0
     let timerLabel = SKLabelNode(fontNamed: "Baskerville-Bold")
     let scoreLabel = SKLabelNode(fontNamed: "Baskerville-Bold")
     
@@ -47,7 +49,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     var rt: Double = 0.0
     var targetResponse: Bool = false
     var responseTimeArray:Array<Double> = []
-    var responseArray:Array<String> = []
+    var responseTargetArray:Array<String> = []
     
     // To validate right/left responses to target (ie. not record random button taps
     var cueFlashed: Bool = false
@@ -265,7 +267,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         
         
         
-        for i in 0...23 {
+        for i in 0...35 {
             
             let delay: Double = Double(i) * 10 + 3.5
             let coinDelay: Double = Double(i) * 10
@@ -315,9 +317,11 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                         self.rt = 0
                         print("ReactionTime invalidated trial 1"
                         )
+                        self.cueToTargetInterval()
+                        
                         // Generate wave and target
                         //self.wholeScreenFlash()
-                        self.flashLeftCircle()
+                        self.flashRightCircle()
                         self.spawnRightBlueTarget()
                         
                         // increment response Count here? So that the answer is independent of user input
@@ -364,7 +368,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                         self.rt = 0
                         
                         print("reaction time invalidated trial 3")
-                        self.wholeScreenFlash()
+                        self.flashBothCircles()
                         self.spawnRightYellowTarget()
                         
                         // increment response Count here? So that the answer is independent of user input
@@ -386,7 +390,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                         self.rt = 0
                         
                         print("reaction time invalidated trial 4")
-                        self.wholeScreenFlash()
+                        self.flashBothCircles()
                         self.spawnRightYellowTarget()
                         
                         // increment response Count here? So that the answer is independent of user input
@@ -408,7 +412,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                         self.rt = 0
                         
                         print("reaction time invalidated trial 5")
-                        self.wholeScreenFlash()
+                        self.flashLeftCircle()
                         self.spawnLeftBlueTarget()
                         
                         // increment response Count here? So that the answer is independent of user input
@@ -430,7 +434,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                         self.rt = 0
                         
                         print("reactiontime invalidated trial 6")
-                        self.wholeScreenFlash()
+                        self.flashLeftCircle()
                         self.spawnLeftBlueTarget()
                         
                         // increment response Count here? So that the answer is independent of user input
@@ -849,15 +853,15 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
             score += 1
 //            print("coin collided with player. First node =  \(firstNode.name ?? "") SecondNode = \(secondNode.name ?? "")")
         } else if secondNode.name == "rightTarget" {
-            
-            rightYellowTarget.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.1),
-                                                   SKAction.wait(forDuration: 0.1),
-                                                   SKAction.scale(to: 1, duration: 0.1)
-            ]))
-            rightBlueTarget.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.1),
-                                                   SKAction.wait(forDuration: 0.1),
-                                                   SKAction.scale(to: 1, duration: 0.1)
-            ]))
+            /// We don't need to be growng or anything right now
+//            rightYellowTarget.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.1),
+//                                                   SKAction.wait(forDuration: 0.1),
+//                                                   SKAction.scale(to: 1, duration: 0.1)
+//            ]))
+//            rightBlueTarget.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.1),
+//                                                   SKAction.wait(forDuration: 0.1),
+//                                                   SKAction.scale(to: 1, duration: 0.1)
+//            ]))
             firstNode.removeFromParent()
             
             run(SKAction.playSoundFileNamed("confirmation_002.wav", waitForCompletion: false))
@@ -865,14 +869,14 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
             score += 5
         } else if secondNode.name == "leftTarget" {
             
-            leftBlueTarget.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.1),
-                                                   SKAction.wait(forDuration: 0.1),
-                                                   SKAction.scale(to: 1, duration: 0.1)
-            ]))
-            leftBlueTarget.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.1),
-                                                   SKAction.wait(forDuration: 0.1),
-                                                   SKAction.scale(to: 1, duration: 0.1)
-            ]))
+//            leftBlueTarget.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.1),
+//                                                   SKAction.wait(forDuration: 0.1),
+//                                                   SKAction.scale(to: 1, duration: 0.1)
+//            ]))
+//            leftBlueTarget.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.1),
+//                                                   SKAction.wait(forDuration: 0.1),
+//                                                   SKAction.scale(to: 1, duration: 0.1)
+//            ]))
             firstNode.removeFromParent()
             
             run(SKAction.playSoundFileNamed("confirmation_002.wav", waitForCompletion: false))
@@ -902,17 +906,12 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                     let moveToPlayer = SKAction.move(to: player.position, duration: 1)
                     let sequence = SKAction.sequence([moveToPlayer, .removeFromParent()])
                     rightYellowTarget.run(sequence)
-                    player.run(SKAction.sequence([SKAction.wait(forDuration: 5),
-                                                  SKAction.scale(to: 1.3, duration: 0.1),
-                                                  SKAction.wait(forDuration: 0.1),
-                                                  SKAction.scale(to: 1, duration: 0.1)
-                    ]))
+                   
                     run(SKAction.playSoundFileNamed("upgrade1.wav", waitForCompletion: false))
-                    
                     
                     print(rt)
                     
-                    self.responseArray.append(node.name!)
+                    self.responseTargetArray.append(node.name!)
                     targetResponse = true
                     cueFlashed = false
                     print(node.name!)
@@ -950,7 +949,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                     
                     // Still need to append and change response parameters if they get the wrong answer
-                    self.responseArray.append(node.name!)
+                    self.responseTargetArray.append(node.name!)
                     targetResponse = true
                     cueFlashed = false
                     // Either way the timer needs to be invalidated
@@ -972,14 +971,11 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                     let moveToPlayer = SKAction.move(to: player.position, duration: 1)
                     let sequence = SKAction.sequence([moveToPlayer, .removeFromParent()])
                     leftYellowTarget.run(sequence)
-                    player.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.1),
-                                                  SKAction.wait(forDuration: 0.1),
-                                                  SKAction.scale(to: 1, duration: 0.1)
-           ]))
+                    
                     run(SKAction.playSoundFileNamed("upgrade1.wav", waitForCompletion: false))
                     print(rt)
                     
-                    self.responseArray.append(node.name!)
+                    self.responseTargetArray.append(node.name!)
                     targetResponse = true
                     cueFlashed = false
                     print(node.name!)
@@ -1014,7 +1010,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                     // Vibrate the device
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                     // Still need to append and change response parameters if they get the wrong answer
-                    self.responseArray.append(node.name!)
+                    self.responseTargetArray.append(node.name!)
                     targetResponse = true
                     cueFlashed = false
                     // Either way the timer needs to be invalidated
@@ -1042,7 +1038,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                     run(SKAction.playSoundFileNamed("upgrade1.wav", waitForCompletion: false))
                     print(rt)
                     
-                    self.responseArray.append(node.name!)
+                    self.responseTargetArray.append(node.name!)
                     targetResponse = true
                     cueFlashed = false
                     print(node.name!)
@@ -1078,7 +1074,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                     
                     // Still need to append and change response parameters if they get the wrong answer
-                    self.responseArray.append(node.name!)
+                    self.responseTargetArray.append(node.name!)
                     targetResponse = true
                     cueFlashed = false
                     // Either way the timer needs to be invalidated
@@ -1106,7 +1102,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                     // Record Reaction time
                     print(rt)
                     
-                    self.responseArray.append(node.name!)
+                    self.responseTargetArray.append(node.name!)
                     targetResponse = true
                     cueFlashed = false
                     print(node.name!)
@@ -1142,7 +1138,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                     
                     // Still need to append and change response parameters if they get the wrong answer
-                    self.responseArray.append(node.name!)
+                    self.responseTargetArray.append(node.name!)
                     targetResponse = true
                     cueFlashed = false
                     // Either way the timer needs to be invalidated

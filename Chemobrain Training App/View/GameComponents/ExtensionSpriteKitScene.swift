@@ -9,6 +9,57 @@ import SpriteKit
 
 extension SpriteKitScene {
 
+    func cueToTargetInterval() -> Double {
+        
+        
+        
+        var targetOnScreen: Bool = false
+        var cueToTargetArray: Array<Double> = []
+        
+        func reactToInterval() {
+            if targetOnScreen == false {
+                interval += 0.1
+            } else if targetOnScreen == true {
+                cueToTargetArray.append(interval)
+                
+                print(interval)
+                interval = 0.0
+                targetOnScreen = false
+            }
+        }
+        
+        if cueFlashed == true {
+            intervalTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { intervalTimer in
+                if targetOnScreen == false {
+                    self.interval += 0.1
+                } else if targetOnScreen == true {
+                    cueToTargetArray.append(self.interval)
+                    
+                    print(self.interval)
+                    self.interval = 0.0
+                    targetOnScreen = false
+                }
+            })
+            
+            
+        }
+        
+        
+        
+        if intersects(leftYellowTarget) {
+            targetOnScreen = true
+        } else if intersects(leftBlueTarget) {
+            targetOnScreen = true
+        } else if intersects(rightYellowTarget) {
+            targetOnScreen = true
+        } else if intersects(rightBlueTarget) {
+            targetOnScreen = true
+        }
+        
+        return interval
+        
+        
+    }
 
     func flashRight() {
         
@@ -36,9 +87,10 @@ extension SpriteKitScene {
         let sequence = SKAction.sequence([wait1, .removeFromParent()])
         flashRight.run(sequence)
     }
+    
     func flashRightCircle() {
         let circle = SKShapeNode(circleOfRadius: 60)
-        circle.position = CGPoint(x: 403, y: 500)
+        circle.position = CGPoint(x: 403, y: 100)
         circle.name = "rightRedCircle"
         circle.strokeColor = SKColor.red
         circle.glowWidth = 10.0
@@ -61,9 +113,10 @@ extension SpriteKitScene {
         let sequence = SKAction.sequence([wait1, .removeFromParent()])
         circle.run(sequence)
     }
+    
     func flashLeftCircle() {
         let circle = SKShapeNode(circleOfRadius: 60)
-        circle.position = CGPoint(x: -403, y: 500)
+        circle.position = CGPoint(x: -403, y: 100)
         circle.name = "leftRedCircle"
         circle.strokeColor = SKColor.red
         circle.glowWidth = 10.0
@@ -85,6 +138,47 @@ extension SpriteKitScene {
         
         let sequence = SKAction.sequence([wait1, .removeFromParent()])
         circle.run(sequence)
+    }
+    
+    func flashBothCircles() {
+        let leftCircle = SKShapeNode(circleOfRadius: 60)
+        leftCircle.position = CGPoint(x: -403, y: 100)
+        leftCircle.name = "leftRedCircle"
+        leftCircle.strokeColor = SKColor.red
+        leftCircle.glowWidth = 10.0
+        leftCircle.fillColor = SKColor.red
+        leftCircle.physicsBody?.isDynamic = false
+        leftCircle.zPosition = 1
+        leftCircle.alpha = 0
+        self.addChild(leftCircle)
+        
+        let rightCircle = SKShapeNode(circleOfRadius: 60)
+        rightCircle.position = CGPoint(x: 403, y: 100)
+        rightCircle.name = "rightRedCircle"
+        rightCircle.strokeColor = SKColor.red
+        rightCircle.glowWidth = 10.0
+        rightCircle.fillColor = SKColor.red
+        rightCircle.physicsBody?.isDynamic = false
+        rightCircle.zPosition = 1
+        rightCircle.alpha = 0
+        self.addChild(rightCircle)
+        
+        let wait10 = SKAction.wait(forDuration: 4)
+        let wait1 = SKAction.wait(forDuration: 0.25)
+        
+        rightCircle.run(wait10)
+        leftCircle.run(wait10)
+        
+        rightCircle.alpha = 0.5
+        leftCircle.alpha = 0.5
+        
+        cueFlashed = true
+        // Here is where flash appears on screen - cue timer
+        reactionTime = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(reactToTarget), userInfo: nil, repeats: true)
+        
+        let sequence = SKAction.sequence([wait1, .removeFromParent()])
+        leftCircle.run(sequence)
+        rightCircle.run(sequence)
     }
     
     func flashLeft() {
@@ -144,14 +238,14 @@ extension SpriteKitScene {
     func spawnRightBlueTarget() {
         
         //boiler plate for target object
-        rightBlueTarget.position = CGPoint(x: 500, y: 700)
+        rightBlueTarget.position = CGPoint(x: 500, y: 200)
         rightBlueTarget.size = CGSize(width: 150, height: 45)
         rightBlueTarget.zPosition = 1
         rightBlueTarget.alpha = 1
         rightBlueTarget.name = "rightTarget"
         
         // To add physics and bitmasks
-        rightBlueTarget.physicsBody = SKPhysicsBody(texture: rightBlueTarget.texture!, size: rightBlueTarget.texture!.size())
+        rightBlueTarget.physicsBody = SKPhysicsBody(texture: rightBlueTarget.texture!, size: CGSize(width: 50, height: 50))
         rightBlueTarget.physicsBody?.categoryBitMask = CollisionType.target.rawValue
 //        rightBlueTarget.physicsBody?.collisionBitMask = CollisionType.player.rawValue | CollisionType.coin.rawValue
         rightBlueTarget.physicsBody?.contactTestBitMask = CollisionType.player.rawValue | CollisionType.coin.rawValue
@@ -161,24 +255,26 @@ extension SpriteKitScene {
         let movement = SKAction.move(to: CGPoint(x: 275, y: 0), duration: 1.5)
         let movement2 = SKAction.move(to: CGPoint(x: 500, y: -700), duration: 0.5)
         let wait5 = SKAction.wait(forDuration: 1)
+        let wait10 = SKAction.wait(forDuration: 6)
+        
         let rotateAction = SKAction.rotate(byAngle: .pi, duration: 0.5)
         let repeatRotation = SKAction.repeatForever(rotateAction)
         rightBlueTarget.run(repeatRotation)
-        let sequence = SKAction.sequence([wait5, movement/*, movement2, .removeFromParent()*/])
+        let sequence = SKAction.sequence([wait5, movement, wait10, .removeFromParent()/*, movement2, .removeFromParent()*/])
         rightBlueTarget.run(sequence)
     }
     
     func spawnRightYellowTarget() {
         
         //boiler plate for target object
-        rightYellowTarget.position = CGPoint(x: 500, y: 700)
+        rightYellowTarget.position = CGPoint(x: 500, y: 200)
         rightYellowTarget.size = CGSize(width: 150, height: 45)
         rightYellowTarget.zPosition = 1
         rightYellowTarget.alpha = 1
         rightYellowTarget.name = "rightTarget"
         
         // To add physics and bitmasks
-        rightYellowTarget.physicsBody = SKPhysicsBody(texture: rightBlueTarget.texture!, size: rightBlueTarget.texture!.size())
+        rightYellowTarget.physicsBody = SKPhysicsBody(texture: rightBlueTarget.texture!, size: CGSize(width: 50, height: 50))
         rightYellowTarget.physicsBody?.categoryBitMask = CollisionType.target.rawValue
 //        rightYellowTarget.physicsBody?.collisionBitMask = CollisionType.player.rawValue | CollisionType.coin.rawValue
         rightYellowTarget.physicsBody?.contactTestBitMask = CollisionType.player.rawValue | CollisionType.coin.rawValue
@@ -188,64 +284,70 @@ extension SpriteKitScene {
         let movement = SKAction.move(to: CGPoint(x: 260, y: 0), duration: 1.5)
         let movement2 = SKAction.move(to: CGPoint(x: 500, y: -700), duration: 0.5)
         let wait5 = SKAction.wait(forDuration: 1)
+        let wait10 = SKAction.wait(forDuration: 6)
+        
         let rotateAction = SKAction.rotate(byAngle: .pi, duration: 0.5)
         let repeatRotation = SKAction.repeatForever(rotateAction)
         rightYellowTarget.run(repeatRotation)
-        let sequence = SKAction.sequence([wait5, movement/*, movement2, .removeFromParent()*/])
+        let sequence = SKAction.sequence([wait5, movement, wait10, .removeFromParent()/*, movement2, .removeFromParent()*/])
         rightYellowTarget.run(sequence)
     }
     
     func spawnLeftYellowTarget() {
         
         //boiler plate for target object
-        leftYellowTarget.position = CGPoint(x: -500, y: 700)
+        leftYellowTarget.position = CGPoint(x: -500, y: 200)
         leftYellowTarget.size = CGSize(width: 150, height: 45)
         leftYellowTarget.zPosition = 1
         leftYellowTarget.alpha = 1
         leftYellowTarget.name = "leftTarget"
         
         // To add physics and bitmasks
-        leftYellowTarget.physicsBody = SKPhysicsBody(texture: rightBlueTarget.texture!, size: rightBlueTarget.texture!.size())
+        leftYellowTarget.physicsBody = SKPhysicsBody(texture: rightBlueTarget.texture!, size: CGSize(width: 50, height: 50))
         leftYellowTarget.physicsBody?.categoryBitMask = CollisionType.target.rawValue
  //       leftYellowTarget.physicsBody?.collisionBitMask = CollisionType.player.rawValue | CollisionType.coin.rawValue
         leftYellowTarget.physicsBody?.contactTestBitMask = CollisionType.player.rawValue | CollisionType.coin.rawValue
         leftYellowTarget.physicsBody?.isDynamic = false
         self.addChild(leftYellowTarget)
         
-        let movement = SKAction.move(to: CGPoint(x: -200, y: 0), duration: 1.5)
+        let movement = SKAction.move(to: CGPoint(x: -260, y: 0), duration: 1.5)
         let movement2 = SKAction.move(to: CGPoint(x: -500, y: -700), duration: 0.5)
         let wait5 = SKAction.wait(forDuration: 1)
+        let wait10 = SKAction.wait(forDuration: 6)
+
         let rotateAction = SKAction.rotate(byAngle: .pi, duration: 0.5)
         let repeatRotation = SKAction.repeatForever(rotateAction)
         leftYellowTarget.run(repeatRotation)
-        let sequence = SKAction.sequence([wait5, movement, movement2, .removeFromParent()])
+        let sequence = SKAction.sequence([wait5, movement, wait10, .removeFromParent()])
         leftYellowTarget.run(sequence)
     }
     
     func spawnLeftBlueTarget() {
         
         //boiler plate for target object
-        leftBlueTarget.position = CGPoint(x: -500, y: 700)
+        leftBlueTarget.position = CGPoint(x: -500, y: 200)
         leftBlueTarget.size = CGSize(width: 150, height: 45)
         leftBlueTarget.zPosition = 1
         leftBlueTarget.alpha = 1
         leftBlueTarget.name = "leftTarget"
         
         // To add physics and bitmasks
-        leftBlueTarget.physicsBody = SKPhysicsBody(texture: rightBlueTarget.texture!, size: rightBlueTarget.texture!.size())
+        leftBlueTarget.physicsBody = SKPhysicsBody(texture: rightBlueTarget.texture!, size: CGSize(width: 50, height: 50))
         leftBlueTarget.physicsBody?.categoryBitMask = CollisionType.target.rawValue
 //        leftBlueTarget.physicsBody?.collisionBitMask = CollisionType.player.rawValue | CollisionType.coin.rawValue
         leftBlueTarget.physicsBody?.contactTestBitMask = CollisionType.player.rawValue | CollisionType.coin.rawValue
         leftBlueTarget.physicsBody?.isDynamic = false
         self.addChild(leftBlueTarget)
         
-        let movement = SKAction.move(to: CGPoint(x: -200, y: 0), duration: 1.5)
+        let movement = SKAction.move(to: CGPoint(x: -260, y: 0), duration: 1.5)
         let movement2 = SKAction.move(to: CGPoint(x: -500, y: -700), duration: 0.5)
         let wait5 = SKAction.wait(forDuration: 1)
+        let wait10 = SKAction.wait(forDuration: 6)
+
         let rotateAction = SKAction.rotate(byAngle: .pi, duration: 0.5)
         let repeatRotation = SKAction.repeatForever(rotateAction)
         leftBlueTarget.run(repeatRotation)
-        let sequence = SKAction.sequence([wait5, movement, movement2, .removeFromParent()])
+        let sequence = SKAction.sequence([wait5, movement, wait10, .removeFromParent()])
         leftBlueTarget.run(sequence)
     }
     
@@ -317,7 +419,7 @@ extension SpriteKitScene {
             
             //        print("\(randomLane)")
             
-            let coin = SKSpriteNode(imageNamed: "yellowResources")
+            let coin = SKSpriteNode(imageNamed: "shipYellow_manned")
             coin.position = CGPoint(x: lanePosition, y: 300)
             coin.size = CGSize(width: 50, height: 50)
             coin.name = "coin"
@@ -337,10 +439,10 @@ extension SpriteKitScene {
         }
         
         let wait1  = SKAction.wait(forDuration: 0.25)
-        let wait3   = SKAction.wait(forDuration:  2)
+        let wait3   = SKAction.wait(forDuration:  1.5)
         let spawn   = SKAction.run { spawnCoin() }
         
-        let action = SKAction.sequence([wait1, spawn, wait1, spawn,wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait3, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn])
+        let action = SKAction.sequence([wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait3, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn])
         
         // To run coin spawns forever
         //      let forever = SKAction.repeatForever(action)
@@ -367,7 +469,7 @@ extension SpriteKitScene {
             
             //        print("\(randomLane)")
             
-            let coin = SKSpriteNode(imageNamed: "blueResources")
+            let coin = SKSpriteNode(imageNamed: "shipBlue_manned")
             coin.position = CGPoint(x: lanePosition, y: 300)
             coin.size = CGSize(width: 50, height: 50)
             coin.name = "coin"
@@ -387,10 +489,10 @@ extension SpriteKitScene {
         }
         
         let wait1  = SKAction.wait(forDuration: 0.25)
-        let wait3   = SKAction.wait(forDuration:  2)
+        let wait3   = SKAction.wait(forDuration:  1.5)
         let spawn   = SKAction.run { spawnCoin() }
         
-        let action = SKAction.sequence([wait1, spawn, wait1, spawn,wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait3, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn])
+        let action = SKAction.sequence([wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait3, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn, wait1, spawn])
         
         // To run coin spawns forever
         //      let forever = SKAction.repeatForever(action)
