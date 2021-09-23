@@ -14,13 +14,15 @@ struct Chemobrain_Training_AppApp: App {
     // Create instance of app delegate for Firebase Authentication
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
+    // Create StateObject for GamsCene transitions
+    @StateObject var appViewModel = AppViewModel()
+    
     var body: some Scene {
         WindowGroup {
             
             let viewModel = AppViewModel()
             
-            ContentView()
-                .environmentObject(viewModel)
+            ContentView().environmentObject(viewModel)
         }
     }
 }

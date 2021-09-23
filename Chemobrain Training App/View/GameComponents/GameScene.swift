@@ -25,8 +25,6 @@ struct GameScene: View {
         scene.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         scene.scaleMode = .fill
         return scene
-        
-        
     }
  
 var body: some View {
@@ -95,12 +93,12 @@ var body: some View {
                 
                 
             }
-            .ignoresSafeArea()
-            .frame(maxWidth: .infinity, alignment: .trailing)
+            
             
         
     }
     .ignoresSafeArea()
+    .frame(maxWidth: .infinity, alignment: .trailing)
 }
 }
 

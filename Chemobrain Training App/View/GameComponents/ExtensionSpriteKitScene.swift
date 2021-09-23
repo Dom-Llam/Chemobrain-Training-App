@@ -13,7 +13,7 @@ extension SpriteKitScene {
         //To trigger timer logic
         let timerTrigger = SKAction.customAction(withDuration: 0) { _,_ in
             self.onlyOne = true
-            
+            self.targetResponse = false
         }
         let wait10 = SKAction.wait(forDuration: 4)
         let wait1 = SKAction.wait(forDuration: 0.25)
@@ -29,7 +29,7 @@ extension SpriteKitScene {
         //To trigger timer logic
         let timerTrigger = SKAction.customAction(withDuration: 0) { _,_ in
             self.onlyOne = true
-           
+            self.targetResponse = false
         }
         let wait10 = SKAction.wait(forDuration: 4)
         let wait1 = SKAction.wait(forDuration: 0.25)
@@ -45,7 +45,7 @@ extension SpriteKitScene {
         let timerTrigger = SKAction.customAction(withDuration: 0) { [self] _,_ in
             // For the RT boolean in update
             self.onlyOne = true
-
+            self.targetResponse = false
 
 //            // For the response logic
 //            self.cueFlashed = true
@@ -67,7 +67,7 @@ extension SpriteKitScene {
 
     func spawnRightBlueTarget(wait forDuration: Double) {
   
-        let movement = SKAction.move(to: CGPoint(x: 275, y: 0), duration: 1.5)
+        let movement = SKAction.move(to: CGPoint(x: 275, y: 0), duration: 0.75)
         let wait1 = SKAction.wait(forDuration: 1)
         let wait5 = SKAction.wait(forDuration: 5)
         
@@ -84,7 +84,7 @@ extension SpriteKitScene {
     
     func spawnRightYellowTarget(wait forDuration: Double) {
         
-        let movement = SKAction.move(to: CGPoint(x: 275, y: 0), duration: 1.5)
+        let movement = SKAction.move(to: CGPoint(x: 275, y: 0), duration: 0.75)
         let wait1 = SKAction.wait(forDuration: 1)
         let wait5 = SKAction.wait(forDuration: 5)
         
@@ -101,7 +101,7 @@ extension SpriteKitScene {
     
     func spawnLeftYellowTarget(wait forDuration: Double) {
 
-        let movement = SKAction.move(to: CGPoint(x: -275, y: 0), duration: 1.5)
+        let movement = SKAction.move(to: CGPoint(x: -275, y: 0), duration: 0.75)
         let wait1 = SKAction.wait(forDuration: 1)
         let wait5 = SKAction.wait(forDuration: 5)
         
@@ -118,7 +118,7 @@ extension SpriteKitScene {
     
     func spawnLeftBlueTarget(wait forDuration: Double) {
 
-        let movement = SKAction.move(to: CGPoint(x: -275, y: 0), duration: 1.5)
+        let movement = SKAction.move(to: CGPoint(x: -275, y: 0), duration: 0.75)
         let wait1 = SKAction.wait(forDuration: 1)
         let wait5 = SKAction.wait(forDuration: 5)
         

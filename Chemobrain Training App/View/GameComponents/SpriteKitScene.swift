@@ -36,7 +36,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     // Setting up reaction time variables
     var reactionTime: Timer?
     var rt: Double = 0.0
-    var targetResponse: Bool = false
+    var targetResponse: Bool = true
     var responseTimeArray:Array<Double> = []
     var responseTargetArray:Array<String> = []
     
@@ -326,9 +326,9 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         
         
         
-        for i in 0...35 {
+        for i in 0...24 {
             
-            let delay: Double = Double(i) * 10 + 3.5 + 1
+            let delay: Double = Double(i) * 10 + 3.5 + 1 /// cueToInterval in place of this 1
             let cueDelay: Double = Double(i) * 10
             let coinDelay: Double = Double(i) * 10
 
@@ -514,7 +514,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                 }
             
             if trialManager.type.trialNumber == 24 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + cueDelay + 30) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + cueDelay) {
                     // To stop gameScene and save to user defaults
                     self.view?.isPaused = true
                     self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
@@ -808,7 +808,8 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         if targetResponse == false {
             rt += 0.1
         } else if targetResponse == true {
-            
+            rt = 0
+            reactionTime?.invalidate()
         }
     }
     
