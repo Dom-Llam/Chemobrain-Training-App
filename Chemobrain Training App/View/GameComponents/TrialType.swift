@@ -21,4 +21,8 @@ struct TrialType: Codable {
     let flashScreen: Bool
     let flashRight: Bool
     
+    // For the number of coins and waves
+    let numberOfCoins: Int
+    let numberOfWaves: Int
+    
 }

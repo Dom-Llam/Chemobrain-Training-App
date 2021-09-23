@@ -16,6 +16,8 @@ class AppViewModel: ObservableObject {
     // For backside server and user auth
     let auth = Auth.auth()
     let db = Firestore.firestore()
+    
+    var numberOfUsers = 0
 
     
     // For the timer and score
@@ -25,6 +27,8 @@ class AppViewModel: ObservableObject {
     @Published var signedIn = false
     
     @Published var showingGame = false
+    
+    @Published var gameShowing = false
     
     
     // Public var to use in the game scene to exit
@@ -58,9 +62,11 @@ class AppViewModel: ObservableObject {
                 print("an error took place creating user\(error!)")
                 return
             }
-            
+            // Increment first, so its's the same until there is a new user
+            self?.numberOfUsers += 1
             // Create user instance of firebase.auth in firebase.firestore?
-            self?.db.collection("users").document().setData(["UserName": email, "Password": password])
+            self?.db.collection("users").document(String(self?.numberOfUsers ?? 000)).setData(["UserName": email, "Password": password])
+            
             
             // Successful login
             DispatchQueue.main.async {

@@ -6,6 +6,8 @@
         "targetRight": true,
         "flashScreen": true,
         "flashRight": false,
+        "numberOfCoins": 5,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 2,
@@ -14,6 +16,8 @@
         "targetRight": true,
         "flashScreen": true,
         "flashRight": false,
+        "numberOfCoins": 5,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 3,
@@ -22,6 +26,8 @@
         "targetRight": true,
         "flashScreen": true,
         "flashRight": false,
+        "numberOfCoins": 5,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 4,
@@ -30,6 +36,8 @@
         "targetRight": true,
         "flashScreen": true,
         "flashRight": false,
+        "numberOfCoins": 5,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 5,
@@ -38,6 +46,8 @@
         "targetRight": false,
         "flashScreen": true,
         "flashRight": false,
+        "numberOfCoins": 5,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 6,
@@ -46,6 +56,8 @@
         "targetRight": false,
         "flashScreen": true,
         "flashRight": false,
+        "numberOfCoins": 5,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 7,
@@ -54,6 +66,8 @@
         "targetRight": false,
         "flashScreen": true,
         "flashRight": false,
+        "numberOfCoins": 5,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 8,
@@ -62,6 +76,8 @@
         "targetRight": false,
         "flashScreen": true,
         "flashRight": false,
+        "numberOfCoins": 5,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 9,
@@ -70,6 +86,8 @@
         "targetRight": true,
         "flashScreen": false,
         "flashRight": true,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 10,
@@ -78,6 +96,8 @@
         "targetRight": true,
         "flashScreen": false,
         "flashRight": true,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 11,
@@ -86,6 +106,8 @@
         "targetRight": true,
         "flashScreen": false,
         "flashRight": true,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 12,
@@ -94,6 +116,8 @@
         "targetRight": true,
         "flashScreen": false,
         "flashRight": true,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 13,
@@ -102,6 +126,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": true,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 15,
@@ -110,6 +136,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": true,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 15,
@@ -118,6 +146,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": true,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 16,
@@ -126,6 +156,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": true,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 17,
@@ -134,6 +166,8 @@
         "targetRight": true,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 18,
@@ -142,6 +176,8 @@
         "targetRight": true,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 19,
@@ -150,6 +186,8 @@
         "targetRight": true,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 20,
@@ -158,6 +196,8 @@
         "targetRight": true,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 21,
@@ -166,6 +206,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 22,
@@ -174,6 +216,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 23,
@@ -182,6 +226,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 24,
@@ -190,6 +236,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 25,
@@ -198,6 +246,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 26,
@@ -206,6 +256,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 27,
@@ -214,6 +266,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 28,
@@ -222,6 +276,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 29,
@@ -230,6 +286,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 30,
@@ -238,6 +296,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 31,
@@ -246,6 +306,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 32,
@@ -254,6 +316,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 33,
@@ -262,6 +326,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 34,
@@ -270,6 +336,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 35,
@@ -278,6 +346,8 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
     {
         "trialNumber": 36,
@@ -286,5 +356,7 @@
         "targetRight": false,
         "flashScreen": false,
         "flashRight": false,
+        "numberOfCoins": 10,
+        "numberOfWaves": 2,
     },
 ]
