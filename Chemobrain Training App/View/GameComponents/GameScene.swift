@@ -86,19 +86,15 @@ var body: some View {
                             }
                         .stroke(Color.white, lineWidth: 0.5)
                             .frame(width: 100, height: 850)
-
-
-                    Spacer()
+                        
+                        
+                        Spacer()
                     }
-                
-                
             }
-            
-            
-        
     }
     .ignoresSafeArea()
     .frame(maxWidth: .infinity, alignment: .trailing)
+    
 }
 }
 

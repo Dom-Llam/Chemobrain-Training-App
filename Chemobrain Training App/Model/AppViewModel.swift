@@ -18,6 +18,7 @@ class AppViewModel: ObservableObject {
     let db = Firestore.firestore()
     
     var numberOfUsers = 0
+    var currentRun = Int(UserDefaults.standard.string(forKey: "runNumber") ?? "0")
 
     
     // For the timer and score

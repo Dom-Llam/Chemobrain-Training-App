@@ -27,7 +27,12 @@ struct Chemobrain_Training_AppApp: App {
     }
 }
 
+
+
 class AppDelegate: NSObject, UIApplicationDelegate {
+
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
        
         // Configure firebase instance
@@ -35,4 +40,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         return true
     }
+    
+    // Attempting to lock screen in portriat
+    static var orientationLock = UIInterfaceOrientationMask.portrait //Don't want any rotation in any view
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+            return AppDelegate.orientationLock
+        }
 }

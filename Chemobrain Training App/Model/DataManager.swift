@@ -38,7 +38,7 @@ class DataManager {
         let currentUserNumber = avm.numberOfUsers
 
         
-        db.collection("users").document(String(currentUserNumber)).collection("new").document("New").setData(["trialNumber": trial, "responseTarget": responseTarget, "responseTime": responseTime ])
+        db.collection("users").document(String(currentUserNumber)).collection(String(avm.currentRun ?? 00000)).document("Trial: \(trial)").setData(["trialNumber": trial, "responseTarget": responseTarget, "responseTime": responseTime ])
     }
     
     func saveResponseTimeToFireStore(trial: Int, responseTarget: Array<String>, responseTime: Array<Double>) {
@@ -59,11 +59,16 @@ class DataManager {
     
 
     func saveResonseTimeToUserDefaults(array: Array<Double>) {
-        UserDefaults.standard.set(array, forKey: doubleTrialString + String(trialNumberUserDefaults))
-        
+        UserDefaults.standard.set(array, forKey: "rt for runNumber: \(avm.currentRun))")
+        //save as Date
+        UserDefaults.standard.set(Date(), forKey: "rt date for runNumber: \(avm.currentRun)")
+
     }
     
     func saveResponseTargetToUserDefaults(stringArray: Array<String>) {
-        UserDefaults.standard.set(stringArray, forKey: stringTrialString + String(trialNumberUserDefaults))
+        UserDefaults.standard.set(stringArray, forKey: "targetResponse for runNumber: \(avm.currentRun)")
+        //save as Date
+        UserDefaults.standard.set(Date(), forKey: "targetResponse date for runNumber: \(avm.currentRun)")
+
     }
 }

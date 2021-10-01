@@ -79,12 +79,10 @@ struct HomeView: View {
                     Button(action: {
                         viewModel.playGame()
                         viewModel.gameShowing = true
-                        // After duration of trial toggle again to get out?
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 360) {
-                            viewModel.playGame()
-                            viewModel.gameShowing = false
-                            
-                        }
+                        
+                        // increment the current run and store it in user defaults for retrieval
+                        viewModel.currentRun! += 1
+                        UserDefaults.standard.set(viewModel.currentRun, forKey: "runNumber")
                     }, label: {
                         Text("Let's Play!")
                             .foregroundColor(Color.black)

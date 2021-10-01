@@ -14,8 +14,8 @@
             filePath = "Chemobrain Training App/View/HomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -62,8 +62,8 @@
             filePath = "Chemobrain Training App/View/HomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -114,22 +114,6 @@
             endingLineNumber = "48"
             landmarkName = "flashBothCircles(wait:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "69239081-9DA5-415F-A45C-B8886959BF5C"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Chemobrain Training App/View/GameComponents/SpriteKitScene.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "611"
-            endingLineNumber = "611"
-            landmarkName = "touchesBegan(_:with:)"
-            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -198,33 +182,145 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "84EC0C89-B005-4464-9731-942F9A5194A5"
+            uuid = "42C61D46-1A18-4866-B981-969E89EBC63A"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Chemobrain Training App/View/GameComponents/SpriteKitScene.swift"
+            filePath = "Chemobrain Training App/View/GameComponents/generateTrials.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "654"
-            endingLineNumber = "654"
-            landmarkName = "touchesBegan(_:with:)"
-            landmarkType = "9">
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "generateTrials(for:thru:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D5B0D5F6-A75E-47BE-9256-A46D6343651B"
+            uuid = "919D6631-CA28-4717-875F-0018C4AE8C6F"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chemobrain Training App/View/GameComponents/SpriteKitScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "658"
-            endingLineNumber = "658"
+            startingLineNumber = "425"
+            endingLineNumber = "425"
             landmarkName = "touchesBegan(_:with:)"
-            landmarkType = "9">
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "69A07421-778A-4BBE-9445-33435B612067"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chemobrain Training App/View/GameComponents/SpriteKitScene.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "411"
+            endingLineNumber = "411"
+            landmarkName = "touchesBegan(_:with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "569E3D11-AD1D-4F7A-BB8A-BC72B1444487"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chemobrain Training App/View/GameComponents/generateTrials.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
+            landmarkName = "generateTrials(for:thru:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "569E3D11-AD1D-4F7A-BB8A-BC72B1444487 - 8ac8cd7f6890bae4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chemobrain_Training_App.SpriteKitScene.generateTrials(for: Swift.Int, thru: Swift.Int) -&gt; ()"
+                  moduleName = "Chemobrain Training App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dom/Desktop/Chemobrain%20Training%20App/Chemobrain%20Training%20App/View/GameComponents/generateTrials.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "200"
+                  endingLineNumber = "200"
+                  offsetFromSymbolStart = "30488">
+               </Location>
+               <Location
+                  uuid = "569E3D11-AD1D-4F7A-BB8A-BC72B1444487 - 9504c7b7f878370f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Chemobrain_Training_App.SpriteKitScene.generateTrials(for: Swift.Int, thru: Swift.Int) -&gt; ()"
+                  moduleName = "Chemobrain Training App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dom/Desktop/Chemobrain%20Training%20App/Chemobrain%20Training%20App/View/GameComponents/generateTrials.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "203"
+                  endingLineNumber = "203"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6360E38E-7835-43DE-8AB4-C90710D687D5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chemobrain Training App/View/GameComponents/SpriteKitScene.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "438"
+            endingLineNumber = "438"
+            landmarkName = "touchesBegan(_:with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E6B6F06F-356E-478C-A75B-039155F4AB47"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chemobrain Training App/View/GameComponents/generateTrials.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "generateTrials(for:thru:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AE8A252B-90EB-4ED3-BAF1-FD9167FBED58"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chemobrain Training App/Model/AppViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "AppViewModel"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

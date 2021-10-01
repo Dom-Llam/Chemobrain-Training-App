@@ -36,12 +36,14 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     // Setting up reaction time variables
     var reactionTime: Timer?
     var rt: Double = 0.0
-    var targetResponse: Bool = true
+    var targetResponse: Bool = false
     var responseTimeArray:Array<Double> = []
     var responseTargetArray:Array<String> = []
     
+    
     // To validate right/left responses to target (ie. not record random button taps
-    var cueFlashed: Bool = false
+    var cueFlashed: Bool = true
+    var readyCounter = 0
     
     // Setting up the score
     let scoreLabel = SKLabelNode(fontNamed: "Baskerville-Bold")
@@ -66,6 +68,11 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     let portal = SKSpriteNode(imageNamed: "gas0")
     let moveRight = SKSpriteNode(imageNamed: "move")
     let moveLeft = SKSpriteNode(imageNamed: "move")
+    
+    let pause = SKSpriteNode(imageNamed: "pause")
+    let play = SKSpriteNode(imageNamed: "play")
+    let ready = SKSpriteNode(imageNamed: "ready_txt")
+    let getReady = SKSpriteNode(imageNamed: "getReady_txt")
     
     // Generates the images to be looped through as textures for portal
     let gas0 = SKTexture(imageNamed: "gas0")
@@ -229,9 +236,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         blue.alpha = 1
         self.addChild(blue)
         
-        // Create instance of trial Manager so that it can be used in response functionality
-        var trialManager = TrialManager(type: trialTypes[0], trialNumber: trialTypes[0].trialNumber, coinCongruent: trialTypes[0].coinCongruent, targetBlue: trialTypes[0].targetBlue, targetRight: trialTypes[0].targetRight, flashScreen: trialTypes[0].flashScreen, flashRight: trialTypes[0].flashRight, numberOfCoins: trialTypes[0].numberOfCoins, numberOfWaves: trialTypes[0].numberOfWaves)
-        
+      
         // Simply leave after two models
        
             DispatchQueue.main.asyncAfter(deadline: .now() + 120) {
@@ -243,10 +248,11 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         physicsWorld.contactDelegate = self
         addChild(music)
+        music.isPaused = true
         
         // For score
         scoreLabel.fontColor = UIColor.white.withAlphaComponent(0.5)
-        scoreLabel.position = CGPoint(x: 310, y: 450)
+        scoreLabel.position = CGPoint(x: 310, y: 400)
         scoreLabel.zPosition = 2
         addChild(scoreLabel)
         score = 0
@@ -324,210 +330,42 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
 
         addChild(fixedSky)
         
+        // For Pause and getReady buttons
+        pause.name = "pause"
+        pause.position = CGPoint(x: -310, y: 400)
+        pause.size = CGSize(width: 100, height: 100)
+        pause.zPosition = 2
+        pause.physicsBody?.isDynamic = false
+        addChild(pause)
         
+        play.name = "pause"
+        play.position = CGPoint(x: -310, y: 400)
+        play.size = CGSize(width: 100, height: 100)
+        play.zPosition = 1
+        play.alpha = 1
+        play.physicsBody?.isDynamic = false
+        addChild(play)
+        play.isHidden = true
         
-        for i in 0...24 {
-            
-            let delay: Double = Double(i) * 10 + 3.5 + 1 /// cueToInterval in place of this 1
-            let cueDelay: Double = Double(i) * 10
-            let coinDelay: Double = Double(i) * 10
+        ready.name = "ready"
+        ready.position = CGPoint(x: 0, y: 0)
+        ready.zPosition = 2
+        ready.size = CGSize(width: 200, height: 100)
+        ready.physicsBody?.isDynamic = false
+        addChild(ready)
+        
+        getReady.name = "getReady"
+        getReady.position = CGPoint(x: 0, y: 0)
+        getReady.zPosition = 2
+        getReady.size = CGSize(width: 200, height: 100)
+        getReady.physicsBody?.isDynamic = false
+        getReady.alpha = 0
+        addChild(getReady)
+        
+        // Start the game off paused
+        scene?.isPaused = true
+        
 
-            trialManager = TrialManager(type: trialTypes[i], trialNumber: trialTypes[i].trialNumber, coinCongruent: trialTypes[i].coinCongruent, targetBlue: trialTypes[i].targetBlue, targetRight: trialTypes[i].targetRight, flashScreen: trialTypes[i].flashScreen, flashRight: trialTypes[i].flashRight, numberOfCoins: trialTypes[i].numberOfCoins, numberOfWaves: trialTypes[i].numberOfWaves)
-            
-            
-            if trialManager.type.targetRight == true && trialManager.type.targetBlue == true {
-                responseKey.append("rightBlue")
-            } else if trialManager.type.targetRight == true && trialManager.type.targetBlue == false {
-                responseKey.append("rightYellow")
-            } else if trialManager.type.targetRight == false && trialManager.type.targetBlue == true {
-                responseKey.append("leftBlue")
-            } else if trialManager.type.targetRight == false && trialManager.type.targetBlue == false {
-                responseKey.append("leftYellow")
-            }
-
-            func printStats() {
-                print("Trial: \(trialManager.type.trialNumber)")
-                print("FlashRight: \(trialManager.type.flashRight)")
-                print("TargetRight: \(trialManager.type.targetRight)")
-                print("TargetBlue: \(trialManager.type.targetBlue)")
-                print("CoinCongruent: \(trialManager.type.coinCongruent)")
-                print("FlashScreen: \(trialManager.type.flashScreen)")
-                print("CurrentDirect: \(currentDirection)")
-                print("CurrentColor: \(currentColor)")
-                print(responseKey[i + 1])
-            }
-
-                // All of the condition possibilities for flash whole
-                
-                if trialManager.type.flashScreen && trialManager.type.targetRight && trialManager.type.targetBlue && trialManager.type.coinCongruent {
-                    // Refactor to using .wait
-                    
-                    spawnBlueCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashBothCircles(wait: cueDelay)
-                    spawnRightBlueTarget(wait: delay)
-             
-                } else if trialManager.type.flashScreen && trialManager.type.targetRight && trialManager.type.targetBlue && !trialManager.type.coinCongruent {
-                    
-                    spawnYellowCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashBothCircles(wait: cueDelay)
-                    spawnRightBlueTarget(wait: delay)
-                  
-                } else if trialManager.type.flashScreen && trialManager.type.targetRight && !trialManager.type.targetBlue && trialManager.type.coinCongruent {
-                    
-                    spawnYellowCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashBothCircles(wait: cueDelay)
-                    spawnRightYellowTarget(wait: delay)
-   
-                } else if trialManager.type.flashScreen && trialManager.type.targetRight && !trialManager.type.targetBlue && !trialManager.type.coinCongruent {
-                    
-                    spawnBlueCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashBothCircles(wait: cueDelay)
-                    spawnRightYellowTarget(wait: delay)
-
-                } else if trialManager.type.flashScreen && !trialManager.type.targetRight && trialManager.type.targetBlue && trialManager.type.coinCongruent {
-                    
-                    spawnBlueCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashBothCircles(wait: cueDelay)
-                    spawnLeftBlueTarget(wait: delay)
-
-                } else if trialManager.type.flashScreen && !trialManager.type.targetRight && trialManager.type.targetBlue && !trialManager.type.coinCongruent {
-                    
-                    spawnYellowCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashBothCircles(wait: cueDelay)
-                    spawnLeftBlueTarget(wait: delay)
-
-                } else if trialManager.type.flashScreen && !trialManager.type.targetRight && !trialManager.type.targetBlue && trialManager.type.coinCongruent {
-                    
-                    spawnYellowCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashBothCircles(wait: cueDelay)
-                    spawnLeftYellowTarget(wait: delay)
-
-                } else if trialManager.type.flashScreen && !trialManager.type.targetRight && !trialManager.type.targetBlue && !trialManager.type.coinCongruent {
-                    
-                    spawnBlueCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashBothCircles(wait: cueDelay)
-                    spawnLeftYellowTarget(wait: delay)
-
-                }
-                
-                // All of the condition possibilities for flash right
-                
-                else if trialManager.type.flashRight && trialManager.type.targetRight && trialManager.type.targetBlue && trialManager.type.coinCongruent {
-                    
-                    spawnBlueCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashRightCircle(wait: cueDelay)
-                    spawnRightBlueTarget(wait: delay)
-             
-                } else if trialManager.type.flashRight && trialManager.type.targetRight && trialManager.type.targetBlue && !trialManager.type.coinCongruent {
-                    
-                    spawnYellowCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashRightCircle(wait: cueDelay)
-                    spawnRightBlueTarget(wait: delay)
-
-                } else if trialManager.type.flashRight && trialManager.type.targetRight && !trialManager.type.targetBlue && trialManager.type.coinCongruent {
-                    
-                    spawnYellowCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashRightCircle(wait: cueDelay)
-                    spawnRightYellowTarget(wait: delay)
-
-                } else if trialManager.type.flashRight && trialManager.type.targetRight && !trialManager.type.targetBlue && !trialManager.type.coinCongruent {
-                    
-                    spawnBlueCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashRightCircle(wait: cueDelay)
-                    spawnRightYellowTarget(wait: delay)
-
-                } else if trialManager.type.flashRight && !trialManager.type.targetRight && trialManager.type.targetBlue && trialManager.type.coinCongruent {
-                    
-                    spawnBlueCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashRightCircle(wait: cueDelay)
-                    spawnLeftBlueTarget(wait: delay)
-
-                } else if trialManager.type.flashRight && !trialManager.type.targetRight && trialManager.type.targetBlue && !trialManager.type.coinCongruent {
-                    
-                    spawnYellowCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashRightCircle(wait: cueDelay)
-                    spawnLeftBlueTarget(wait: delay)
-
-                } else if trialManager.type.flashRight && !trialManager.type.targetRight && !trialManager.type.targetBlue && trialManager.type.coinCongruent {
-                    
-                    spawnYellowCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashRightCircle(wait: cueDelay)
-                    spawnLeftYellowTarget(wait: delay)
-              
-                } else if trialManager.type.flashRight && !trialManager.type.targetRight && !trialManager.type.targetBlue && !trialManager.type.coinCongruent {
-                    
-                    spawnBlueCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashRightCircle(wait: cueDelay)
-                    spawnLeftYellowTarget(wait: delay)
-          
-                }
-                
-                // All of the condition possibilities for flash left
-                
-                else if !trialManager.type.flashRight && trialManager.type.targetRight && trialManager.type.targetBlue && trialManager.type.coinCongruent {
-                    
-                    spawnBlueCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashLeftCircle(wait: cueDelay)
-                    spawnRightBlueTarget(wait: delay)
-               
-                } else if !trialManager.type.flashRight && trialManager.type.targetRight && trialManager.type.targetBlue && !trialManager.type.coinCongruent {
-                    
-                    spawnYellowCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashLeftCircle(wait: cueDelay)
-                    spawnRightBlueTarget(wait: delay)
-            
-                } else if !trialManager.type.flashRight && trialManager.type.targetRight && !trialManager.type.targetBlue && trialManager.type.coinCongruent {
-                    
-                    spawnYellowCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashLeftCircle(wait: cueDelay)
-                    spawnRightYellowTarget(wait: delay)
-             
-                } else if !trialManager.type.flashRight && trialManager.type.targetRight && !trialManager.type.targetBlue && !trialManager.type.coinCongruent {
-                    
-                    spawnBlueCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashLeftCircle(wait: cueDelay)
-                    spawnRightYellowTarget(wait: delay)
-                
-                } else if !trialManager.type.flashRight && !trialManager.type.targetRight && trialManager.type.targetBlue && trialManager.type.coinCongruent {
-                    
-                    spawnBlueCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashLeftCircle(wait: cueDelay)
-                    spawnLeftBlueTarget(wait: delay)
-                  
-                } else if !trialManager.type.flashRight && !trialManager.type.targetRight && trialManager.type.targetBlue && !trialManager.type.coinCongruent {
-                    
-                    spawnYellowCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashLeftCircle(wait: cueDelay)
-                    spawnLeftBlueTarget(wait: delay)
-
-                } else if !trialManager.type.flashRight && !trialManager.type.targetRight && !trialManager.type.targetBlue && trialManager.type.coinCongruent {
-                    
-                    spawnYellowCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashLeftCircle(wait: cueDelay)
-                    spawnLeftYellowTarget(wait: delay)
-                    
-                } else if !trialManager.type.flashRight && !trialManager.type.targetRight && !trialManager.type.targetBlue && !trialManager.type.coinCongruent {
-                    
-                    spawnBlueCoinWave(wait: coinDelay, numberOfCoins: trialManager.type.numberOfCoins, numberOfWaves: trialManager.type.numberOfWaves)
-                    flashLeftCircle(wait: cueDelay)
-                    spawnLeftYellowTarget(wait: delay)
-                }
-            
-            if trialManager.type.trialNumber == 24 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + cueDelay) {
-                    // To stop gameScene and save to user defaults
-                    self.view?.isPaused = true
-                    self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
-                    self.dm.saveResponseTargetToUserDefaults(stringArray: self.responseTargetArray)
-                    
-                    // To save the trial data to Firestore
-                    self.dm.saveAnythingAtAllToFirestore(trial: self.dm.trialNumberFireStore, responseTarget: self.responseTargetArray, responseTime: self.responseTimeArray)
-                    self.dm.trialNumberFireStore += 1
-                    
-                    
-                }
-            }
-        }
     }
     
     
@@ -568,6 +406,51 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         let location = touch.location(in: self)
         let node: SKNode = self.atPoint(location)
         
+        
+        // For Pause
+        if node.name == "pause" {
+            scene?.isPaused.toggle()
+            
+            pause.isHidden.toggle()
+            play.isHidden.toggle()
+        }
+        if node.name == "play" {
+            scene?.isPaused.toggle()
+            
+            play.isHidden.toggle()
+            pause.isHidden.toggle()
+        }
+        // For Ready and trial generation
+        // When ready button is tapped, begin game for first round of trials and increment readyCount
+        if node.name == "ready" {
+            scene?.isPaused = false
+            readyCounter += 1
+            ready.removeFromParent()
+            
+            let fadein = SKAction.resize(toWidth: 250, duration: 1)
+            let fadeOut = SKAction.resize(toWidth: 200, duration: 1)
+            let sequence = SKAction.sequence([visible, fadein, fadeOut, invisible])
+            getReady.run(sequence)
+            
+            // unpause music
+            music.isPaused = false
+            
+            switch readyCounter {
+            case 1:
+                generateTrials(for: 2, thru: 5)
+            case 2:
+                generateTrials(for: 68, thru: 71)
+            case 3:
+                generateTrials(for: 104, thru: 107)
+            case 4:
+                generateTrials(for: 140, thru: 143)
+            default:
+                print("an error took place")
+            }
+        }
+            
+            
+
         // Touch either directional nodes and mark response to target
         if cueFlashed == true {
             let resetRight = SKAction.sequence([resetRightTarget, targetVisible])
@@ -761,7 +644,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                 reactionTime?.invalidate()
                 
                 
-            reactionTime = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(reactToTarget), userInfo: nil, repeats: true)
+            reactionTime = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(reactToTarget), userInfo: nil, repeats: true)
             onlyOne = false
             
                 // Maybe find a way to put an incrementer somewhere like here - happens once per trial/user action independent.
@@ -800,13 +683,13 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     
     @objc func reactToInterval() {
         if cueFlashed == true {
-            cueToInterval += 0.1
+            cueToInterval += 0.01
         }
     }
     
     @objc func reactToTarget() {
         if targetResponse == false {
-            rt += 0.1
+            rt += 0.01
         } else if targetResponse == true {
             rt = 0
             reactionTime?.invalidate()
