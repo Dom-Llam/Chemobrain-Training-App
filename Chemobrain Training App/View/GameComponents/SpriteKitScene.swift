@@ -361,11 +361,6 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         getReady.physicsBody?.isDynamic = false
         getReady.alpha = 0
         addChild(getReady)
-        
-        // Start the game off paused
-        scene?.isPaused = true
-        
-
     }
     
     
@@ -423,7 +418,6 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         // For Ready and trial generation
         // When ready button is tapped, begin game for first round of trials and increment readyCount
         if node.name == "ready" {
-            scene?.isPaused = false
             readyCounter += 1
             ready.removeFromParent()
             
@@ -435,6 +429,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
             // unpause music
             music.isPaused = false
             
+            // Generate wave runs based on how many times ready has been clicked
             switch readyCounter {
             case 1:
                 generateTrials(for: 2, thru: 5)
@@ -519,12 +514,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                     print("New response time from incorrect response: \(rt)")
                     
                     self.responseTimeArray.append(newResponse)
-                    // Either way the timer needs to be invalidated
                 }
-                
-                
-                
-                
             } else if node.name == "blue" {
                 
                 if intersects(rightBlueTarget) || intersects(leftBlueTarget) {
@@ -586,12 +576,8 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                     print("New response time from incorrect answer: \(rt)")
                     
                     self.responseTimeArray.append(newResponse)
-                    // Either way the timer needs to be invalidated
-                    
                 }
-                
             }
-            
         }
         
         // Touch movement pads to move left or right
@@ -606,20 +592,6 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
             let moveLeft = SKAction.moveBy(x: -163, y: 0, duration: 0.5)
             player.run(moveLeft)
         }
-        // Touch anywhere on the screen left/right of center line and player moves
-//        if location.x < center {
-//            guard moveCount != -1 else { return }
-//            moveCount -= 1
-//            let moveLeft = SKAction.moveBy(x: -163, y: 0, duration: 0.5)
-//            player.run(moveLeft)
-//        } else {
-//
-//            guard moveCount != 1 else { return }
-//            let moveRight = SKAction.moveBy(x: +163, y: 0, duration: 0.5)
-//            player.run(moveRight)
-//            moveCount += 1
-//
-//        }
     }
     
     // Var to tally to only allow one timer until response
