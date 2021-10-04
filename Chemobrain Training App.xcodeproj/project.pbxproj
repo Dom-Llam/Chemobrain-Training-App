@@ -19,6 +19,7 @@
 		F237AB7C26C18E5900DC94A8 /* the-hero.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F237AB7B26C18E5900DC94A8 /* the-hero.mp3 */; };
 		F23F533426E8FF8E00EE0B47 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23F533326E8FF8E00EE0B47 /* DataManager.swift */; };
 		F2415E2827062B8B0008A752 /* generateTrials.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2415E2727062B8B0008A752 /* generateTrials.swift */; };
+		F2415E2B270A166F0008A752 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2415E29270A166F0008A752 /* DataModel.xcdatamodeld */; };
 		F244F00026AF4D27006DE8EA /* SpriteKitScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F244EFFF26AF4D27006DE8EA /* SpriteKitScene.swift */; };
 		F244F00326AF4F45006DE8EA /* Starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = F244F00126AF4F45006DE8EA /* Starfield.sks */; };
 		F244F00426AF4F45006DE8EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F244F00226AF4F45006DE8EA /* Assets.xcassets */; };
@@ -61,6 +62,7 @@
 		F237AB7B26C18E5900DC94A8 /* the-hero.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "the-hero.mp3"; sourceTree = "<group>"; };
 		F23F533326E8FF8E00EE0B47 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		F2415E2727062B8B0008A752 /* generateTrials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = generateTrials.swift; sourceTree = "<group>"; };
+		F2415E2A270A166F0008A752 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		F244EFFF26AF4D27006DE8EA /* SpriteKitScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitScene.swift; sourceTree = "<group>"; };
 		F244F00126AF4F45006DE8EA /* Starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Starfield.sks; sourceTree = "<group>"; };
 		F244F00226AF4F45006DE8EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				F2E2A9282684CD6900143E69 /* AppViewModel.swift */,
 				F290131F26DA767300B850CD /* DifficultyLevel.swift */,
 				F23F533326E8FF8E00EE0B47 /* DataManager.swift */,
+				F2415E29270A166F0008A752 /* DataModel.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F222302926690EDB00435E92 /* ContentView.swift in Sources */,
+				F2415E2B270A166F0008A752 /* DataModel.xcdatamodeld in Sources */,
 				F251FF82267A4F6C004887FF /* LoginView.swift in Sources */,
 				F244F00026AF4D27006DE8EA /* SpriteKitScene.swift in Sources */,
 				F2E2A9292684CD6900143E69 /* AppViewModel.swift in Sources */,
@@ -550,6 +554,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F2415E29270A166F0008A752 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F2415E2A270A166F0008A752 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = F2415E2A270A166F0008A752 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F222301B26690EDB00435E92 /* Project object */;
 }

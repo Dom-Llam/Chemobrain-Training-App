@@ -16,6 +16,16 @@ extension SpriteKitScene {
         var trialManager = TrialManager(type: trialTypes[0], trialNumber: trialTypes[0].trialNumber, coinCongruent: trialTypes[0].coinCongruent, targetBlue: trialTypes[0].targetBlue, targetRight: trialTypes[0].targetRight, flashScreen: trialTypes[0].flashScreen, flashRight: trialTypes[0].flashRight, numberOfCoins: trialTypes[0].numberOfCoins, numberOfWaves: trialTypes[0].numberOfWaves)
         // t to take place of i for delay incrementation?
         var t = 0
+        
+        // To trigger reactionTimer for the first trial each call
+//        let wait2 = SKAction.wait(forDuration: 2)
+//        let timerTrigger = SKAction.customAction(withDuration: 0) { [self] _,_ in
+//            self.cueFlashed = true
+//        }
+//        let triggerSequence = SKAction.sequence([wait2,timerTrigger])
+//        player.run(triggerSequence)
+/*        flashNoCircles(wait: 0)*/
+        
         // Run trial generation for blocks that can be enter for button pressses
         for i in trialStart...trialEnd {
             
@@ -201,14 +211,14 @@ extension SpriteKitScene {
             
             switch trialManager.type.trialNumber {
             case 6:
-                DispatchQueue.main.asyncAfter(deadline: .now() + cueDelay + 10) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
                     // To stop gameScene and save to user defaults
                     
                     self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
                     self.dm.saveResponseTargetToUserDefaults(stringArray: self.responseTargetArray)
                     
                     // To save the trial data to Firestore
-                    self.dm.saveAnythingAtAllToFirestore(trial: self.dm.trialNumberFireStore, responseTarget: self.responseTargetArray, responseTime: self.responseTimeArray)
+                    self.dm.saveAnythingAtAllToFirestore(trial: self.dm.trialNumberFireStore, score: self.score, responseTarget: self.responseTargetArray, responseTime: self.responseTimeArray)
                     self.dm.trialNumberFireStore += 1
                     
 //                    self.ready.name = "ready"
@@ -224,13 +234,13 @@ extension SpriteKitScene {
                     self.cueFlashed = true
                 }
             case 72:
-                DispatchQueue.main.asyncAfter(deadline: .now() + cueDelay + 10) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
                     // To stop gameScene and save to user defaults
                     self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
                     self.dm.saveResponseTargetToUserDefaults(stringArray: self.responseTargetArray)
                     
                     // To save the trial data to Firestore
-                    self.dm.saveAnythingAtAllToFirestore(trial: self.dm.trialNumberFireStore, responseTarget: self.responseTargetArray, responseTime: self.responseTimeArray)
+                    self.dm.saveAnythingAtAllToFirestore(trial: self.dm.trialNumberFireStore, score: self.score, responseTarget: self.responseTargetArray, responseTime: self.responseTimeArray)
                     self.dm.trialNumberFireStore += 1
                     
                     //                    self.ready.name = "ready"
@@ -246,14 +256,14 @@ extension SpriteKitScene {
                     self.cueFlashed = true
                 }
             case 108:
-                DispatchQueue.main.asyncAfter(deadline: .now() + cueDelay + 10) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
                     // To stop gameScene and save to user defaults
                     
                     self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
                     self.dm.saveResponseTargetToUserDefaults(stringArray: self.responseTargetArray)
                     
                     // To save the trial data to Firestore
-                    self.dm.saveAnythingAtAllToFirestore(trial: self.dm.trialNumberFireStore, responseTarget: self.responseTargetArray, responseTime: self.responseTimeArray)
+                    self.dm.saveAnythingAtAllToFirestore(trial: self.dm.trialNumberFireStore, score: self.score, responseTarget: self.responseTargetArray, responseTime: self.responseTimeArray)
                     self.dm.trialNumberFireStore += 1
                     
                     //                    self.ready.name = "ready"
@@ -269,16 +279,22 @@ extension SpriteKitScene {
                     self.cueFlashed = true
                 }
             case 144:
-                DispatchQueue.main.asyncAfter(deadline: .now() + cueDelay + 10) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
                     // To stop gameScene and save to user defaults
                     self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
                     self.dm.saveResponseTargetToUserDefaults(stringArray: self.responseTargetArray)
                     
                     // To save the trial data to Firestore
-                    self.dm.saveAnythingAtAllToFirestore(trial: self.dm.trialNumberFireStore, responseTarget: self.responseTargetArray, responseTime: self.responseTimeArray)
+                    self.dm.saveAnythingAtAllToFirestore(trial: self.dm.trialNumberFireStore, score: self.score, responseTarget: self.responseTargetArray, responseTime: self.responseTimeArray)
                     self.dm.trialNumberFireStore += 1
-                    
+
                     //MARK: - Code to show level completion animations
+                    
+                    // Attempts to exit the view
+//                    self.view?.removeFromSuperview()
+//                    self.appViewModel.gameShowing = false
+//                    self.appViewModel.showingGame = false
+//                    self.presentationMode.wrappedValue.dismiss()
                     
                 }
             default:

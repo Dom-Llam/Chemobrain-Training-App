@@ -34,11 +34,13 @@ class DataManager {
         }
     }
     
-    func saveAnythingAtAllToFirestore(trial: Int, responseTarget: Array<String>, responseTime: Array<Double>) {
+    func saveAnythingAtAllToFirestore(trial: Int, score: Int, responseTarget: Array<String>, responseTime: Array<Double>) {
         let currentUserNumber = avm.numberOfUsers
-
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
+        let date = dateFormatter.string(from: Date())
         
-        db.collection("users").document(String(currentUserNumber)).collection(String(avm.currentRun ?? 00000)).document("Trial: \(trial)").setData(["trialNumber": trial, "responseTarget": responseTarget, "responseTime": responseTime ])
+        db.collection("users").document(String(currentUserNumber)).collection(String(avm.currentRun ?? 0000)).document("Trial: \(trial)").setData([ "Date": date, "Score": score, "trialNumber": trial, "responseTarget": responseTarget, "responseTime": responseTime])
     }
     
     func saveResponseTimeToFireStore(trial: Int, responseTarget: Array<String>, responseTime: Array<Double>) {

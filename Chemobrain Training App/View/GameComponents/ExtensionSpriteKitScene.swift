@@ -64,12 +64,38 @@ extension SpriteKitScene {
         leftCircle.run(sequence)
         rightCircle.run(sequence)
     }
+    
+    // For the noCue condition
+    func flashNoCircles(wait forDuration: Double) {
+        //To trigger timer logic
+        let timerTrigger = SKAction.customAction(withDuration: 0) { [self] _,_ in
+            // For the RT boolean in update
+            self.onlyOne = true
+            self.targetResponse = false
+
+//            // For the response logic
+//            self.cueFlashed = true
+//
+//            // For finding the cue-to-target interval
+//            intervalTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(reactToInterval), userInfo: nil, repeats: true)
+        }
+        
+        let wait10 = SKAction.wait(forDuration: 4)
+        let wait1 = SKAction.wait(forDuration: 0.25)
+        // For switch to .wait
+        let trialWait = SKAction.wait(forDuration: forDuration)
+        
+
+        let sequence = SKAction.sequence([trialWait, wait10, timerTrigger, visible, wait1, invisible])
+        
+        noCircle.run(sequence)
+    }
 
     func spawnRightBlueTarget(wait forDuration: Double) {
   
         let movement = SKAction.move(to: CGPoint(x: 275, y: 0), duration: 0.75)
         let wait1 = SKAction.wait(forDuration: 1)
-        let wait5 = SKAction.wait(forDuration: 5)
+        let wait5 = SKAction.wait(forDuration: 8)
         
         // For switch to .wait
         let trialWait = SKAction.wait(forDuration: forDuration)
@@ -86,7 +112,7 @@ extension SpriteKitScene {
         
         let movement = SKAction.move(to: CGPoint(x: 275, y: 0), duration: 0.75)
         let wait1 = SKAction.wait(forDuration: 1)
-        let wait5 = SKAction.wait(forDuration: 5)
+        let wait5 = SKAction.wait(forDuration: 8)
         
         // For switch to .wait
         let trialWait = SKAction.wait(forDuration: forDuration)
@@ -103,7 +129,7 @@ extension SpriteKitScene {
 
         let movement = SKAction.move(to: CGPoint(x: -275, y: 0), duration: 0.75)
         let wait1 = SKAction.wait(forDuration: 1)
-        let wait5 = SKAction.wait(forDuration: 5)
+        let wait5 = SKAction.wait(forDuration: 8)
         
         // For switch to .wait
         let trialWait = SKAction.wait(forDuration: forDuration)
@@ -120,7 +146,7 @@ extension SpriteKitScene {
 
         let movement = SKAction.move(to: CGPoint(x: -275, y: 0), duration: 0.75)
         let wait1 = SKAction.wait(forDuration: 1)
-        let wait5 = SKAction.wait(forDuration: 5)
+        let wait5 = SKAction.wait(forDuration: 8)
         
         // For switch to .wait
         let trialWait = SKAction.wait(forDuration: forDuration)

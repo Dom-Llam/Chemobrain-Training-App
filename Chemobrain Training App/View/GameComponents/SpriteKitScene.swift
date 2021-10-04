@@ -22,6 +22,7 @@ enum CollisionType: UInt32 {
 class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     
 //    GameScene().environmentObject(AppViewModel)
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     // To decode the hardcoded JSON file into an array of TrialType
     let trialTypes = Bundle.main.decode([TrialType].self, from: "test-trial.json")
@@ -110,6 +111,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     // Add cues here to make them globally available
     let leftCircle = SKShapeNode(circleOfRadius: 60)
     let rightCircle = SKShapeNode(circleOfRadius: 60)
+    let noCircle = SKShapeNode(circleOfRadius: 60)
     // For response circles
     let yellow = SKShapeNode(circleOfRadius: 55)
     let blue = SKShapeNode(circleOfRadius: 55)
@@ -212,6 +214,17 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         rightCircle.zPosition = 1
         rightCircle.alpha = 0
         self.addChild(rightCircle)
+        
+        // noCircle Cue
+        noCircle.position = CGPoint(x: 403, y: 100)
+        noCircle.name = "rightRedCircle"
+        noCircle.strokeColor = SKColor.clear
+        noCircle.glowWidth = 10.0
+        noCircle.fillColor = SKColor.clear
+        noCircle.physicsBody?.isDynamic = false
+        noCircle.zPosition = 1
+        noCircle.alpha = 0
+        self.addChild(noCircle)
         
         // Yellow response circle on left side
         yellow.position = CGPoint(x: -325, y: -350)
@@ -432,13 +445,21 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
             // Generate wave runs based on how many times ready has been clicked
             switch readyCounter {
             case 1:
-                generateTrials(for: 2, thru: 5)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.generateTrials(for: 141, thru: 143)
+                }
             case 2:
-                generateTrials(for: 68, thru: 71)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.generateTrials(for: 68, thru: 71)
+                }
             case 3:
-                generateTrials(for: 104, thru: 107)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.generateTrials(for: 104, thru: 107)
+                }
             case 4:
-                generateTrials(for: 140, thru: 143)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.generateTrials(for: 140, thru: 143)
+                }
             default:
                 print("an error took place")
             }
@@ -608,7 +629,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
 //            print(".playGame toggled. AppViewModel.playGame: \(appViewModel.playGame())")
         }
         // First attempt at updating screen if target is flying towards player, how to update path accurately
-        if leftCircle.alpha == 1 || rightCircle.alpha == 1 {
+        if intersects(leftCircle) || intersects(rightCircle)/* || intersects(noCircle)*/ {
             cueFlashed = true
             
             if onlyOne == true {

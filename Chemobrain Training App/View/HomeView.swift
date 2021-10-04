@@ -92,7 +92,7 @@ struct HomeView: View {
                 .frame(width: 700, height: 300, alignment: .center)
                 .background(Color(red: 246/255, green: 160/255, blue: 12/255))
                 .cornerRadius(20)
-                if currentDay == 5 /*&& ANTTaken == true*/ {
+                if currentDay == 1 /*&& ANTTaken == true*/ {
                 HStack {
                     Text("It's time to take the ANT for the week!")
                     

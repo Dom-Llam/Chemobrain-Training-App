@@ -33,7 +33,9 @@ var body: some View {
     
     ZStack {
         if viewModel.gameShowing == true {
-        SpriteView(scene: scene, isPaused: false)
+            SpriteView(scene: scene, isPaused: false)
+            
+            
         // Another attempt to exit game
 //        if viewManager.exitView {
 //            Button {
@@ -48,9 +50,6 @@ var body: some View {
 //            }
 //        }
         } else if viewModel.gameShowing == false {
-            
-            
-            
         }
             VStack(alignment: .leading) {
 //                Text("Score: \(viewModel.score)")
@@ -96,6 +95,7 @@ var body: some View {
     .frame(maxWidth: .infinity, alignment: .trailing)
     
 }
+
 }
 
 
