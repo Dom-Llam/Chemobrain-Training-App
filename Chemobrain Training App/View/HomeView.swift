@@ -78,7 +78,6 @@ struct HomeView: View {
                     
                     Button(action: {
                         viewModel.playGame()
-                        viewModel.gameShowing = true
                         
                         // increment the current run and store it in user defaults for retrieval
                         viewModel.currentRun! += 1

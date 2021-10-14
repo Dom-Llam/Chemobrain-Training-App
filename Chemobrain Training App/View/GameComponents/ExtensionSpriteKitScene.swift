@@ -208,7 +208,7 @@ extension SpriteKitScene {
         self.run(action)
     }
     
-    func spawnYellowCoinWave(wait forDuration: Double, numberOfCoins: Int, numberOfWaves: Int/*waveSpeed: Int*/) {
+    func spawnYellowCoinWave(wait forDuration: Double, numberOfCoins: Int, numberOfWaves: Int, waveSpacer: Double/*waveSpeed: Int*/) {
         
         func spawnCoin()   {
             let randomLane = Int.random(in: 1...3)
@@ -247,7 +247,7 @@ extension SpriteKitScene {
         }
         
         let wait1  = SKAction.wait(forDuration: 0.25)
-        let wait3   = SKAction.wait(forDuration:  1.5)
+        let waveSpacer   = SKAction.wait(forDuration:  waveSpacer)
         let spawn   = SKAction.run { spawnCoin() }
         
         // For switch to .wait
@@ -265,13 +265,13 @@ extension SpriteKitScene {
                 actionArray.append(spawn)
                 actionArray.append(wait1)
             }
-            actionArray.append(wait3)
+            actionArray.append(waveSpacer)
         }
         let action = SKAction.sequence(actionArray)
         self.run(action)
     }
     
-    func spawnBlueCoinWave(wait forDuration: Double, numberOfCoins: Int, numberOfWaves: Int/*waveSpeed: Int*/) {
+    func spawnBlueCoinWave(wait forDuration: Double, numberOfCoins: Int, numberOfWaves: Int, waveSpacer: Double/*waveSpeed: Int*/) {
         
         func spawnCoin()   {
             let randomLane = Int.random(in: 1...3)
@@ -310,7 +310,7 @@ extension SpriteKitScene {
         }
         
         let wait1  = SKAction.wait(forDuration: 0.25)
-        let wait3   = SKAction.wait(forDuration:  1.5)
+        let waveSpacer   = SKAction.wait(forDuration:  waveSpacer)
         let spawn   = SKAction.run { spawnCoin() }
         
         // For switch to .wait
@@ -328,7 +328,7 @@ extension SpriteKitScene {
                 actionArray.append(spawn)
                 actionArray.append(wait1)
             }
-            actionArray.append(wait3)
+            actionArray.append(waveSpacer)
         }
         let action = SKAction.sequence(actionArray)
         self.run(action)

@@ -34,6 +34,9 @@ struct ContentView: View {
             viewModel.signedIn = viewModel.isSignedIn
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .navigationBarTitle("Title")
+        .navigationTitle("BigTitle")
+        
     }
 }
 

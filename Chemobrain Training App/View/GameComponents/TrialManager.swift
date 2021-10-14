@@ -10,7 +10,7 @@ import SpriteKit
 class TrialManager {
     var type: TrialType
     
-    init(type: TrialType, trialNumber: Int, coinCongruent: Bool, targetBlue: Bool, targetRight: Bool, flashScreen: Bool, flashRight: Bool, numberOfCoins: Int, numberOfWaves: Int) {
+    init(type: TrialType, trialNumber: Int, coinCongruent: Bool, targetBlue: Bool, targetRight: Bool, flashScreen: Bool, flashRight: Bool, numberOfCoins: Int, numberOfWaves: Int, waveSpacer: Double, cueToInterval: Double, trialsPerBlock: Int) {
         self.type = type
         
     }

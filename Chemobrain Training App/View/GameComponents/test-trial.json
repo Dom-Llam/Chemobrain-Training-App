@@ -8,6 +8,9 @@
         "flashRight": false,
         "numberOfCoins": 5,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 2,
@@ -18,6 +21,9 @@
         "flashRight": false,
         "numberOfCoins": 5,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 3,
@@ -28,6 +34,9 @@
         "flashRight": false,
         "numberOfCoins": 5,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 4,
@@ -38,6 +47,9 @@
         "flashRight": false,
         "numberOfCoins": 5,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 5,
@@ -48,6 +60,9 @@
         "flashRight": false,
         "numberOfCoins": 5,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 6,
@@ -58,6 +73,9 @@
         "flashRight": false,
         "numberOfCoins": 5,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 7,
@@ -68,6 +86,9 @@
         "flashRight": false,
         "numberOfCoins": 5,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 8,
@@ -78,6 +99,9 @@
         "flashRight": false,
         "numberOfCoins": 5,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 9,
@@ -88,6 +112,9 @@
         "flashRight": true,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 10,
@@ -98,6 +125,9 @@
         "flashRight": true,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 11,
@@ -108,6 +138,9 @@
         "flashRight": true,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 12,
@@ -118,6 +151,9 @@
         "flashRight": true,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 13,
@@ -128,6 +164,9 @@
         "flashRight": true,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 15,
@@ -138,6 +177,9 @@
         "flashRight": true,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 15,
@@ -148,6 +190,9 @@
         "flashRight": true,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 16,
@@ -158,6 +203,9 @@
         "flashRight": true,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 17,
@@ -168,6 +216,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 18,
@@ -178,6 +229,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 19,
@@ -188,6 +242,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 20,
@@ -198,6 +255,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 21,
@@ -208,6 +268,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 22,
@@ -218,6 +281,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 23,
@@ -228,6 +294,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 24,
@@ -238,6 +307,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 25,
@@ -248,6 +320,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 26,
@@ -258,6 +333,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 27,
@@ -268,6 +346,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 28,
@@ -278,6 +359,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 29,
@@ -288,6 +372,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 30,
@@ -298,6 +385,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 31,
@@ -308,6 +398,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 32,
@@ -318,6 +411,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 33,
@@ -328,6 +424,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 34,
@@ -338,6 +437,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 35,
@@ -348,6 +450,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
         "trialNumber": 36,
@@ -358,6 +463,9 @@
         "flashRight": false,
         "numberOfCoins": 10,
         "numberOfWaves": 2,
+        "waveSpacer": 1.0,
+        "cueToInterval": 1.0,
+        "trialsPerBlock": 18,
     },
     {
        "trialNumber": 37,
@@ -368,6 +476,9 @@
        "flashRight": false,
        "numberOfCoins": 5,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 38,
@@ -378,6 +489,9 @@
        "flashRight": false,
        "numberOfCoins": 5,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 39,
@@ -388,6 +502,9 @@
        "flashRight": false,
        "numberOfCoins": 5,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 40,
@@ -398,6 +515,9 @@
        "flashRight": false,
        "numberOfCoins": 5,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 41,
@@ -408,6 +528,9 @@
        "flashRight": false,
        "numberOfCoins": 5,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 42,
@@ -418,6 +541,9 @@
        "flashRight": false,
        "numberOfCoins": 5,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 43,
@@ -428,6 +554,9 @@
        "flashRight": false,
        "numberOfCoins": 5,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 44,
@@ -438,6 +567,9 @@
        "flashRight": false,
        "numberOfCoins": 5,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 45,
@@ -448,6 +580,9 @@
        "flashRight": true,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 46,
@@ -458,6 +593,9 @@
        "flashRight": true,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 47,
@@ -468,6 +606,9 @@
        "flashRight": true,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 48,
@@ -478,6 +619,9 @@
        "flashRight": true,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 49,
@@ -488,6 +632,9 @@
        "flashRight": true,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 50,
@@ -498,6 +645,9 @@
        "flashRight": true,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 51,
@@ -508,6 +658,9 @@
        "flashRight": true,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 52,
@@ -518,6 +671,9 @@
        "flashRight": true,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 53,
@@ -528,6 +684,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 54,
@@ -538,6 +697,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 55,
@@ -548,6 +710,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 56,
@@ -558,6 +723,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 57,
@@ -568,6 +736,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 58,
@@ -578,6 +749,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 59,
@@ -588,6 +762,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 60,
@@ -598,6 +775,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 61,
@@ -608,6 +788,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 62,
@@ -618,6 +801,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 63,
@@ -628,6 +814,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 64,
@@ -638,6 +827,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 65,
@@ -648,6 +840,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 66,
@@ -658,6 +853,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 67,
@@ -668,6 +866,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 68,
@@ -678,6 +879,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 69,
@@ -688,6 +892,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 70,
@@ -698,6 +905,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 71,
@@ -708,6 +918,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
        "trialNumber": 72,
@@ -718,6 +931,9 @@
        "flashRight": false,
        "numberOfCoins": 10,
        "numberOfWaves": 2,
+       "waveSpacer": 1.0,
+       "cueToInterval": 1.0,
+       "trialsPerBlock": 18,
    },
    {
       "trialNumber": 73,
@@ -728,6 +944,9 @@
       "flashRight": false,
       "numberOfCoins": 5,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 74,
@@ -738,6 +957,9 @@
       "flashRight": false,
       "numberOfCoins": 5,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 75,
@@ -748,6 +970,9 @@
       "flashRight": false,
       "numberOfCoins": 5,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 76,
@@ -758,6 +983,9 @@
       "flashRight": false,
       "numberOfCoins": 5,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 77,
@@ -768,6 +996,9 @@
       "flashRight": false,
       "numberOfCoins": 5,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 78,
@@ -778,6 +1009,9 @@
       "flashRight": false,
       "numberOfCoins": 5,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 79,
@@ -788,6 +1022,9 @@
       "flashRight": false,
       "numberOfCoins": 5,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 80,
@@ -798,6 +1035,9 @@
       "flashRight": false,
       "numberOfCoins": 5,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 81,
@@ -808,6 +1048,9 @@
       "flashRight": true,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 82,
@@ -818,6 +1061,9 @@
       "flashRight": true,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 83,
@@ -828,6 +1074,9 @@
       "flashRight": true,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 84,
@@ -838,6 +1087,9 @@
       "flashRight": true,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 85,
@@ -848,6 +1100,9 @@
       "flashRight": true,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 86,
@@ -858,6 +1113,9 @@
       "flashRight": true,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 87,
@@ -868,6 +1126,9 @@
       "flashRight": true,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 88,
@@ -878,6 +1139,9 @@
       "flashRight": true,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 89,
@@ -888,6 +1152,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 90,
@@ -898,6 +1165,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 91,
@@ -908,6 +1178,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 92,
@@ -918,6 +1191,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 93,
@@ -928,6 +1204,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 94,
@@ -938,6 +1217,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 95,
@@ -948,6 +1230,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 96,
@@ -958,6 +1243,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 97,
@@ -968,6 +1256,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 98,
@@ -978,6 +1269,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 99,
@@ -988,6 +1282,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 100,
@@ -998,6 +1295,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 101,
@@ -1008,6 +1308,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 102,
@@ -1018,6 +1321,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 103,
@@ -1028,6 +1334,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 104,
@@ -1038,6 +1347,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 105,
@@ -1048,6 +1360,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 106,
@@ -1058,6 +1373,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 107,
@@ -1068,6 +1386,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
       "trialNumber": 108,
@@ -1078,6 +1399,9 @@
       "flashRight": false,
       "numberOfCoins": 10,
       "numberOfWaves": 2,
+      "waveSpacer": 1.0,
+      "cueToInterval": 1.0,
+      "trialsPerBlock": 18,
   },
   {
      "trialNumber": 109,
@@ -1088,6 +1412,9 @@
      "flashRight": false,
      "numberOfCoins": 5,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 110,
@@ -1098,6 +1425,9 @@
      "flashRight": false,
      "numberOfCoins": 5,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 111,
@@ -1108,6 +1438,9 @@
      "flashRight": false,
      "numberOfCoins": 5,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 112,
@@ -1118,6 +1451,9 @@
      "flashRight": false,
      "numberOfCoins": 5,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 113,
@@ -1128,6 +1464,9 @@
      "flashRight": false,
      "numberOfCoins": 5,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 114,
@@ -1138,6 +1477,9 @@
      "flashRight": false,
      "numberOfCoins": 5,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 115,
@@ -1148,6 +1490,9 @@
      "flashRight": false,
      "numberOfCoins": 5,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 116,
@@ -1158,6 +1503,9 @@
      "flashRight": false,
      "numberOfCoins": 5,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 117,
@@ -1168,6 +1516,9 @@
      "flashRight": true,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 118,
@@ -1178,6 +1529,9 @@
      "flashRight": true,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 119,
@@ -1188,6 +1542,9 @@
      "flashRight": true,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 120,
@@ -1198,6 +1555,9 @@
      "flashRight": true,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 121,
@@ -1208,6 +1568,9 @@
      "flashRight": true,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 122,
@@ -1218,6 +1581,9 @@
      "flashRight": true,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 123,
@@ -1228,6 +1594,9 @@
      "flashRight": true,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 124,
@@ -1238,6 +1607,9 @@
      "flashRight": true,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 125,
@@ -1248,6 +1620,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 126,
@@ -1258,6 +1633,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 127,
@@ -1268,6 +1646,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 128,
@@ -1278,6 +1659,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 129,
@@ -1288,6 +1672,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 130,
@@ -1298,6 +1685,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 131,
@@ -1308,6 +1698,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 132,
@@ -1318,6 +1711,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 133,
@@ -1328,6 +1724,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 134,
@@ -1338,6 +1737,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 135,
@@ -1348,6 +1750,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 136,
@@ -1358,6 +1763,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 137,
@@ -1368,6 +1776,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 138,
@@ -1378,6 +1789,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 139,
@@ -1388,6 +1802,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 140,
@@ -1398,6 +1815,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 141,
@@ -1408,6 +1828,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 142,
@@ -1418,6 +1841,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 143,
@@ -1428,6 +1854,9 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  },
  {
      "trialNumber": 144,
@@ -1438,5 +1867,8 @@
      "flashRight": false,
      "numberOfCoins": 10,
      "numberOfWaves": 2,
+     "waveSpacer": 1.0,
+     "cueToInterval": 1.0,
+     "trialsPerBlock": 18,
  }
 ]

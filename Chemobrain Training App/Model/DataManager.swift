@@ -13,6 +13,7 @@ class DataManager {
     var trialNumberFireStore = 0
     var doubleTrialString = "00"
     var stringTrialString = "000"
+    var convertedJSON = ""
     
     let db = Firestore.firestore()
     let avm = AppViewModel()
@@ -59,18 +60,38 @@ class DataManager {
     }
     }
     
+    func jsonToString(json: AnyObject){
+            do {
+                let data1 =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted) // first of all convert json to the data
+                if let convertedString = String(data: data1, encoding: String.Encoding.utf8) { // the data will be converted to the string
+                    convertedJSON = convertedString
+                    print(convertedString) // <-- here is ur string
+                }
+
+            } catch let myJSONError {
+                print(myJSONError)
+            }
+
+        }
+
+    
+    func saveJSONToUserDefaults(jsonStringConverted: String){
+      
+         UserDefaults.standard.setValue(jsonStringConverted, forKey: "\(avm.currentRun) JSON")
+      
+   }
 
     func saveResonseTimeToUserDefaults(array: Array<Double>) {
-        UserDefaults.standard.set(array, forKey: "rt for runNumber: \(avm.currentRun))")
+        UserDefaults.standard.set(array, forKey: "\(avm.currentRun) rt array")
         //save as Date
-        UserDefaults.standard.set(Date(), forKey: "rt date for runNumber: \(avm.currentRun)")
+        UserDefaults.standard.set(Date(), forKey: "\(avm.currentRun) rt date")
 
     }
     
     func saveResponseTargetToUserDefaults(stringArray: Array<String>) {
-        UserDefaults.standard.set(stringArray, forKey: "targetResponse for runNumber: \(avm.currentRun)")
+        UserDefaults.standard.set(stringArray, forKey: "\(avm.currentRun) targetResponse array")
         //save as Date
-        UserDefaults.standard.set(Date(), forKey: "targetResponse date for runNumber: \(avm.currentRun)")
+        UserDefaults.standard.set(Date(), forKey: "\(avm.currentRun) targetResponse date")
 
     }
 }

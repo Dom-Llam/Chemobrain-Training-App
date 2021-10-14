@@ -19,7 +19,7 @@ class AppViewModel: ObservableObject {
     
     var numberOfUsers = 0
     var currentRun = Int(UserDefaults.standard.string(forKey: "runNumber") ?? "0")
-
+    var gameComplete = false
     
     // For the timer and score
     let timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()

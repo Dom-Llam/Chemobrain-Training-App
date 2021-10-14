@@ -23,7 +23,9 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     
 //    GameScene().environmentObject(AppViewModel)
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+    @EnvironmentObject var viewModel: AppViewModel
+    
+    
     // To decode the hardcoded JSON file into an array of TrialType
     let trialTypes = Bundle.main.decode([TrialType].self, from: "test-trial.json")
     
@@ -31,8 +33,41 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     var dl = DifficultyLevel(scoreAndTrial: [0:0])
     let dm = DataManager()
     
-    @StateObject public var appViewModel = AppViewModel.shared
-    
+    // the URL call for the JSON File
+       //create the url with NSURL
+    func urlFetchJSON() {
+       let url = URL(string: "SNAPLabURLForJSONFile")! //change the url
+
+       //create the session object
+       let session = URLSession.shared
+
+       //now create the URLRequest object using the url object
+       let request = URLRequest(url: url)
+
+       //create dataTask using the session object to send data to the server
+       let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+
+           guard error == nil else {
+               return
+           }
+
+           guard let data = data else {
+               return
+           }
+
+          do {
+             //create json object from data
+             if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                print(json)
+                
+             }
+          } catch let error {
+            print(error.localizedDescription)
+          }
+       })
+
+       task.resume()
+    }
     
     // Setting up reaction time variables
     var reactionTime: Timer?
@@ -53,25 +88,16 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
             scoreLabel.text = "Score: \(score)"
         }
     }
-    // Response variables
-    var currentColor: String = ""
-    var currentDirection: String = ""
-    
-    // Second attempt to match responses, key is an array that is appended at each iteration of [i] in dispatch for loop
-    // Response count should be incremented each time that a response is tapped.
-    var responseKey = [""]
 
-    
     // Setting up images for the scene itself
     let fixedSky = SKSpriteNode(imageNamed: "fixedSky")
-    let tile = SKSpriteNode(imageNamed: "tile")
     let player = SKSpriteNode(imageNamed: "player")
     let portal = SKSpriteNode(imageNamed: "gas0")
     let moveRight = SKSpriteNode(imageNamed: "move")
     let moveLeft = SKSpriteNode(imageNamed: "move")
     
-    let pause = SKSpriteNode(imageNamed: "pause")
-    let play = SKSpriteNode(imageNamed: "play")
+//    let pause = SKSpriteNode(imageNamed: "pause")
+//    let play = SKSpriteNode(imageNamed: "play")
     let ready = SKSpriteNode(imageNamed: "ready_txt")
     let getReady = SKSpriteNode(imageNamed: "getReady_txt")
     
@@ -126,7 +152,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     let targetVisible = SKAction.fadeIn(withDuration: 0)
     
     var onlyOne: Bool = false
-    var cueToInterval = 0.0
+    var CTI = 0.0
     var CTIArray: Array<Double> = []
     
     
@@ -252,20 +278,20 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
       
         // Simply leave after two models
        
-            DispatchQueue.main.asyncAfter(deadline: .now() + 120) {
-                self.dl.appendScoreAndTrial(score: self.score)
-            }
-        
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 120) {
+//                self.dl.appendScoreAndTrial(score: self.score)
+//            }
+//        
         
         //Set up scene here
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         physicsWorld.contactDelegate = self
         addChild(music)
-        music.isPaused = true
+
         
         // For score
         scoreLabel.fontColor = UIColor.white.withAlphaComponent(0.5)
-        scoreLabel.position = CGPoint(x: 310, y: 400)
+        scoreLabel.position = CGPoint(x: 310, y: 300)
         scoreLabel.zPosition = 2
         addChild(scoreLabel)
         score = 0
@@ -343,22 +369,22 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
 
         addChild(fixedSky)
         
-        // For Pause and getReady buttons
-        pause.name = "pause"
-        pause.position = CGPoint(x: -310, y: 400)
-        pause.size = CGSize(width: 100, height: 100)
-        pause.zPosition = 2
-        pause.physicsBody?.isDynamic = false
-        addChild(pause)
-        
-        play.name = "pause"
-        play.position = CGPoint(x: -310, y: 400)
-        play.size = CGSize(width: 100, height: 100)
-        play.zPosition = 1
-        play.alpha = 1
-        play.physicsBody?.isDynamic = false
-        addChild(play)
-        play.isHidden = true
+//        // For Pause and getReady buttons
+//        pause.name = "pause"
+//        pause.position = CGPoint(x: -310, y: 400)
+//        pause.size = CGSize(width: 100, height: 100)
+//        pause.zPosition = 2
+//        pause.physicsBody?.isDynamic = false
+//        addChild(pause)
+//
+//        play.name = "pause"
+//        play.position = CGPoint(x: -310, y: 400)
+//        play.size = CGSize(width: 100, height: 100)
+//        play.zPosition = 1
+//        play.alpha = 1
+//        play.physicsBody?.isDynamic = false
+//        addChild(play)
+//        play.isHidden = true
         
         ready.name = "ready"
         ready.position = CGPoint(x: 0, y: 0)
@@ -415,19 +441,19 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         let node: SKNode = self.atPoint(location)
         
         
-        // For Pause
-        if node.name == "pause" {
-            scene?.isPaused.toggle()
-            
-            pause.isHidden.toggle()
-            play.isHidden.toggle()
-        }
-        if node.name == "play" {
-            scene?.isPaused.toggle()
-            
-            play.isHidden.toggle()
-            pause.isHidden.toggle()
-        }
+//        // For Pause
+//        if node.name == "pause" {
+//            scene?.isPaused.toggle()
+//
+//            pause.isHidden.toggle()
+//            play.isHidden.toggle()
+//        }
+//        if node.name == "play" {
+//            scene?.isPaused.toggle()
+//
+//            play.isHidden.toggle()
+//            pause.isHidden.toggle()
+//        }
         // For Ready and trial generation
         // When ready button is tapped, begin game for first round of trials and increment readyCount
         if node.name == "ready" {
@@ -446,19 +472,39 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
             switch readyCounter {
             case 1:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self.generateTrials(for: 141, thru: 143)
+                    self.generateTrials(readyCounter: 1)
                 }
             case 2:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self.generateTrials(for: 68, thru: 71)
+                    self.generateTrials(readyCounter: 2)
                 }
             case 3:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self.generateTrials(for: 104, thru: 107)
+                    self.generateTrials(readyCounter: 3)
                 }
             case 4:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self.generateTrials(for: 140, thru: 143)
+                    self.generateTrials(readyCounter: 4)
+                }
+            case 5:
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.generateTrials(readyCounter: 5)
+                }
+            case 6:
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.generateTrials(readyCounter: 6)
+                }
+            case 7:
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.generateTrials(readyCounter: 7)
+                }
+            case 8:
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.generateTrials(readyCounter: 8)
+                }
+            case 9:
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.generateTrials(readyCounter: 9)
                 }
             default:
                 print("an error took place")
@@ -644,39 +690,39 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
             }
         }
 //        if cueFlashed == true && intersects(rightBlueTarget) {
-//            let captured = cueToInterval
+//            let captured = CTI
 //            print("captured = \(captured)")
 //            CTIArray.append(captured)
 //            intervalTimer?.invalidate()
-//            cueToInterval = 0
+//            CTI = 0
 //        } else if cueFlashed == true && intersects(rightYellowTarget) {
-//            let captured = cueToInterval
+//            let captured = CTI
 //            print("captured = \(captured)")
 //
 //            CTIArray.append(captured)
 //            intervalTimer?.invalidate()
-//            cueToInterval = 0
+//            CTI = 0
 //        } else if cueFlashed == true && intersects(leftBlueTarget) {
-//            let captured = cueToInterval
+//            let captured = CTI
 //            print("captured = \(captured)")
 //
 //            CTIArray.append(captured)
 //            intervalTimer?.invalidate()
-//            cueToInterval = 0
+//            CTI = 0
 //        } else if cueFlashed == true && intersects(leftYellowTarget) {
-//            let captured = cueToInterval
+//            let captured = CTI
 //            print("captured = \(captured)")
 //
 //            CTIArray.append(captured)
 //            intervalTimer?.invalidate()
-//            cueToInterval = 0
+//            CTI = 0
 //        }
     }
 
     
     @objc func reactToInterval() {
         if cueFlashed == true {
-            cueToInterval += 0.01
+            CTI += 0.01
         }
     }
     

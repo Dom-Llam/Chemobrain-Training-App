@@ -13,7 +13,6 @@ import SpriteKit
 struct GameScene: View {
     // For environment object to exit game
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @StateObject private var viewManager = AppViewModel.shared
     
     // To track page observable object
     @EnvironmentObject var viewModel: AppViewModel
@@ -26,37 +25,41 @@ struct GameScene: View {
         scene.scaleMode = .fill
         return scene
     }
+    
+    var otherScene: SKScene {
+        let scene = SKScene()
+        scene.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        scene.scaleMode = .fill
+        return scene
+    }
  
 var body: some View {
     
-    
-    
+
     ZStack {
-        if viewModel.gameShowing == true {
+
             SpriteView(scene: scene, isPaused: false)
-            
-            
+
         // Another attempt to exit game
 //        if viewManager.exitView {
-//            Button {
-//                presentationMode.wrappedValue.dismiss()
-//
-//                viewModel.playGame()
-//
-//                viewManager.exitView = false
-//
-//            } label: {
-//                Image(systemName: "arrow.uturn.left")
-//            }
+//        if viewModel.gameComplete == true {
+
 //        }
-        } else if viewModel.gameShowing == false {
-        }
+//        }
+
             VStack(alignment: .leading) {
-//                Text("Score: \(viewModel.score)")
-//                    .font((.system(size: 32, weight: .heavy, design: .rounded)))
-//                    .padding(.trailing, 100)
-//                    .padding(.top, 42)
-//                    .foregroundColor(.white)
+                
+                // Maybe present the button after the time duration for an entire trial  - NOPE12
+                Button {
+                    presentationMode.wrappedValue.dismiss()
+                    viewModel.playGame()
+                } label: {
+                    Image("back_btn")
+                    
+                }
+                    .padding(.leading, 700)
+                    .padding(.top, 150)
+                    .foregroundColor(.white)
                 Spacer()
                 
                 //Another attempt at making lanes
@@ -93,7 +96,7 @@ var body: some View {
     }
     .ignoresSafeArea()
     .frame(maxWidth: .infinity, alignment: .trailing)
-    
+    .navigationBarTitle("Game")
 }
 
 }
@@ -114,7 +117,6 @@ struct BlueButton: ButtonStyle {
 struct GameScene_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            GameScene()
             GameScene()
         }
     }

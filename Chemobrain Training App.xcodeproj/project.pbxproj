@@ -203,9 +203,9 @@
 			children = (
 				F2A93F18266FBE830067662D /* MyButtonStyle.swift */,
 				F2E2A9282684CD6900143E69 /* AppViewModel.swift */,
+				F2415E29270A166F0008A752 /* DataModel.xcdatamodeld */,
 				F290131F26DA767300B850CD /* DifficultyLevel.swift */,
 				F23F533326E8FF8E00EE0B47 /* DataManager.swift */,
-				F2415E29270A166F0008A752 /* DataModel.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
