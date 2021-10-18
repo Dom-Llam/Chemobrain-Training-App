@@ -21,31 +21,18 @@ enum CollisionType: UInt32 {
 
 class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     
-//    GameScene().environmentObject(AppViewModel)
+    // environment objects to leave game?
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var viewModel: AppViewModel
     
-    
     // Create an instance of the difficulty manager
     var dl = DifficultyLevel(scoreAndTrial: [0:0])
+    // Create instance of dataManager
     let dm = DataManager()
+    // Initialize trialTypes so fetch can populate the array
+    var trialTypes: [TrialType] = []
     
-    // the URL call for the JSON File
-    var fetchedJSON = ""
-       //create the url with NSURL
-    func urlFetchJSON() {
-       let url = URL(string: "https://www.eng.mu.edu/snaplab/test-trial.json")!
 
-
-        let task = URLSession.shared.dataTask(with: url) { [self](data, response, error) in
-            guard let data = data else { return }
-            print(String(data: data, encoding: .utf8)!)
-            fetchedJSON = String(data: data, encoding: .utf8)!
-        }
-
-        task.resume()
-    }
-    
     
 
     // Setting up reaction time variables
@@ -147,8 +134,8 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
 
     override func didMove(to view: SKView) {
         
+ 
         urlFetchJSON()
-        
         
         // Add targets/cues to view here once and toggle alpha throughout game
         // Right Blue

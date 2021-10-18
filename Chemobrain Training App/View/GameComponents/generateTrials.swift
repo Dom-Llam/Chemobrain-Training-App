@@ -11,24 +11,16 @@ import SpriteKit
 extension SpriteKitScene {
     
     func generateTrials(readyCounter: Int) {
-        // To decode the hardcoded JSON file into an array of TrialType
-        let trialTypes = Bundle.main.decode([TrialType].self, from: "test-trial.json"/*fetchedJSON*/)
-        
-        // Create instance of trial Manager so that it can be used in response functionality
+        // Create instance of trial Manager for run generation
         var trialManager = TrialManager(type: trialTypes[0], trialNumber: trialTypes[0].trialNumber, coinCongruent: trialTypes[0].coinCongruent, targetBlue: trialTypes[0].targetBlue, targetRight: trialTypes[0].targetRight, flashScreen: trialTypes[0].flashScreen, flashRight: trialTypes[0].flashRight, numberOfCoins: trialTypes[0].numberOfCoins, numberOfWaves: trialTypes[0].numberOfWaves, waveSpacer: trialTypes[0].waveSpacer, cueToInterval: trialTypes[0].cueToInterval, trialsPerBlock: trialTypes[0].trialsPerBlock)
-        // t to take place of i for delay incrementation?
+        
+        // t to take place of i for delay incrementation
         var t = 0
         
-        // To trigger reactionTimer for the first trial each call
-//        let wait2 = SKAction.wait(forDuration: 2)
-//        let timerTrigger = SKAction.customAction(withDuration: 0) { [self] _,_ in
-//            self.cueFlashed = true
-//        }
-//        let triggerSequence = SKAction.sequence([wait2,timerTrigger])
-//        player.run(triggerSequence)
-/*        flashNoCircles(wait: 0)*/
+        // Trial start and end segments based on trialsPerBlock
         var trialStart = 0
         var trialEnd = 0
+        
         // To generate the blocks to be ran based on trialsPerBlock
         if trialManager.type.trialsPerBlock == 24 {
             switch readyCounter {
@@ -121,17 +113,15 @@ extension SpriteKitScene {
         
         // Run trial generation for blocks that can be enter for button pressses
         for i in trialStart...trialEnd {
-            
-            
-            
+
             trialManager = TrialManager(type: trialTypes[i], trialNumber: trialTypes[i].trialNumber, coinCongruent: trialTypes[i].coinCongruent, targetBlue: trialTypes[i].targetBlue, targetRight: trialTypes[i].targetRight, flashScreen: trialTypes[i].flashScreen, flashRight: trialTypes[i].flashRight, numberOfCoins: trialTypes[i].numberOfCoins, numberOfWaves: trialTypes[i].numberOfWaves, waveSpacer: trialTypes[i].waveSpacer, cueToInterval: trialTypes[i].cueToInterval, trialsPerBlock: trialTypes[i].trialsPerBlock)
             
+            // the delay variables for coins/cue/target
             let delay: Double = Double(t) * 10 + 2 + trialTypes[i].cueToInterval
             let cueDelay: Double = Double(t) * 10 - 1
             let coinDelay: Double = Double(t) * 10
             
             // All of the condition possibilities for flash whole
-            
             if trialManager.type.flashScreen && trialManager.type.targetRight && trialManager.type.targetBlue && trialManager.type.coinCongruent {
                 // Refactor to using .wait
                 

@@ -26,3 +26,5 @@ extension Bundle {
         return loaded
     }
 }
+
+/* = Bundle.main.decode([TrialType].self, from: "test-trial.json"/*fetchedJSON*/)*/
