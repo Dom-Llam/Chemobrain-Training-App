@@ -17,6 +17,7 @@
 		F237AB7626B8AB3E00DC94A8 /* Bundle-Decoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F237AB7526B8AB3E00DC94A8 /* Bundle-Decoding.swift */; };
 		F237AB7A26C18D7E00DC94A8 /* score.wav in Resources */ = {isa = PBXBuildFile; fileRef = F237AB7926C18D7E00DC94A8 /* score.wav */; };
 		F237AB7C26C18E5900DC94A8 /* the-hero.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F237AB7B26C18E5900DC94A8 /* the-hero.mp3 */; };
+		F23AD3D3271DE43D00CC93EE /* test-trial.json in Resources */ = {isa = PBXBuildFile; fileRef = F23AD3D2271DE43D00CC93EE /* test-trial.json */; };
 		F23F533426E8FF8E00EE0B47 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23F533326E8FF8E00EE0B47 /* DataManager.swift */; };
 		F2415E2827062B8B0008A752 /* generateTrials.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2415E2727062B8B0008A752 /* generateTrials.swift */; };
 		F2415E2B270A166F0008A752 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2415E29270A166F0008A752 /* DataModel.xcdatamodeld */; };
@@ -31,7 +32,6 @@
 		F290130C26D3F47200B850CD /* ExtensionSpriteKitScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F290130B26D3F47200B850CD /* ExtensionSpriteKitScene.swift */; };
 		F290130E26D3FD1400B850CD /* TrialType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F290130D26D3FD1400B850CD /* TrialType.swift */; };
 		F290131126D4029E00B850CD /* TrialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F290131026D4029E00B850CD /* TrialManager.swift */; };
-		F290131326D40D3500B850CD /* test-trial.json in Resources */ = {isa = PBXBuildFile; fileRef = F290131226D40D3500B850CD /* test-trial.json */; };
 		F290131526D7C49800B850CD /* ResponseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F290131426D7C49800B850CD /* ResponseKey.swift */; };
 		F290131826D8437800B850CD /* confirmation_002.wav in Resources */ = {isa = PBXBuildFile; fileRef = F290131726D8437800B850CD /* confirmation_002.wav */; };
 		F290131A26D8443F00B850CD /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = F290131926D8443F00B850CD /* Explosion.sks */; };
@@ -60,6 +60,7 @@
 		F237AB7526B8AB3E00DC94A8 /* Bundle-Decoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-Decoding.swift"; sourceTree = "<group>"; };
 		F237AB7926C18D7E00DC94A8 /* score.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = score.wav; sourceTree = "<group>"; };
 		F237AB7B26C18E5900DC94A8 /* the-hero.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "the-hero.mp3"; sourceTree = "<group>"; };
+		F23AD3D2271DE43D00CC93EE /* test-trial.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "test-trial.json"; sourceTree = "<group>"; };
 		F23F533326E8FF8E00EE0B47 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		F2415E2727062B8B0008A752 /* generateTrials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = generateTrials.swift; sourceTree = "<group>"; };
 		F2415E2A270A166F0008A752 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -74,7 +75,6 @@
 		F290130B26D3F47200B850CD /* ExtensionSpriteKitScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionSpriteKitScene.swift; sourceTree = "<group>"; };
 		F290130D26D3FD1400B850CD /* TrialType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialType.swift; sourceTree = "<group>"; };
 		F290131026D4029E00B850CD /* TrialManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialManager.swift; sourceTree = "<group>"; };
-		F290131226D40D3500B850CD /* test-trial.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "test-trial.json"; sourceTree = "<group>"; };
 		F290131426D7C49800B850CD /* ResponseKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseKey.swift; sourceTree = "<group>"; };
 		F290131726D8437800B850CD /* confirmation_002.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = confirmation_002.wav; sourceTree = "<group>"; };
 		F290131926D8443F00B850CD /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
@@ -167,8 +167,8 @@
 				F290130B26D3F47200B850CD /* ExtensionSpriteKitScene.swift */,
 				F290130D26D3FD1400B850CD /* TrialType.swift */,
 				F290131026D4029E00B850CD /* TrialManager.swift */,
+				F23AD3D2271DE43D00CC93EE /* test-trial.json */,
 				F290131426D7C49800B850CD /* ResponseKey.swift */,
-				F290131226D40D3500B850CD /* test-trial.json */,
 				F237AB7526B8AB3E00DC94A8 /* Bundle-Decoding.swift */,
 				F237AB6F26B0329100DC94A8 /* GlowExtension.swift */,
 				F244F00126AF4F45006DE8EA /* Starfield.sks */,
@@ -285,10 +285,10 @@
 				F237AB7A26C18D7E00DC94A8 /* score.wav in Resources */,
 				F290131A26D8443F00B850CD /* Explosion.sks in Resources */,
 				F237AB6E26B02F9C00DC94A8 /* PlayerEngine.sks in Resources */,
+				F23AD3D3271DE43D00CC93EE /* test-trial.json in Resources */,
 				F290131E26D8577900B850CD /* upgrade1.wav in Resources */,
 				F244F00326AF4F45006DE8EA /* Starfield.sks in Resources */,
 				F2E2A927268399C500143E69 /* GoogleService-Info.plist in Resources */,
-				F290131326D40D3500B850CD /* test-trial.json in Resources */,
 				F244F00426AF4F45006DE8EA /* Assets.xcassets in Resources */,
 				F244F02426AF940C006DE8EA /* Assets.xcassets in Resources */,
 				F222302B26690EDD00435E92 /* Assets.xcassets in Resources */,

@@ -11,6 +11,8 @@ import SpriteKit
 extension SpriteKitScene {
     
     func generateTrials(readyCounter: Int) {
+        // To decode the hardcoded JSON file into an array of TrialType
+        let trialTypes = Bundle.main.decode([TrialType].self, from: "test-trial.json"/*fetchedJSON*/)
         
         // Create instance of trial Manager so that it can be used in response functionality
         var trialManager = TrialManager(type: trialTypes[0], trialNumber: trialTypes[0].trialNumber, coinCongruent: trialTypes[0].coinCongruent, targetBlue: trialTypes[0].targetBlue, targetRight: trialTypes[0].targetRight, flashScreen: trialTypes[0].flashScreen, flashRight: trialTypes[0].flashRight, numberOfCoins: trialTypes[0].numberOfCoins, numberOfWaves: trialTypes[0].numberOfWaves, waveSpacer: trialTypes[0].waveSpacer, cueToInterval: trialTypes[0].cueToInterval, trialsPerBlock: trialTypes[0].trialsPerBlock)
@@ -124,7 +126,7 @@ extension SpriteKitScene {
             
             trialManager = TrialManager(type: trialTypes[i], trialNumber: trialTypes[i].trialNumber, coinCongruent: trialTypes[i].coinCongruent, targetBlue: trialTypes[i].targetBlue, targetRight: trialTypes[i].targetRight, flashScreen: trialTypes[i].flashScreen, flashRight: trialTypes[i].flashRight, numberOfCoins: trialTypes[i].numberOfCoins, numberOfWaves: trialTypes[i].numberOfWaves, waveSpacer: trialTypes[i].waveSpacer, cueToInterval: trialTypes[i].cueToInterval, trialsPerBlock: trialTypes[i].trialsPerBlock)
             
-            let delay: Double = Double(t) * 10 + 2.5 + trialTypes[i].cueToInterval - 1
+            let delay: Double = Double(t) * 10 + 2 + trialTypes[i].cueToInterval
             let cueDelay: Double = Double(t) * 10 - 1
             let coinDelay: Double = Double(t) * 10
             
@@ -304,7 +306,7 @@ extension SpriteKitScene {
             if trialManager.type.trialsPerBlock == 24 {
                 switch trialManager.type.trialNumber {
                 case 24:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
                         self.dm.saveResponseTargetToUserDefaults(stringArray: self.responseTargetArray)
@@ -329,7 +331,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 48:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
                         self.dm.saveResponseTargetToUserDefaults(stringArray: self.responseTargetArray)
@@ -351,7 +353,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 72:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
@@ -374,7 +376,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 96:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
@@ -397,7 +399,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 120:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
@@ -420,7 +422,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 144:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
                         self.dm.saveResponseTargetToUserDefaults(stringArray: self.responseTargetArray)
@@ -440,7 +442,8 @@ extension SpriteKitScene {
             } else if trialManager.type.trialsPerBlock == 18 {
                 switch trialManager.type.trialNumber {
                 case 18:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    print(self.CTIArray)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
                         self.dm.saveResponseTargetToUserDefaults(stringArray: self.responseTargetArray)
@@ -465,7 +468,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 36:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
                         self.dm.saveResponseTargetToUserDefaults(stringArray: self.responseTargetArray)
@@ -487,7 +490,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 54:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
@@ -510,7 +513,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 72:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
@@ -533,7 +536,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 90:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
@@ -556,7 +559,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 108:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
@@ -579,7 +582,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 126:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
@@ -602,7 +605,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 144:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
                         self.dm.saveResponseTargetToUserDefaults(stringArray: self.responseTargetArray)
@@ -622,7 +625,7 @@ extension SpriteKitScene {
             } else if trialManager.type.trialsPerBlock == 16 {
                 switch trialManager.type.trialNumber {
                 case 16:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
                         self.dm.saveResponseTargetToUserDefaults(stringArray: self.responseTargetArray)
@@ -647,7 +650,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 32:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
                         self.dm.saveResponseTargetToUserDefaults(stringArray: self.responseTargetArray)
@@ -669,7 +672,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 48:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
@@ -692,7 +695,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 64:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
@@ -715,7 +718,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 80:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
@@ -738,7 +741,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 96:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
@@ -761,7 +764,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 112:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
@@ -784,7 +787,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 128:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
@@ -807,7 +810,7 @@ extension SpriteKitScene {
                         self.cueFlashed = true
                     }
                 case 144:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 10) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay + 9) {
                         // To stop gameScene and save to user defaults
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
                         self.dm.saveResponseTargetToUserDefaults(stringArray: self.responseTargetArray)

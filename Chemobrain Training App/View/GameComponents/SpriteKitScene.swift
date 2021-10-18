@@ -26,51 +26,31 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     @EnvironmentObject var viewModel: AppViewModel
     
     
-    // To decode the hardcoded JSON file into an array of TrialType
-    let trialTypes = Bundle.main.decode([TrialType].self, from: "test-trial.json")
-    
     // Create an instance of the difficulty manager
     var dl = DifficultyLevel(scoreAndTrial: [0:0])
     let dm = DataManager()
     
     // the URL call for the JSON File
+    var fetchedJSON = ""
        //create the url with NSURL
     func urlFetchJSON() {
-       let url = URL(string: "SNAPLabURLForJSONFile")! //change the url
+       let url = URL(string: "https://www.eng.mu.edu/snaplab/test-trial.json")!
 
-       //create the session object
-       let session = URLSession.shared
 
-       //now create the URLRequest object using the url object
-       let request = URLRequest(url: url)
+        let task = URLSession.shared.dataTask(with: url) { [self](data, response, error) in
+            guard let data = data else { return }
+            print(String(data: data, encoding: .utf8)!)
+            fetchedJSON = String(data: data, encoding: .utf8)!
+        }
 
-       //create dataTask using the session object to send data to the server
-       let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-
-           guard error == nil else {
-               return
-           }
-
-           guard let data = data else {
-               return
-           }
-
-          do {
-             //create json object from data
-             if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-                print(json)
-                
-             }
-          } catch let error {
-            print(error.localizedDescription)
-          }
-       })
-
-       task.resume()
+        task.resume()
     }
     
+    
+
     // Setting up reaction time variables
     var reactionTime: Timer?
+    var CTITimer: Timer?
     var rt: Double = 0.0
     var targetResponse: Bool = false
     var responseTimeArray:Array<Double> = []
@@ -151,6 +131,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     let visible = SKAction.fadeIn(withDuration: 0)
     let targetVisible = SKAction.fadeIn(withDuration: 0)
     
+    var onlyTwo: Bool = false
     var onlyOne: Bool = false
     var CTI = 0.0
     var CTIArray: Array<Double> = []
@@ -165,6 +146,9 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     
 
     override func didMove(to view: SKView) {
+        
+        urlFetchJSON()
+        
         
         // Add targets/cues to view here once and toggle alpha throughout game
         // Right Blue
@@ -464,47 +448,54 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
             let fadeOut = SKAction.resize(toWidth: 200, duration: 1)
             let sequence = SKAction.sequence([visible, fadein, fadeOut, invisible])
             getReady.run(sequence)
-            
-            // unpause music
-            music.isPaused = false
-            
+                     
             // Generate wave runs based on how many times ready has been clicked
             switch readyCounter {
             case 1:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.generateTrials(readyCounter: 1)
+                    self.onlyOne = true
                 }
+
             case 2:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.generateTrials(readyCounter: 2)
+                    self.onlyOne = true
                 }
             case 3:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.generateTrials(readyCounter: 3)
+                    self.onlyOne = true
                 }
             case 4:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.generateTrials(readyCounter: 4)
+                    self.onlyOne = true
                 }
             case 5:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.generateTrials(readyCounter: 5)
+                    self.onlyOne = true
                 }
             case 6:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.generateTrials(readyCounter: 6)
+                    self.onlyOne = true
                 }
             case 7:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.generateTrials(readyCounter: 7)
+                    self.onlyOne = true
                 }
             case 8:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.generateTrials(readyCounter: 8)
+                    self.onlyOne = true
                 }
             case 9:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.generateTrials(readyCounter: 9)
+                    self.onlyOne = true
                 }
             default:
                 print("an error took place")
@@ -675,13 +666,16 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
 //            print(".playGame toggled. AppViewModel.playGame: \(appViewModel.playGame())")
         }
         // First attempt at updating screen if target is flying towards player, how to update path accurately
-        if intersects(leftCircle) || intersects(rightCircle)/* || intersects(noCircle)*/ {
+        if intersects(rightBlueTarget) || intersects(rightYellowTarget) || intersects(leftBlueTarget) || intersects(leftYellowTarget) {
             cueFlashed = true
             
             if onlyOne == true {
                 rt = 0
                 reactionTime?.invalidate()
                 
+                let captured = CTI
+                print("CTI captured = \(captured)")
+                CTIArray.append(captured)
                 
             reactionTime = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(reactToTarget), userInfo: nil, repeats: true)
             onlyOne = false
@@ -689,33 +683,38 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
                 // Maybe find a way to put an incrementer somewhere like here - happens once per trial/user action independent.
             }
         }
-//        if cueFlashed == true && intersects(rightBlueTarget) {
-//            let captured = CTI
-//            print("captured = \(captured)")
-//            CTIArray.append(captured)
-//            intervalTimer?.invalidate()
-//            CTI = 0
-//        } else if cueFlashed == true && intersects(rightYellowTarget) {
-//            let captured = CTI
-//            print("captured = \(captured)")
+        
+        if intersects(rightCircle) || intersects(leftCircle) {
+            if onlyTwo == true {
+                CTI = 0
+                CTITimer?.invalidate()
+                CTITimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(reactToInterval), userInfo: nil, repeats: true)
+                
+                onlyTwo = false
+            }
+        }
+//        if onlyTwo == true {
+//            if intersects(rightBlueTarget) {
+//                let captured = CTI
+//                print("CTI captured = \(captured)")
+//                CTIArray.append(captured)
+//            } else if intersects(rightYellowTarget) {
+//                let captured = CTI
+//                print("captured = \(captured)")
 //
-//            CTIArray.append(captured)
-//            intervalTimer?.invalidate()
-//            CTI = 0
-//        } else if cueFlashed == true && intersects(leftBlueTarget) {
-//            let captured = CTI
-//            print("captured = \(captured)")
+//                CTIArray.append(captured)
+//            } else if  intersects(leftBlueTarget) {
+//                let captured = CTI
+//                print("captured = \(captured)")
 //
-//            CTIArray.append(captured)
-//            intervalTimer?.invalidate()
-//            CTI = 0
-//        } else if cueFlashed == true && intersects(leftYellowTarget) {
-//            let captured = CTI
-//            print("captured = \(captured)")
+//                CTIArray.append(captured)
+//            } else if intersects(leftYellowTarget) {
+//                let captured = CTI
+//                print("captured = \(captured)")
 //
-//            CTIArray.append(captured)
-//            intervalTimer?.invalidate()
-//            CTI = 0
+//                CTIArray.append(captured)
+//            }
+//            onlyTwo = false
 //        }
     }
 

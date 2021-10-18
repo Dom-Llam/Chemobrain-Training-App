@@ -13,6 +13,8 @@ extension SpriteKitScene {
         //To trigger timer logic
         let timerTrigger = SKAction.customAction(withDuration: 0) { _,_ in
             self.onlyOne = true
+            self.onlyTwo = true
+
             self.targetResponse = false
         }
         let wait10 = SKAction.wait(forDuration: 4)
@@ -29,6 +31,8 @@ extension SpriteKitScene {
         //To trigger timer logic
         let timerTrigger = SKAction.customAction(withDuration: 0) { _,_ in
             self.onlyOne = true
+            self.onlyTwo = true
+
             self.targetResponse = false
         }
         let wait10 = SKAction.wait(forDuration: 4)
@@ -45,6 +49,7 @@ extension SpriteKitScene {
         let timerTrigger = SKAction.customAction(withDuration: 0) { [self] _,_ in
             // For the RT boolean in update
             self.onlyOne = true
+            self.onlyTwo = true
             self.targetResponse = false
 
 //            // For the response logic
