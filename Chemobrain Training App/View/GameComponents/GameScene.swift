@@ -50,16 +50,16 @@ var body: some View {
             VStack(alignment: .leading) {
                 
                 // Maybe present the button after the time duration for an entire trial  - NOPE12
-                Button {
-                    presentationMode.wrappedValue.dismiss()
-                    viewModel.playGame()
-                } label: {
-                    Image("back_btn")
-                    
-                }
-                    .padding(.leading, 700)
-                    .padding(.top, 150)
-                    .foregroundColor(.white)
+//                Button {
+//                    presentationMode.wrappedValue.dismiss()
+//                    viewModel.playGame()
+//                } label: {
+//                    Image("back_btn")
+//                    
+//                }
+//                    .padding(.leading, 700)
+//                    .padding(.top, 150)
+//                    .foregroundColor(.white)
                 Spacer()
                 
                 //Another attempt at making lanes

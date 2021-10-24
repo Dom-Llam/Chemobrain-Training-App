@@ -41,7 +41,7 @@ class DataManager {
         dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
         let date = dateFormatter.string(from: Date())
         
-        db.collection("users").document(String(currentUserNumber)).collection(String(avm.currentRun ?? 0000)).document("Trial: \(trial)").setData([ "Date": date, "Score": score, "trialNumber": trial, "responseTarget": responseTarget, "responseTime": responseTime])
+        db.collection("users").document(String(currentUserNumber)).collection(String(avm.currentRun ?? 0000)).document("Trial: \(trial)").setData([ "Date": date, "Score": score, "trialNumber": trial, "responseTarget": responseTarget, "responseTime": responseTime, "convertedJSON": convertedJSON])
     }
     
     func saveResponseTimeToFireStore(trial: Int, responseTarget: Array<String>, responseTime: Array<Double>) {
@@ -53,32 +53,16 @@ class DataManager {
         
         db.collection("users").document("test").setData(docData) { err in
             if let err = err {
-            print("Error writing to fireStore: \(err)")
+                print("Error writing to fireStore: \(err)")
             } else {
                 print("Document successfully written")
             }
-    }
-    }
-    
-    func jsonToString(json: AnyObject){
-            do {
-                let data1 =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted) // first of all convert json to the data
-                if let convertedString = String(data: data1, encoding: String.Encoding.utf8) { // the data will be converted to the string
-                    convertedJSON = convertedString
-                    print(convertedString) // <-- here is ur string
-                }
-
-            } catch let myJSONError {
-                print(myJSONError)
-            }
-
         }
+    }
 
     
     func saveJSONToUserDefaults(jsonStringConverted: String){
-      
          UserDefaults.standard.setValue(jsonStringConverted, forKey: "\(avm.currentRun) JSON")
-      
    }
 
     func saveResonseTimeToUserDefaults(array: Array<Double>) {

@@ -11,6 +11,9 @@ import SpriteKit
 extension SpriteKitScene {
     
     func generateTrials(readyCounter: Int) {
+        
+
+        
         // Create instance of trial Manager for run generation
         var trialManager = TrialManager(type: trialTypes[0], trialNumber: trialTypes[0].trialNumber, coinCongruent: trialTypes[0].coinCongruent, targetBlue: trialTypes[0].targetBlue, targetRight: trialTypes[0].targetRight, flashScreen: trialTypes[0].flashScreen, flashRight: trialTypes[0].flashRight, numberOfCoins: trialTypes[0].numberOfCoins, numberOfWaves: trialTypes[0].numberOfWaves, waveSpacer: trialTypes[0].waveSpacer, cueToInterval: trialTypes[0].cueToInterval, trialsPerBlock: trialTypes[0].trialsPerBlock)
         
@@ -437,6 +440,7 @@ extension SpriteKitScene {
                         // To stop gameScene and save to user defaults
                         self.dm.saveResonseTimeToUserDefaults(array: self.responseTimeArray)
                         self.dm.saveResponseTargetToUserDefaults(stringArray: self.responseTargetArray)
+                        self.dm.saveJSONToUserDefaults(jsonStringConverted: self.dm.convertedJSON)
                         
                         // To save the trial data to Firestore
                         self.dm.saveAnythingAtAllToFirestore(trial: self.dm.trialNumberFireStore, score: self.score, responseTarget: self.responseTargetArray, responseTime: self.responseTimeArray)

@@ -16,12 +16,23 @@ extension SpriteKitScene {
 
         let task = URLSession.shared.dataTask(with: url) { [self](data, response, error) in
             guard let data = data else { return }
-//            print(String(data: data, encoding: .utf8)!)
+
+            // first convert to string to save JSON with user data
+            if let content = String(data: data, encoding: String.Encoding.utf8) {
+                dm.convertedJSON = content
+                print(dm.convertedJSON)
+            }
+            
+            // Then decode and cast as array of [TrialType] to be used for trial generation
             let decoder = JSONDecoder()
             guard let loaded = try? decoder.decode([TrialType].self, from: data) else {
                 fatalError("failed to decode")
             }
             trialTypes = loaded
+            
+            /// For the full number of trials in the json file
+            trialsForSession = loaded.count
+            print(trialsForSession)
             }
 
         task.resume()

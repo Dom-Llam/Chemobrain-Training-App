@@ -32,7 +32,9 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     // Initialize trialTypes so fetch can populate the array
     var trialTypes: [TrialType] = []
     
-
+    // variables for generating the number of trials per block per json files
+    var trialsForSession = 0
+    
     
 
     // Setting up reaction time variables
