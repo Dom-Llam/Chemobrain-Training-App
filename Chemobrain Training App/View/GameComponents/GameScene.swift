@@ -38,65 +38,59 @@ var body: some View {
 
     ZStack {
 
+            //SpriteView presents the Gamescene to the Swiftui View
             SpriteView(scene: scene, isPaused: false)
-
-        // Another attempt to exit game
-//        if viewManager.exitView {
-//        if viewModel.gameComplete == true {
-
-//        }
-//        }
 
             VStack(alignment: .leading) {
                 
                 // Maybe present the button after the time duration for an entire trial  - NOPE12
-//                Button {
-//                    presentationMode.wrappedValue.dismiss()
-//                    viewModel.playGame()
-//                } label: {
-//                    Image("back_btn")
-//                    
-//                }
-//                    .padding(.leading, 700)
-//                    .padding(.top, 150)
-//                    .foregroundColor(.white)
+                Button {
+                    presentationMode.wrappedValue.dismiss()
+                    viewModel.playGame()
+                } label: {
+                    Image("back_btn1")
+                    
+                }
+                    .padding(.trailing, 700)
+                    .padding(.top, 150)
+                    .foregroundColor(.white)
                 Spacer()
                 
                 //Another attempt at making lanes
-                    HStack {
-                        Path { path in
-                                path.move(to: CGPoint(x: 190, y: 850))
-                                path.addQuadCurve(to: CGPoint(x: 405, y: 0), control: CGPoint(x: 150, y: 50))
-                            }
-                        .stroke(Color.white, lineWidth: 0.5)
-                            .frame(width: 100, height: 850)
-                        Path { path in
-                                path.move(to: CGPoint(x: 200, y: 850))
-                                path.addQuadCurve(to: CGPoint(x: 290, y: 0), control: CGPoint(x: 175, y: 50))
-                            }
-                        .stroke(Color.white, lineWidth: 0.5)
-                            .frame(width: 100, height: 850)
-                        Path { path in
-                                path.move(to: CGPoint(x: 290, y: 850))
-                                path.addQuadCurve(to: CGPoint(x: 190, y: 0), control: CGPoint(x: 325, y: 50))
-                            }
-                        .stroke(Color.white, lineWidth: 0.5)
-                            .frame(width: 100, height: 850)
-                        Path { path in
-                                path.move(to: CGPoint(x: 300, y: 850))
-                                path.addQuadCurve(to: CGPoint(x: 90, y: 0), control: CGPoint(x: 350, y: 25))
-                            }
-                        .stroke(Color.white, lineWidth: 0.5)
-                            .frame(width: 100, height: 850)
-                        
-                        
-                        Spacer()
-                    }
+//                    HStack {
+//                        Path { path in
+//                                path.move(to: CGPoint(x: 190, y: 850))
+//                                path.addQuadCurve(to: CGPoint(x: 405, y: 0), control: CGPoint(x: 150, y: 50))
+//                            }
+//                        .stroke(Color.white, lineWidth: 0.5)
+//                            .frame(width: 100, height: 850)
+//                        Path { path in
+//                                path.move(to: CGPoint(x: 200, y: 850))
+//                                path.addQuadCurve(to: CGPoint(x: 290, y: 0), control: CGPoint(x: 175, y: 50))
+//                            }
+//                        .stroke(Color.white, lineWidth: 0.5)
+//                            .frame(width: 100, height: 850)
+//                        Path { path in
+//                                path.move(to: CGPoint(x: 290, y: 850))
+//                                path.addQuadCurve(to: CGPoint(x: 190, y: 0), control: CGPoint(x: 325, y: 50))
+//                            }
+//                        .stroke(Color.white, lineWidth: 0.5)
+//                            .frame(width: 100, height: 850)
+//                        Path { path in
+//                                path.move(to: CGPoint(x: 300, y: 850))
+//                                path.addQuadCurve(to: CGPoint(x: 90, y: 0), control: CGPoint(x: 350, y: 25))
+//                            }
+//                        .stroke(Color.white, lineWidth: 0.5)
+//                            .frame(width: 100, height: 850)
+//                        
+//                        
+//                        Spacer()
+//                    }
             }
     }
     .ignoresSafeArea()
     .frame(maxWidth: .infinity, alignment: .trailing)
-    .navigationBarTitle("Game")
+//    .navigationBarTitle("Game")
 }
 
 }

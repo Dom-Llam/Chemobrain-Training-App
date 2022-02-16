@@ -54,7 +54,7 @@ extension SpriteKitScene {
         
 
         let sequence = SKAction.sequence([trialWait, wait10, visible, timerTrigger, wait1, invisible])
-        rightCircle.run(sequence)
+        rightCapture.run(sequence)
     }
     
     // Func to generate left cue flash
@@ -72,7 +72,7 @@ extension SpriteKitScene {
         let trialWait = SKAction.wait(forDuration: forDuration)
         
         let sequence = SKAction.sequence([trialWait, wait10, visible, timerTrigger, wait1, invisible])
-        leftCircle.run(sequence)
+        leftCapture.run(sequence)
     }
     
     // Func to generate dual cue condition
@@ -92,29 +92,29 @@ extension SpriteKitScene {
         
 
         let sequence = SKAction.sequence([trialWait, wait10, timerTrigger, visible, wait1, invisible])
-        leftCircle.run(sequence)
-        rightCircle.run(sequence)
+        leftCapture.run(sequence)
+        rightCapture.run(sequence)
     }
     
-    // For the noCue condition /// Not currently used
-    func flashNoCircles(wait forDuration: Double) {
-        //To trigger timer logic
-        let timerTrigger = SKAction.customAction(withDuration: 0) { [self] _,_ in
-            // For the RT boolean in update
-            self.onlyOne = true
-            self.targetResponse = false
-        }
-        
-        let wait10 = SKAction.wait(forDuration: 4)
-        let wait1 = SKAction.wait(forDuration: 0.25)
-        // For switch to .wait
-        let trialWait = SKAction.wait(forDuration: forDuration)
-        
-
-        let sequence = SKAction.sequence([trialWait, wait10, timerTrigger, visible, wait1, invisible])
-        
-        noCircle.run(sequence)
-    }
+//    // For the noCue condition /// Not currently used
+//    func flashNoCircles(wait forDuration: Double) {
+//        //To trigger timer logic
+//        let timerTrigger = SKAction.customAction(withDuration: 0) { [self] _,_ in
+//            // For the RT boolean in update
+//            self.onlyOne = true
+//            self.targetResponse = false
+//        }
+//        
+//        let wait10 = SKAction.wait(forDuration: 4)
+//        let wait1 = SKAction.wait(forDuration: 0.25)
+//        // For switch to .wait
+//        let trialWait = SKAction.wait(forDuration: forDuration)
+//        
+//
+//        let sequence = SKAction.sequence([trialWait, wait10, timerTrigger, visible, wait1, invisible])
+//        
+//        noCircle.run(sequence)
+//    }
     
     
     func spawnRightBlueTarget(wait forDuration: Double) {
@@ -126,11 +126,11 @@ extension SpriteKitScene {
         // For switch to .wait
         let trialWait = SKAction.wait(forDuration: forDuration)
         
-        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 4)
-        let repeatRotation = SKAction.repeatForever(rotateAction)
+//        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 4)
+//        let repeatRotation = SKAction.repeatForever(rotateAction)
         let sequence = SKAction.sequence([trialWait, resetRightTarget, targetVisible, wait1, movement, wait5, invisible, resetRightTarget/*, movement2, .removeFromParent()*/])
         
-        rightBlueTarget.run(repeatRotation)
+//        rightBlueTarget.run(repeatRotation)
         rightBlueTarget.run(sequence)
     }
     
@@ -143,11 +143,11 @@ extension SpriteKitScene {
         // For switch to .wait
         let trialWait = SKAction.wait(forDuration: forDuration)
         
-        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 4)
-        let repeatRotation = SKAction.repeatForever(rotateAction)
+//        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 4)
+//        let repeatRotation = SKAction.repeatForever(rotateAction)
         let sequence = SKAction.sequence([trialWait, resetRightTarget, targetVisible, wait1, movement, wait5, invisible, resetRightTarget/*, movement2, .removeFromParent()*/])
         
-        rightYellowTarget.run(repeatRotation)
+//        rightYellowTarget.run(repeatRotation)
         rightYellowTarget.run(sequence)
     }
     
@@ -160,11 +160,11 @@ extension SpriteKitScene {
         // For switch to .wait
         let trialWait = SKAction.wait(forDuration: forDuration)
         
-        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 4)
-        let repeatRotation = SKAction.repeatForever(rotateAction)
+//        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 4)
+//        let repeatRotation = SKAction.repeatForever(rotateAction)
         let sequence = SKAction.sequence([trialWait, resetLeftTarget, targetVisible, wait1, movement, wait5, invisible, resetLeftTarget/*, movement2, .removeFromParent()*/])
         
-        leftYellowTarget.run(repeatRotation)
+//        leftYellowTarget.run(repeatRotation)
         leftYellowTarget.run(sequence)
     }
     
@@ -177,11 +177,11 @@ extension SpriteKitScene {
         // For switch to .wait
         let trialWait = SKAction.wait(forDuration: forDuration)
         
-        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 4)
-        let repeatRotation = SKAction.repeatForever(rotateAction)
+//        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 4)
+//        let repeatRotation = SKAction.repeatForever(rotateAction)
         let sequence = SKAction.sequence([trialWait, resetLeftTarget, targetVisible, wait1, movement, wait5, invisible, resetLeftTarget/*, movement2, .removeFromParent()*/])
         
-        leftBlueTarget.run(repeatRotation)
+//        leftBlueTarget.run(repeatRotation)
         leftBlueTarget.run(sequence)
     }
     
@@ -204,9 +204,9 @@ extension SpriteKitScene {
             
             //        print("\(randomLane)")
             
-            let coin = SKSpriteNode(imageNamed: "shipYellow_manned")
-            coin.position = CGPoint(x: lanePosition, y: 300)
-            coin.size = CGSize(width: 60, height: 60)
+            let coin = SKSpriteNode(imageNamed: "yellow_flower")
+            coin.position = CGPoint(x: lanePosition, y: 500)
+            coin.size = CGSize(width: 150, height: 150)
             coin.name = "coin"
             coin.zPosition = 0
             
@@ -267,9 +267,9 @@ extension SpriteKitScene {
             
             //        print("\(randomLane)")
             
-            let coin = SKSpriteNode(imageNamed: "shipBlue_manned")
-            coin.position = CGPoint(x: lanePosition, y: 300)
-            coin.size = CGSize(width: 60, height: 60)
+            let coin = SKSpriteNode(imageNamed: "blue_flower")
+            coin.position = CGPoint(x: lanePosition, y: 500)
+            coin.size = CGSize(width: 150, height: 150)
             coin.name = "coin"
             coin.zPosition = 0
             

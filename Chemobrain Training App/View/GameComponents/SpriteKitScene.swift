@@ -59,9 +59,9 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     }
 
     // Setting up images for the scene itself
-    let fixedSky = SKSpriteNode(imageNamed: "fixedSky")
+    let background = SKSpriteNode(imageNamed: "spring_b")
     let player = SKSpriteNode(imageNamed: "player")
-    let portal = SKSpriteNode(imageNamed: "gas0")
+//    let portal = SKSpriteNode(imageNamed: "gas0")
     let moveRight = SKSpriteNode(imageNamed: "move")
     let moveLeft = SKSpriteNode(imageNamed: "move")
     
@@ -70,46 +70,58 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     let ready = SKSpriteNode(imageNamed: "ready_txt")
     let getReady = SKSpriteNode(imageNamed: "getReady_txt")
     
-    // Generates the images to be looped through as textures for portal
-    let gas0 = SKTexture(imageNamed: "gas0")
-    let gas1 = SKTexture(imageNamed: "gas1")
-    let gas2 = SKTexture(imageNamed: "gas2")
-    let gas3 = SKTexture(imageNamed: "gas3")
-    let gas4 = SKTexture(imageNamed: "gas4")
-    let gas5 = SKTexture(imageNamed: "gas5")
-    let gas6 = SKTexture(imageNamed: "gas6")
-    let gas7 = SKTexture(imageNamed: "gas7")
-    let gas8 = SKTexture(imageNamed: "gas8")
-    let gas9 = SKTexture(imageNamed: "gas9")
-    let gas10 = SKTexture(imageNamed: "gas10")
-    let gas11 = SKTexture(imageNamed: "gas11")
-    let gas12 = SKTexture(imageNamed: "gas12")
-    let gas13 = SKTexture(imageNamed: "gas13")
-    let gas14 = SKTexture(imageNamed: "gas14")
-    let gas15 = SKTexture(imageNamed: "gas15")
-    let gas16 = SKTexture(imageNamed: "gas16")
-    let gas17 = SKTexture(imageNamed: "gas17")
-    let gas18 = SKTexture(imageNamed: "gas18")
-    let gas19 = SKTexture(imageNamed: "gas19")
-    let gas20 = SKTexture(imageNamed: "gas20")
-    let gas21 = SKTexture(imageNamed: "gas21")
-    let gas22 = SKTexture(imageNamed: "gas22")
-    let gas23 = SKTexture(imageNamed: "gas23")
-    let gas24 = SKTexture(imageNamed: "gas24")
+//    // Generates the images to be looped through as textures for portal
+//    let gas0 = SKTexture(imageNamed: "gas0")
+//    let gas1 = SKTexture(imageNamed: "gas1")
+//    let gas2 = SKTexture(imageNamed: "gas2")
+//    let gas3 = SKTexture(imageNamed: "gas3")
+//    let gas4 = SKTexture(imageNamed: "gas4")
+//    let gas5 = SKTexture(imageNamed: "gas5")
+//    let gas6 = SKTexture(imageNamed: "gas6")
+//    let gas7 = SKTexture(imageNamed: "gas7")
+//    let gas8 = SKTexture(imageNamed: "gas8")
+//    let gas9 = SKTexture(imageNamed: "gas9")
+//    let gas10 = SKTexture(imageNamed: "gas10")
+//    let gas11 = SKTexture(imageNamed: "gas11")
+//    let gas12 = SKTexture(imageNamed: "gas12")
+//    let gas13 = SKTexture(imageNamed: "gas13")
+//    let gas14 = SKTexture(imageNamed: "gas14")
+//    let gas15 = SKTexture(imageNamed: "gas15")
+//    let gas16 = SKTexture(imageNamed: "gas16")
+//    let gas17 = SKTexture(imageNamed: "gas17")
+//    let gas18 = SKTexture(imageNamed: "gas18")
+//    let gas19 = SKTexture(imageNamed: "gas19")
+//    let gas20 = SKTexture(imageNamed: "gas20")
+//    let gas21 = SKTexture(imageNamed: "gas21")
+//    let gas22 = SKTexture(imageNamed: "gas22")
+//    let gas23 = SKTexture(imageNamed: "gas23")
+//    let gas24 = SKTexture(imageNamed: "gas24")
+//
+//
+    // Throw the birds in the ring
+    let yellowbird1 = SKSpriteNode(imageNamed: "yellow_bird1")
+    let yellowbird2 = SKSpriteNode(imageNamed: "yellow_bird2")
+    let yellowbird3 = SKSpriteNode(imageNamed: "yellow_bird3")
     
+    let bluebird1 = SKSpriteNode(imageNamed: "blue_bird1")
+    let bluebird2 = SKSpriteNode(imageNamed: "blue_bird2")
+    let bluebird3 = SKSpriteNode(imageNamed: "blue_bird3")
     
     // Add targets here to make them globally available
-    let rightYellowTarget = SKSpriteNode(imageNamed: "yellowSmall")
-    let rightBlueTarget = SKSpriteNode(imageNamed: "blueSmall")
-    let leftYellowTarget = SKSpriteNode(imageNamed: "yellowSmall")
-    let leftBlueTarget = SKSpriteNode(imageNamed: "blueSmall")
+    let rightYellowTarget = SKSpriteNode(imageNamed: "yellow_bird1")
+    let rightBlueTarget = SKSpriteNode(imageNamed: "blue_bird1")
+    let leftYellowTarget = SKSpriteNode(imageNamed: "yellow_bird1")
+    let leftBlueTarget = SKSpriteNode(imageNamed: "blue_bird1")
     // Add cues here to make them globally available
-    let leftCircle = SKShapeNode(circleOfRadius: 60)
-    let rightCircle = SKShapeNode(circleOfRadius: 60)
-    let noCircle = SKShapeNode(circleOfRadius: 60)
+    let leftCircle = SKShapeNode(circleOfRadius: 50)
+    let rightCircle = SKShapeNode(circleOfRadius: 50)
+    
+    let leftCapture = SKSpriteNode(imageNamed: "capture")
+    let rightCapture = SKSpriteNode(imageNamed: "capture")
+//    let noCircle = SKShapeNode(circleOfRadius: 60)
     // For response circles
-    let yellow = SKShapeNode(circleOfRadius: 55)
-    let blue = SKShapeNode(circleOfRadius: 55)
+    let yellow = SKSpriteNode(imageNamed: "yellow_button")
+    let blue = SKSpriteNode(imageNamed: "blue_button")
     
     // ADD INVISIBLE to use in place of .removeFromParent so there is only ever one of each node.
 //x
@@ -127,7 +139,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     
     
     
-    let music = SKAudioNode(fileNamed: "the-hero.mp3")
+    let music = SKAudioNode(fileNamed: "Swinging-Pants.mp3")
     
     // Setting up properties to control the scene
     let center: CGFloat = 0
@@ -136,13 +148,26 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
 
     override func didMove(to view: SKView) {
         
+        //        let portalArray = [gas0, gas1, gas2, gas3, gas4, gas5, gas6, gas7, gas8, gas9, gas10, gas11, gas12, gas13, gas14, gas15, gas16, gas17, gas18, gas19, gas20, gas21, gas22, gas23, gas24]
+        //        let portalAnim = SKAction.animate(with: portalArray, timePerFrame: 0.175)
+        //        let portalForever = SKAction.repeatForever(portalAnim)
  
         urlFetchJSON()
         
         // Add targets/cues to view here once and toggle alpha throughout game
+        // Bird animation loops to be used
+//        let wingsUp = SKAction.
+//        let yellowbirdArray = SKAction.sequence([yellowbird1, yellowbird2, yellowbird3])
+//        let yellowBirdFlight = SKAction.animate(with: yellowbirdArray, timePerFrame: 0.25)
+//        let yellowFlight = SKAction.repeatForever(yellowBirdFlight)
+//
+//        let bluebirdArray = [bluebird1, bluebird2, bluebird3]
+//        let blueBirdFlight = SKAction.animate(with: bluebirdArray, timePerFrame: 0.25)
+//        let blueFlight = SKAction.repeatForever(blueBirdFlight)
+//
         // Right Blue
         rightBlueTarget.position = CGPoint(x: 500, y: 200)
-        rightBlueTarget.size = CGSize(width: 150, height: 45)
+        rightBlueTarget.size = CGSize(width: 150, height: 150)
         rightBlueTarget.zPosition = 1
         rightBlueTarget.alpha = 1
         rightBlueTarget.name = "blueTarget"
@@ -155,7 +180,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         
         // Right Yellow
         rightYellowTarget.position = CGPoint(x: 500, y: 200)
-        rightYellowTarget.size = CGSize(width: 150, height: 45)
+        rightYellowTarget.size = CGSize(width: 150, height: 150)
         rightYellowTarget.zPosition = 1
         rightYellowTarget.alpha = 1
         rightYellowTarget.name = "yellowTarget"
@@ -168,7 +193,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         
         // Left Yellow
         leftYellowTarget.position = CGPoint(x: 500, y: 200)
-        leftYellowTarget.size = CGSize(width: 150, height: 45)
+        leftYellowTarget.size = CGSize(width: 150, height: 150)
         leftYellowTarget.zPosition = 1
         leftYellowTarget.alpha = 1
         leftYellowTarget.name = "yellowTarget"
@@ -177,11 +202,13 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         leftYellowTarget.physicsBody?.categoryBitMask = CollisionType.target.rawValue
         leftYellowTarget.physicsBody?.contactTestBitMask = CollisionType.player.rawValue | CollisionType.coin.rawValue
         leftYellowTarget.physicsBody?.isDynamic = false
+        // To flip the bird around
+        leftYellowTarget.xScale = leftYellowTarget.xScale * -1
         self.addChild(leftYellowTarget)
         
         // Left Blue
         leftBlueTarget.position = CGPoint(x: 500, y: 200)
-        leftBlueTarget.size = CGSize(width: 150, height: 45)
+        leftBlueTarget.size = CGSize(width: 150, height: 150)
         leftBlueTarget.zPosition = 1
         leftBlueTarget.alpha = 1
         leftBlueTarget.name = "blueTarget"
@@ -190,6 +217,8 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         leftBlueTarget.physicsBody?.categoryBitMask = CollisionType.target.rawValue
         leftBlueTarget.physicsBody?.contactTestBitMask = CollisionType.player.rawValue | CollisionType.coin.rawValue
         leftBlueTarget.physicsBody?.isDynamic = false
+        // to flip the bird around
+        leftBlueTarget.xScale = leftBlueTarget.xScale * -1
         self.addChild(leftBlueTarget)
         
         // leftCircle Cue
@@ -203,6 +232,22 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         leftCircle.alpha = 0
         self.addChild(leftCircle)
         
+        // For switch to left capture
+        leftCapture.position = CGPoint(x: -380, y: 100)
+        leftCapture.name = "leftCapture"
+        leftCapture.physicsBody?.isDynamic = false
+        leftCapture.zPosition = 1
+        leftCapture.alpha = 0
+        self.addChild(leftCapture)
+        
+        //  And for right capture
+        rightCapture.position = CGPoint(x: 380, y: 100)
+        rightCapture.name = "rightCapture"
+        rightCapture.physicsBody?.isDynamic = false
+        rightCapture.zPosition = 1
+        rightCapture.alpha = 0
+        self.addChild(rightCapture)
+        
         // rightCircle Cue
         rightCircle.position = CGPoint(x: 403, y: 100)
         rightCircle.name = "rightRedCircle"
@@ -214,35 +259,29 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         rightCircle.alpha = 0
         self.addChild(rightCircle)
         
-        // noCircle Cue
-        noCircle.position = CGPoint(x: 403, y: 100)
-        noCircle.name = "rightRedCircle"
-        noCircle.strokeColor = SKColor.clear
-        noCircle.glowWidth = 10.0
-        noCircle.fillColor = SKColor.clear
-        noCircle.physicsBody?.isDynamic = false
-        noCircle.zPosition = 1
-        noCircle.alpha = 0
-        self.addChild(noCircle)
+//        // noCircle Cue
+//        noCircle.position = CGPoint(x: 403, y: 100)
+//        noCircle.name = "rightRedCircle"
+//        noCircle.strokeColor = SKColor.clear
+//        noCircle.glowWidth = 10.0
+//        noCircle.fillColor = SKColor.clear
+//        noCircle.physicsBody?.isDynamic = false
+//        noCircle.zPosition = 1
+//        noCircle.alpha = 0
+//        self.addChild(noCircle)
         
         // Yellow response circle on left side
-        yellow.position = CGPoint(x: -325, y: -350)
+        yellow.position = CGPoint(x: -325, y: -300)
         yellow.name = "yellow"
-        yellow.lineWidth = 6
-        yellow.strokeColor = SKColor.black
-        yellow.glowWidth = 10.0
-        yellow.fillColor = SKColor.yellow
+        yellow.size = CGSize(width: 150, height: 150)
         yellow.physicsBody?.isDynamic = false
         yellow.zPosition = 1
         yellow.alpha = 1
         self.addChild(yellow)
         // The same for blue on right
-        blue.position = CGPoint(x: 325, y: -350)
+        blue.position = CGPoint(x: 325, y: -300)
         blue.name = "blue"
-        blue.lineWidth = 6
-        blue.strokeColor = SKColor.black
-        blue.glowWidth = 10.0
-        blue.fillColor = SKColor.blue
+        blue.size = CGSize(width: 150, height: 150)
         blue.physicsBody?.isDynamic = false
         blue.zPosition = 1
         blue.alpha = 1
@@ -270,53 +309,53 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         score = 0
         
         // Add starfields - can create a siwtch on theme Enum? to switch which type of particle emitter for space, water, etc.
-        if let particles = SKEmitterNode(fileNamed: "Starfield") {
-            particles.position = CGPoint(x: 0, y: 1080)
-            particles.zPosition = -1
-            particles.advanceSimulationTime(60)
-            addChild(particles)
-        }
-        // Adds the energy sparks around the central portal
-        if let particles = SKEmitterNode(fileNamed: "PortalSparks") {
-            particles.position = CGPoint(x: 0, y: 300)
-            particles.zPosition = 1
-            particles.advanceSimulationTime(60)
-            addChild(particles)
-        }
-        // Adds the player engine blaster
-        if let particles = SKEmitterNode(fileNamed: "PlayerEngine") {
-            particles.targetNode = player
-            particles.zPosition = -1
-            
-            particles.position = CGPoint(x: 0, y: 50)
-            player.addChild(particles)
-        }
+//        if let particles = SKEmitterNode(fileNamed: "Starfield") {
+//            particles.position = CGPoint(x: 0, y: 1080)
+//            particles.zPosition = -1
+//            particles.advanceSimulationTime(60)
+//            addChild(particles)
+//        }
+//        // Adds the energy sparks around the central portal
+//        if let particles = SKEmitterNode(fileNamed: "PortalSparks") {
+//            particles.position = CGPoint(x: 0, y: 300)
+//            particles.zPosition = 1
+//            particles.advanceSimulationTime(60)
+//            addChild(particles)
+//        }
+//        // Adds the player engine blaster
+//        if let particles = SKEmitterNode(fileNamed: "PlayerEngine") {
+//            particles.targetNode = player
+//            particles.zPosition = -1
+//
+//            particles.position = CGPoint(x: 0, y: 50)
+//            player.addChild(particles)
+//        }
         
 
-        // Setting up the animation components for the portal
-        let portalArray = [gas0, gas1, gas2, gas3, gas4, gas5, gas6, gas7, gas8, gas9, gas10, gas11, gas12, gas13, gas14, gas15, gas16, gas17, gas18, gas19, gas20, gas21, gas22, gas23, gas24]
-        let portalAnim = SKAction.animate(with: portalArray, timePerFrame: 0.175)
-        let portalForever = SKAction.repeatForever(portalAnim)
-        
-        // Initiating the portal
-        portal.name = "portal"
-        portal.position = CGPoint(x: 0, y: 300)
-        portal.size.height = 450
-        portal.size.width = 450
-        portal.run(portalForever)
-        portal.zPosition = 2
-        addChild(portal)
+//        // Setting up the animation components for the portal
+//        let portalArray = [gas0, gas1, gas2, gas3, gas4, gas5, gas6, gas7, gas8, gas9, gas10, gas11, gas12, gas13, gas14, gas15, gas16, gas17, gas18, gas19, gas20, gas21, gas22, gas23, gas24]
+//        let portalAnim = SKAction.animate(with: portalArray, timePerFrame: 0.175)
+//        let portalForever = SKAction.repeatForever(portalAnim)
+//
+//        // Initiating the portal
+//        portal.name = "portal"
+//        portal.position = CGPoint(x: 0, y: 300)
+//        portal.size.height = 450
+//        portal.size.width = 450
+//        portal.run(portalForever)
+//        portal.zPosition = 2
+//        addChild(portal)
         
         // For the movement buttons
         moveRight.name = "moveRight"
-        moveRight.position = CGPoint(x: 325, y: -475)
-        moveRight.size = CGSize(width: moveRight.frame.width, height: moveRight.frame.height)
+        moveRight.position = CGPoint(x: 325, y: -425)
+        moveRight.size = CGSize(width: 75, height: 75)
         moveRight.zPosition = 2
         addChild(moveRight)
         
         moveLeft.name = "moveLeft"
-        moveLeft.position = CGPoint(x: -325, y: -475)
-        moveLeft.size = CGSize(width: moveLeft.frame.width, height: moveLeft.frame.height)
+        moveLeft.position = CGPoint(x: -325, y: -425)
+        moveLeft.size = CGSize(width: 75, height: 75)
         moveLeft.zPosition = 2
         addChild(moveLeft)
         
@@ -325,10 +364,9 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         player.position.y = frame.minY + 150
         player.position.x = 0
         player.zPosition = 2
-        player.size = CGSize(width: 100, height: 100)
-        player.zRotation = .pi / 1
+        player.size = CGSize(width: 150, height: 150)
         //Adding physics body to allow collisions with coins and obstacles and distractor laser
-        player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.texture!.size())
+        player.physicsBody = SKPhysicsBody(texture: player.texture!, size: CGSize(width: 50, height: 50))
         player.physicsBody?.categoryBitMask = CollisionType.player.rawValue
         player.physicsBody?.collisionBitMask = CollisionType.coin.rawValue | CollisionType.target.rawValue | CollisionType.distractorLaser.rawValue
         player.physicsBody?.contactTestBitMask = CollisionType.coin.rawValue | CollisionType.target.rawValue | CollisionType.distractorLaser.rawValue
@@ -336,11 +374,11 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         addChild(player)
         
         //Place sky
-        fixedSky.name = "sky"
-        fixedSky.size = CGSize(width: (self.scene?.size.width)!, height: (self.scene?.size.height)!)
-        fixedSky.zPosition = -2
+        background.name = "sky"
+        background.size = CGSize(width: (self.scene?.size.width)!, height: (self.scene?.size.height)!)
+        background.zPosition = -2
 
-        addChild(fixedSky)
+        addChild(background)
         
 //        // For Pause and getReady buttons
 //        pause.name = "pause"

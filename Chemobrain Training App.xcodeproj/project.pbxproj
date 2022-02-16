@@ -18,6 +18,7 @@
 		F237AB7A26C18D7E00DC94A8 /* score.wav in Resources */ = {isa = PBXBuildFile; fileRef = F237AB7926C18D7E00DC94A8 /* score.wav */; };
 		F237AB7C26C18E5900DC94A8 /* the-hero.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F237AB7B26C18E5900DC94A8 /* the-hero.mp3 */; };
 		F23AD3D3271DE43D00CC93EE /* test-trial.json in Resources */ = {isa = PBXBuildFile; fileRef = F23AD3D2271DE43D00CC93EE /* test-trial.json */; };
+		F23C994F27BD477C00BA3EFA /* Swinging-Pants.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F23C994E27BD477C00BA3EFA /* Swinging-Pants.mp3 */; };
 		F23F533426E8FF8E00EE0B47 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23F533326E8FF8E00EE0B47 /* DataManager.swift */; };
 		F2415E2827062B8B0008A752 /* generateTrials.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2415E2727062B8B0008A752 /* generateTrials.swift */; };
 		F2415E2B270A166F0008A752 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2415E29270A166F0008A752 /* DataModel.xcdatamodeld */; };
@@ -61,6 +62,7 @@
 		F237AB7926C18D7E00DC94A8 /* score.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = score.wav; sourceTree = "<group>"; };
 		F237AB7B26C18E5900DC94A8 /* the-hero.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "the-hero.mp3"; sourceTree = "<group>"; };
 		F23AD3D2271DE43D00CC93EE /* test-trial.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "test-trial.json"; sourceTree = "<group>"; };
+		F23C994E27BD477C00BA3EFA /* Swinging-Pants.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Swinging-Pants.mp3"; sourceTree = "<group>"; };
 		F23F533326E8FF8E00EE0B47 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		F2415E2727062B8B0008A752 /* generateTrials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = generateTrials.swift; sourceTree = "<group>"; };
 		F2415E2A270A166F0008A752 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				F244F02726AF944C006DE8EA /* PortalSparks.sks */,
 				F237AB6D26B02F9C00DC94A8 /* PlayerEngine.sks */,
 				F290131926D8443F00B850CD /* Explosion.sks */,
+				F23C994E27BD477C00BA3EFA /* Swinging-Pants.mp3 */,
 				F290131B26D844E300B850CD /* explosion1.wav */,
 				F290131D26D8577900B850CD /* upgrade1.wav */,
 				F237AB7B26C18E5900DC94A8 /* the-hero.mp3 */,
@@ -286,6 +289,7 @@
 				F290131A26D8443F00B850CD /* Explosion.sks in Resources */,
 				F237AB6E26B02F9C00DC94A8 /* PlayerEngine.sks in Resources */,
 				F23AD3D3271DE43D00CC93EE /* test-trial.json in Resources */,
+				F23C994F27BD477C00BA3EFA /* Swinging-Pants.mp3 in Resources */,
 				F290131E26D8577900B850CD /* upgrade1.wav in Resources */,
 				F244F00326AF4F45006DE8EA /* Starfield.sks in Resources */,
 				F2E2A927268399C500143E69 /* GoogleService-Info.plist in Resources */,
@@ -494,7 +498,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Chemobrain Training App/Preview Content\"";
-				DEVELOPMENT_TEAM = 86M7NUNZ22;
+				DEVELOPMENT_TEAM = Q9L4G9SA5N;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Chemobrain Training App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -502,7 +506,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mcw.bme.SNAPStudy1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mcw.bme.SNAPStudy10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -517,7 +521,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Chemobrain Training App/Preview Content\"";
-				DEVELOPMENT_TEAM = 86M7NUNZ22;
+				DEVELOPMENT_TEAM = Q9L4G9SA5N;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Chemobrain Training App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -525,7 +529,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mcw.bme.SNAPStudy1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mcw.bme.SNAPStudy10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
