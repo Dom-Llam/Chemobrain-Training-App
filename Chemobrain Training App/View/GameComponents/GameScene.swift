@@ -47,6 +47,7 @@ var body: some View {
                 Button {
                     presentationMode.wrappedValue.dismiss()
                     viewModel.playGame()
+                    print("backbutton pressed")
                 } label: {
                     Image("back_btn1")
                     

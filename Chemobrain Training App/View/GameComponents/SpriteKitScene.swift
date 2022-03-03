@@ -98,14 +98,15 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
 //    let gas24 = SKTexture(imageNamed: "gas24")
 //
 //
-    // Throw the birds in the ring
-    let yellowbird1 = SKSpriteNode(imageNamed: "yellow_bird1")
-    let yellowbird2 = SKSpriteNode(imageNamed: "yellow_bird2")
-    let yellowbird3 = SKSpriteNode(imageNamed: "yellow_bird3")
+//    // Throw the birds in the ring
+//    let yellowbird1 = SKTexture(imageNamed: "yellow_bird1")
+//    let yellowbird2 = SKTexture(imageNamed: "yellow_bird2")
+//    let yellowbird3 = SKTexture(imageNamed: "yellow_bird3")
+//
+//    let bluebird1 = SKSpriteNode(imageNamed: "blue_bird1")
+//    let bluebird2 = SKSpriteNode(imageNamed: "blue_bird2")
+//    let bluebird3 = SKSpriteNode(imageNamed: "blue_bird3")
     
-    let bluebird1 = SKSpriteNode(imageNamed: "blue_bird1")
-    let bluebird2 = SKSpriteNode(imageNamed: "blue_bird2")
-    let bluebird3 = SKSpriteNode(imageNamed: "blue_bird3")
     
     // Add targets here to make them globally available
     let rightYellowTarget = SKSpriteNode(imageNamed: "yellow_bird1")
@@ -125,8 +126,8 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     
     // ADD INVISIBLE to use in place of .removeFromParent so there is only ever one of each node.
 //x
-    let resetRightTarget = SKAction.move(to: CGPoint(x: 500, y: 200), duration: 0)
-    let resetLeftTarget = SKAction.move(to: CGPoint(x: -500, y: 200), duration: 0)
+    let resetRightTarget = SKAction.move(to: CGPoint(x: 500, y: 400), duration: 0)
+    let resetLeftTarget = SKAction.move(to: CGPoint(x: -500, y: 400), duration: 0)
     
     let invisible = SKAction.fadeOut(withDuration: 0)
     let visible = SKAction.fadeIn(withDuration: 0)
@@ -166,7 +167,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
 //        let blueFlight = SKAction.repeatForever(blueBirdFlight)
 //
         // Right Blue
-        rightBlueTarget.position = CGPoint(x: 500, y: 200)
+        rightBlueTarget.position = CGPoint(x: 500, y: 400)
         rightBlueTarget.size = CGSize(width: 150, height: 150)
         rightBlueTarget.zPosition = 1
         rightBlueTarget.alpha = 1
@@ -179,7 +180,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(rightBlueTarget)
         
         // Right Yellow
-        rightYellowTarget.position = CGPoint(x: 500, y: 200)
+        rightYellowTarget.position = CGPoint(x: 500, y: 400)
         rightYellowTarget.size = CGSize(width: 150, height: 150)
         rightYellowTarget.zPosition = 1
         rightYellowTarget.alpha = 1
@@ -192,7 +193,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(rightYellowTarget)
         
         // Left Yellow
-        leftYellowTarget.position = CGPoint(x: 500, y: 200)
+        leftYellowTarget.position = CGPoint(x: 500, y: 400)
         leftYellowTarget.size = CGSize(width: 150, height: 150)
         leftYellowTarget.zPosition = 1
         leftYellowTarget.alpha = 1
@@ -207,7 +208,7 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(leftYellowTarget)
         
         // Left Blue
-        leftBlueTarget.position = CGPoint(x: 500, y: 200)
+        leftBlueTarget.position = CGPoint(x: 500, y: 400)
         leftBlueTarget.size = CGSize(width: 150, height: 150)
         leftBlueTarget.zPosition = 1
         leftBlueTarget.alpha = 1
@@ -221,19 +222,20 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         leftBlueTarget.xScale = leftBlueTarget.xScale * -1
         self.addChild(leftBlueTarget)
         
-        // leftCircle Cue
-        leftCircle.position = CGPoint(x: -403, y: 100)
-        leftCircle.name = "leftRedCircle"
-        leftCircle.strokeColor = SKColor.red
-        leftCircle.glowWidth = 10.0
-        leftCircle.fillColor = SKColor.red
-        leftCircle.physicsBody?.isDynamic = false
-        leftCircle.zPosition = 1
-        leftCircle.alpha = 0
-        self.addChild(leftCircle)
-        
+//        // leftCircle Cue
+//        leftCircle.position = CGPoint(x: -403, y: 100)
+//        leftCircle.name = "leftRedCircle"
+//        leftCircle.strokeColor = SKColor.red
+//        leftCircle.glowWidth = 10.0
+//        leftCircle.fillColor = SKColor.red
+//        leftCircle.physicsBody?.isDynamic = false
+//        leftCircle.zPosition = 1
+//        leftCircle.alpha = 0
+//        self.addChild(leftCircle)
+//
         // For switch to left capture
-        leftCapture.position = CGPoint(x: -380, y: 100)
+        leftCapture.position = CGPoint(x: -370, y: 290)
+        leftCapture.size = CGSize(width: 250, height: 250)
         leftCapture.name = "leftCapture"
         leftCapture.physicsBody?.isDynamic = false
         leftCapture.zPosition = 1
@@ -241,24 +243,25 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(leftCapture)
         
         //  And for right capture
-        rightCapture.position = CGPoint(x: 380, y: 100)
+        rightCapture.position = CGPoint(x: 370, y: 290)
+        rightCapture.size = CGSize(width: 250, height: 250)
         rightCapture.name = "rightCapture"
         rightCapture.physicsBody?.isDynamic = false
         rightCapture.zPosition = 1
         rightCapture.alpha = 0
         self.addChild(rightCapture)
         
-        // rightCircle Cue
-        rightCircle.position = CGPoint(x: 403, y: 100)
-        rightCircle.name = "rightRedCircle"
-        rightCircle.strokeColor = SKColor.red
-        rightCircle.glowWidth = 10.0
-        rightCircle.fillColor = SKColor.red
-        rightCircle.physicsBody?.isDynamic = false
-        rightCircle.zPosition = 1
-        rightCircle.alpha = 0
-        self.addChild(rightCircle)
-        
+//        // rightCircle Cue
+//        rightCircle.position = CGPoint(x: 403, y: 100)
+//        rightCircle.name = "rightRedCircle"
+//        rightCircle.strokeColor = SKColor.red
+//        rightCircle.glowWidth = 10.0
+//        rightCircle.fillColor = SKColor.red
+//        rightCircle.physicsBody?.isDynamic = false
+//        rightCircle.zPosition = 1
+//        rightCircle.alpha = 0
+//        self.addChild(rightCircle)
+//
 //        // noCircle Cue
 //        noCircle.position = CGPoint(x: 403, y: 100)
 //        noCircle.name = "rightRedCircle"
@@ -302,8 +305,8 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
 
         
         // For score
-        scoreLabel.fontColor = UIColor.white.withAlphaComponent(0.5)
-        scoreLabel.position = CGPoint(x: 310, y: 300)
+        scoreLabel.fontColor = UIColor.black.withAlphaComponent(0.5)
+        scoreLabel.position = CGPoint(x: 310, y: 450)
         scoreLabel.zPosition = 2
         addChild(scoreLabel)
         score = 0
@@ -400,14 +403,14 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
         ready.name = "ready"
         ready.position = CGPoint(x: 0, y: 0)
         ready.zPosition = 2
-        ready.size = CGSize(width: 200, height: 100)
+        ready.size = CGSize(width: 300, height: 450)
         ready.physicsBody?.isDynamic = false
         addChild(ready)
         
         getReady.name = "getReady"
         getReady.position = CGPoint(x: 0, y: 0)
         getReady.zPosition = 2
-        getReady.size = CGSize(width: 200, height: 100)
+        getReady.size = CGSize(width: 300, height: 450)
         getReady.physicsBody?.isDynamic = false
         getReady.alpha = 0
         addChild(getReady)

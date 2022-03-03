@@ -119,69 +119,120 @@ extension SpriteKitScene {
     
     func spawnRightBlueTarget(wait forDuration: Double) {
   
-        let movement = SKAction.move(to: CGPoint(x: 275, y: 0), duration: 0.75)
+        let movement = SKAction.move(to: CGPoint(x: 275, y: 200), duration: 0.25)
         let wait1 = SKAction.wait(forDuration: 1)
         let wait5 = SKAction.wait(forDuration: 8)
         
         // For switch to .wait
         let trialWait = SKAction.wait(forDuration: forDuration)
+        
+        
+//        let flapAnimation = SKAction.animate(with: [flapArray], timePerFrame: <#T##TimeInterval#>)
+
+        // For flapping wings
+        let customFlap1 = SKAction.customAction(withDuration: 0.15) { [self] _,_ in
+            self.rightBlueTarget.texture = SKTexture.init(imageNamed: "blue_bird1")
+        }
+        let customFlap2 = SKAction.customAction(withDuration: 0.15) { [self] _,_ in
+            self.rightBlueTarget.texture = SKTexture.init(imageNamed: "blue_bird2")
+        }
+        let customFlap3 = SKAction.customAction(withDuration: 0.15) { [self] _,_ in
+            self.rightBlueTarget.texture = SKTexture.init(imageNamed: "blue_bird3")
+        }
+        let flapForever = SKAction.sequence([customFlap1, customFlap2, customFlap3])
+        let forever = SKAction.repeatForever(flapForever)
+        
         
 //        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 4)
 //        let repeatRotation = SKAction.repeatForever(rotateAction)
         let sequence = SKAction.sequence([trialWait, resetRightTarget, targetVisible, wait1, movement, wait5, invisible, resetRightTarget/*, movement2, .removeFromParent()*/])
         
 //        rightBlueTarget.run(repeatRotation)
+        rightBlueTarget.run(forever)
         rightBlueTarget.run(sequence)
     }
     
     func spawnRightYellowTarget(wait forDuration: Double) {
         
-        let movement = SKAction.move(to: CGPoint(x: 275, y: 0), duration: 0.75)
+        let movement = SKAction.move(to: CGPoint(x: 275, y: 200), duration: 0.25)
         let wait1 = SKAction.wait(forDuration: 1)
         let wait5 = SKAction.wait(forDuration: 8)
         
         // For switch to .wait
         let trialWait = SKAction.wait(forDuration: forDuration)
         
-//        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 4)
-//        let repeatRotation = SKAction.repeatForever(rotateAction)
+        // For flapping wings
+        let customFlap1 = SKAction.customAction(withDuration: 0.15) { [self] _,_ in
+            self.rightYellowTarget.texture = SKTexture.init(imageNamed: "yellow_bird1")
+        }
+        let customFlap2 = SKAction.customAction(withDuration: 0.15) { [self] _,_ in
+            self.rightYellowTarget.texture = SKTexture.init(imageNamed: "yellow_bird2")
+        }
+        let customFlap3 = SKAction.customAction(withDuration: 0.15) { [self] _,_ in
+            self.rightYellowTarget.texture = SKTexture.init(imageNamed: "yellow_bird3")
+        }
+        let flapForever = SKAction.sequence([customFlap1, customFlap2, customFlap3])
+        let forever = SKAction.repeatForever(flapForever)
+        
         let sequence = SKAction.sequence([trialWait, resetRightTarget, targetVisible, wait1, movement, wait5, invisible, resetRightTarget/*, movement2, .removeFromParent()*/])
         
-//        rightYellowTarget.run(repeatRotation)
+        rightYellowTarget.run(forever)
         rightYellowTarget.run(sequence)
     }
     
     func spawnLeftYellowTarget(wait forDuration: Double) {
 
-        let movement = SKAction.move(to: CGPoint(x: -275, y: 0), duration: 0.75)
+        let movement = SKAction.move(to: CGPoint(x: -275, y: 200), duration: 0.25)
         let wait1 = SKAction.wait(forDuration: 1)
         let wait5 = SKAction.wait(forDuration: 8)
         
         // For switch to .wait
         let trialWait = SKAction.wait(forDuration: forDuration)
         
-//        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 4)
-//        let repeatRotation = SKAction.repeatForever(rotateAction)
+        // For flapping wings
+        let customFlap1 = SKAction.customAction(withDuration: 0.15) { [self] _,_ in
+            self.leftYellowTarget.texture = SKTexture.init(imageNamed: "yellow_bird1")
+        }
+        let customFlap2 = SKAction.customAction(withDuration: 0.15) { [self] _,_ in
+            self.leftYellowTarget.texture = SKTexture.init(imageNamed: "yellow_bird2")
+        }
+        let customFlap3 = SKAction.customAction(withDuration: 0.15) { [self] _,_ in
+            self.leftYellowTarget.texture = SKTexture.init(imageNamed: "yellow_bird3")
+        }
+        let flapForever = SKAction.sequence([customFlap1, customFlap2, customFlap3])
+        let forever = SKAction.repeatForever(flapForever)
+        
         let sequence = SKAction.sequence([trialWait, resetLeftTarget, targetVisible, wait1, movement, wait5, invisible, resetLeftTarget/*, movement2, .removeFromParent()*/])
         
-//        leftYellowTarget.run(repeatRotation)
+        leftYellowTarget.run(forever)
         leftYellowTarget.run(sequence)
     }
     
     func spawnLeftBlueTarget(wait forDuration: Double) {
 
-        let movement = SKAction.move(to: CGPoint(x: -275, y: 0), duration: 0.75)
+        let movement = SKAction.move(to: CGPoint(x: -275, y: 200), duration: 0.25)
         let wait1 = SKAction.wait(forDuration: 1)
         let wait5 = SKAction.wait(forDuration: 8)
         
         // For switch to .wait
         let trialWait = SKAction.wait(forDuration: forDuration)
         
-//        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 4)
-//        let repeatRotation = SKAction.repeatForever(rotateAction)
+        // For flapping wings
+        let customFlap1 = SKAction.customAction(withDuration: 0.15) { [self] _,_ in
+            self.leftBlueTarget.texture = SKTexture.init(imageNamed: "blue_bird1")
+        }
+        let customFlap2 = SKAction.customAction(withDuration: 0.15) { [self] _,_ in
+            self.leftBlueTarget.texture = SKTexture.init(imageNamed: "blue_bird2")
+        }
+        let customFlap3 = SKAction.customAction(withDuration: 0.15) { [self] _,_ in
+            self.leftBlueTarget.texture = SKTexture.init(imageNamed: "blue_bird3")
+        }
+        let flapForever = SKAction.sequence([customFlap1, customFlap2, customFlap3])
+        let forever = SKAction.repeatForever(flapForever)
+        
         let sequence = SKAction.sequence([trialWait, resetLeftTarget, targetVisible, wait1, movement, wait5, invisible, resetLeftTarget/*, movement2, .removeFromParent()*/])
         
-//        leftBlueTarget.run(repeatRotation)
+        leftBlueTarget.run(forever)
         leftBlueTarget.run(sequence)
     }
     
@@ -204,9 +255,9 @@ extension SpriteKitScene {
             
             //        print("\(randomLane)")
             
-            let coin = SKSpriteNode(imageNamed: "yellow_flower")
+            let coin = SKSpriteNode(imageNamed: "yellow_raindrop")
             coin.position = CGPoint(x: lanePosition, y: 500)
-            coin.size = CGSize(width: 150, height: 150)
+            coin.size = CGSize(width: 80, height: 80)
             coin.name = "coin"
             coin.zPosition = 0
             
@@ -267,9 +318,9 @@ extension SpriteKitScene {
             
             //        print("\(randomLane)")
             
-            let coin = SKSpriteNode(imageNamed: "blue_flower")
+            let coin = SKSpriteNode(imageNamed: "blue_raindrop")
             coin.position = CGPoint(x: lanePosition, y: 500)
-            coin.size = CGSize(width: 150, height: 150)
+            coin.size = CGSize(width: 110, height: 100)
             coin.name = "coin"
             coin.zPosition = 0
             
