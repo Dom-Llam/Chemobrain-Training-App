@@ -52,7 +52,7 @@ var body: some View {
                     Image("back_btn1")
                     
                 }
-                    .padding(.trailing, 700)
+                    .padding(.trailing, 400)
                     .padding(.top, 150)
                     .foregroundColor(.white)
                 Spacer()

@@ -72,8 +72,7 @@ struct HomeView: View {
 //
                 HStack {
                     VStack {
-                        Image("robot")
-                        Text("It's space time!")
+                        Image("blue_bird1")
                     }
                     
                     Button(action: {

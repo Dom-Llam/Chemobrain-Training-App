@@ -34,7 +34,10 @@ class SpriteKitScene: SKScene, SKPhysicsContactDelegate {
     
     // variables for generating the number of trials per block per json files
     var trialsForSession = 0
-    
+    var currentBlock = 1
+    // Trial start and end segments based on trialsPerBlock
+    var trialStart = 0
+    var trialEnd = -1
     
 
     // Setting up reaction time variables
